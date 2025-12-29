@@ -1,0 +1,51 @@
+/* ===================================
+   HOME PAGE - Desktop Styles
+   Only loaded on desktop (≥769px)
+   =================================== */
+
+/* Hero Section */
+.hero__desktop {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    /* Height of header */
+}
+
+.hero-grid-desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+}
+
+.hero-text-desktop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.hero-title-desktop {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    line-height: var(--line-height-tight);
+}
+
+.hero-subtitle-desktop {
+    font-size: 1.125rem;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-gray-700);
+}
+
+.trust-pills-desktop {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.hero-image-desktop img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+}

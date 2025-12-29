@@ -17,20 +17,16 @@
 /* Header - Desktop only */
 @media (min-width: 769px) {
    @import url('_header-desktop.css');
+   @import url('_home-desktop.css');
 }
 
 /* Header - Mobile only */
 @media (max-width: 768px) {
    @import url('_header-mobile.css');
+   @import url('_home-mobile.css');
 }
 
 @import url('_animations.css');
 /* 6. Animations & transitions */
-@import url('_home-page.css');
-/* 7. Home page specific */
-@import url('_nosotros-page.css');
-/* 8. Nosotros page specific */
-@import url('_asesores-page.css');
-/* 9. Asesores page specific */
 @import url('_responsive.css');
-/* 10. Media queries (last) */
+/* 7. Media queries (last) */
