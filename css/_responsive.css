@@ -1,0 +1,14 @@
+/* ===================================
+   RESPONSIVE - Final Adjustments
+   Media query overrides and tweaks
+   =================================== */
+
+/* Mobile-specific global tweaks */
+@media (max-width: 768px) {
+
+    /* Ensure no unexpected scrollbars */
+    html,
+    body {
+        overflow-x: hidden;
+    }
+}
