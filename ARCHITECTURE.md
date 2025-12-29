@@ -42,10 +42,20 @@ planespro_final/
 ├── README.md
 ├── .gitignore
 │
-├── index.html               # HTML puro (cero inline)
+├── index.html               # Orquestador mínimo (~40 líneas)
 ├── nosotros.html
 ├── asesores.html
 ├── noticias.html
+│
+├── partials/                # ⭐ COMPONENTES HTML REUTILIZABLES
+│   ├── header.html          # Header compartido (todas las páginas)
+│   ├── footer.html          # Footer compartido
+│   └── sections/            # Secciones de index.html
+│       ├── hero.html
+│       ├── proceso.html
+│       ├── planes.html
+│       ├── casos.html
+│       └── testimonios.html
 │
 ├── assets/
 │   ├── images/
@@ -61,26 +71,31 @@ planespro_final/
 │   ├── _base.css            # Resets, tipografía
 │   ├── _layout.css          # Grid, containers
 │   ├── _components.css      # Botones, cards, inputs
-│   ├── _header-footer.css
+│   ├── _header-desktop.css  # Header desktop (glassmorphism)
+│   ├── _header-mobile.css   # Header mobile
+│   ├── _home-desktop.css    # Home desktop
+│   ├── _home-mobile.css     # Home mobile
 │   ├── _animations.css
-│   ├── _home-page.css
-│   ├── _nosotros-page.css
-│   ├── _asesores-page.css
-│   └── _responsive.css      # Media queries
+│   └── _responsive.css      # Media queries globales
 │
 └── js/
     ├── main.js              # Orquestador
+    ├── loader.js            # ⭐ Carga HTML partials
     │
     ├── core/
     │   ├── config.js
     │   └── state.js
     │
     ├── data/
+    │   ├── header_content.js
+    │   ├── hero_content.js
     │   ├── planes_data.js
     │   ├── testimonials_data.js
     │   └── asesores_data.js
     │
     ├── modules/             # Componentes UI
+    │   ├── header/
+    │   │   └── mobile_menu.js
     │   ├── hero/
     │   ├── planes_slider/
     │   ├── comparison_widget/
