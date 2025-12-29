@@ -42,6 +42,12 @@ function toggleMenu() {
     mobileMenu.classList.toggle('active');
     hamburgerBtn.classList.toggle('active');
 
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    // Prevent scrolling on both html and body when menu is open
+    if (isMenuOpen) {
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+    }
 }
