@@ -8,17 +8,24 @@
     /* Hero Section */
     .hero__mobile {
         min-height: 100vh;
+        max-height: 100vh;
+        /* Prevent overflow */
         display: flex;
         align-items: center;
         padding-top: 60px;
         /* Height of mobile header */
+        overflow: hidden;
+        /* Clip any overflow */
     }
 
     .hero-stack-mobile {
         display: flex;
         flex-direction: column;
-        gap: var(--space-lg);
+        gap: var(--space-md);
+        /* Reduced from lg */
         text-align: center;
+        max-height: calc(100vh - 60px);
+        /* Account for header */
     }
 
     .hero-title-mobile {
@@ -37,12 +44,25 @@
         display: flex;
         gap: var(--space-sm);
         justify-content: center;
+        flex-wrap: wrap;
+        /* Allow wrapping if needed */
+    }
+
+    .hero-image-mobile {
+        flex-shrink: 1;
+        /* Allow image to shrink */
+        min-height: 0;
+        /* Allow flex to shrink below content size */
     }
 
     .hero-image-mobile img {
         width: 100%;
         height: auto;
-        max-width: 300px;
+        max-width: 280px;
+        /* Reduced from 300px */
+        max-height: 45vh;
+        /* Limit height to 45% of viewport */
+        object-fit: contain;
         margin: 0 auto;
     }
 

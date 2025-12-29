@@ -6,9 +6,21 @@
 /* Mobile-specific global tweaks */
 @media (max-width: 768px) {
 
-    /* Ensure no unexpected scrollbars */
+    /* Hide scrollbar globally on mobile */
     html,
     body {
         overflow-x: hidden;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+        width: 0;
+        height: 0;
     }
 }
