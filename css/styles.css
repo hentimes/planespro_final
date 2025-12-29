@@ -1,0 +1,27 @@
+/* ===================================
+   PlanesPro Final - Master Stylesheet
+   ARCH: Single source that imports all partials
+   =================================== */
+
+/* Order matters for CSS cascade */
+
+@import url('_variables.css');
+/* 1. Design tokens */
+@import url('_base.css');
+/* 2. Resets & typography */
+@import url('_layout.css');
+/* 3. Layout system */
+@import url('_components.css');
+/* 4. Reusable components */
+@import url('_header-footer.css');
+/* 5. Header & Footer */
+@import url('_animations.css');
+/* 6. Animations & transitions */
+@import url('_home-page.css');
+/* 7. Home page specific */
+@import url('_nosotros-page.css');
+/* 8. Nosotros page specific */
+@import url('_asesores-page.css');
+/* 9. Asesores page specific */
+@import url('_responsive.css');
+/* 10. Media queries (last) */
