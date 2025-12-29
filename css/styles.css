@@ -3,30 +3,16 @@
    ARCH: Single source that imports all partials
    =================================== */
 
+/* CRITICAL: @import must be at TOP of file */
 /* Order matters for CSS cascade */
 
 @import url('_variables.css');
-/* 1. Design tokens */
 @import url('_base.css');
-/* 2. Resets & typography */
 @import url('_layout.css');
-/* 3. Layout system */
 @import url('_components.css');
-/* 4. Reusable components */
-
-/* Header - Desktop only */
-@media (min-width: 769px) {
-   @import url('_header-desktop.css');
-   @import url('_home-desktop.css');
-}
-
-/* Header - Mobile only */
-@media (max-width: 768px) {
-   @import url('_header-mobile.css');
-   @import url('_home-mobile.css');
-}
-
+@import url('_header-desktop.css');
+@import url('_header-mobile.css');
+@import url('_home-desktop.css');
+@import url('_home-mobile.css');
 @import url('_animations.css');
-/* 6. Animations & transitions */
 @import url('_responsive.css');
-/* 7. Media queries (last) */

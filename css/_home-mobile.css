@@ -1,45 +1,51 @@
 /* ===================================
    HOME PAGE - Mobile Styles
-   Only loaded on mobile (≤768px)
+   Only applies on mobile (≤768px)
    =================================== */
 
-/* Hero Section */
-.hero__mobile {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 60px;
-    /* Height of mobile header */
+@media (max-width: 768px) {
+
+    /* Hero Section */
+    .hero__mobile {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 60px;
+        /* Height of mobile header */
+    }
+
+    .hero-stack-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+        text-align: center;
+    }
+
+    .hero-title-mobile {
+        font-size: var(--font-size-h1);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+    }
+
+    .hero-subtitle-mobile {
+        font-size: var(--font-size-body);
+        line-height: var(--line-height-relaxed);
+        color: var(--color-gray-700);
+    }
+
+    .trust-pills-mobile {
+        display: flex;
+        gap: var(--space-sm);
+        justify-content: center;
+    }
+
+    .hero-image-mobile img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
 }
 
-.hero-stack-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    text-align: center;
-}
-
-.hero-title-mobile {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-dark);
-}
-
-.hero-subtitle-mobile {
-    font-size: var(--font-size-body);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-gray-700);
-}
-
-.trust-pills-mobile {
-    display: flex;
-    gap: var(--space-sm);
-    justify-content: center;
-}
-
-.hero-image-mobile img {
-    width: 100%;
-    height: auto;
-    max-width: 300px;
-    margin: 0 auto;
-}
+/* End @media */
