@@ -2,6 +2,7 @@
    HEADER DESKTOP STYLES
    Only applies on desktop (≥769px)
    PREMIUM DESIGN: Glassmorphism + Gradients
+   V2 MATCHED SPECS
    =================================== */
 
 @media (min-width: 769px) {
@@ -11,9 +12,10 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 80px;
+        height: 70px;
+        /* V2: 70px (was 80px) */
 
-        /* GLASSMORPHISM EFFECT (V2 Style) */
+        /* GLASS MORPHISM EFFECT (V2 Style) */
         background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
@@ -25,19 +27,17 @@
 
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        /* V2: space-between */
+        padding: 0 5%;
+        /* V2: 5% padding */
 
         transition: padding-right 0.3s ease-in-out;
     }
 
     .header-container-desktop {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0 5%;
-        /* V2 Style: Percentage padding */
-        max-width: 100%;
+        /* Removed - header itself is the container now */
+        display: contents;
     }
 
     /* Logo/Brand */
@@ -56,7 +56,7 @@
 
     .header-logo-desktop {
         height: 40px;
-        /* Slightly smaller per V2 */
+        /* V2 size */
         width: auto;
         object-fit: contain;
     }
@@ -65,8 +65,8 @@
         font-size: 1.25rem;
         font-weight: 400;
         /* Regular weight like V2 */
-        color: var(--color-secondary);
-        /* Navy color */
+        color: #1A365D;
+        /* V2: Navy --secondary-color */
         letter-spacing: -0.5px;
         /* V2 tracking */
     }
@@ -84,8 +84,8 @@
         /* V2 size */
         font-weight: 500;
         /* Medium weight */
-        color: var(--color-secondary);
-        /* Navy */
+        color: #1A365D;
+        /* V2: Navy #1A365D, NOT green */
         text-decoration: none;
         transition: color 0.3s;
         position: relative;
@@ -94,7 +94,8 @@
     }
 
     .nav-link-desktop:hover {
-        color: var(--color-primary);
+        color: #0a74da;
+        /* V2: Blue primary */
     }
 
     /* ANIMATED UNDERLINE (V2 Style) */
@@ -105,7 +106,8 @@
         height: 2px;
         bottom: -4px;
         left: 0;
-        background-color: var(--color-primary);
+        background-color: #0a74da;
+        /* V2: Blue primary */
         transition: width 0.3s ease;
     }
 
@@ -115,17 +117,18 @@
     }
 
     .nav-link-active-desktop {
-        color: var(--color-primary);
+        color: #0a74da;
+        /* V2: Blue primary */
         font-weight: 600;
     }
 
     /* CTA Button - V2 PREMIUM STYLE */
     .header-cta-desktop {
-        /* Pill shape with gradient */
+        /* Pill shape */
         padding: 8px 20px;
-        background: var(--color-primary);
-        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-        color: var(--color-white);
+        background-color: #0a74da;
+        /* V2: Primary blue */
+        color: white;
         font-weight: 600;
         font-size: 0.9rem;
         border-radius: 50px;
@@ -135,15 +138,15 @@
         border: none;
 
         /* Premium shadow */
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 15px rgba(10, 116, 218, 0.2);
 
         transition: all 0.3s ease;
         cursor: pointer;
     }
 
     .header-cta-desktop:hover {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(10, 116, 218, 0.3);
     }
 
 }
