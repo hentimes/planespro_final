@@ -163,6 +163,97 @@ Antes de escribir **cualquier línea de código**, validar:
 
 **Justificación:** ARCH (DRY, mantenibilidad), UXI (mobile-first, accesibilidad), PROD (métricas unificadas), GROW (SEO, cero friction).
 
+---
+
+## 🔒 REGLAS DE INDEPENDENCIA DESKTOP/MOBILE
+
+### Breakpoint Único
+- **Desktop:** `≥ 769px`
+- **Mobile:** `≤ 768px`
+- **NO usar breakpoint intermedio** (tablet = desktop)
+
+### Estructura CSS (Archivos Separados)
+```
+css/
+├── styles.css              # Maestro con @imports condicionales
+├── _variables.css          # Compartido
+├── _base.css               # Compartido
+├── _layout.css             # Compartido
+├── _components.css         # Compartido
+├── _home-desktop.css       # SOLO desktop
+├── _home-mobile.css        # SOLO mobile
+└── _responsive.css         # Ajustes finales
+```
+
+**Carga condicional en `styles.css`:**
+```css
+@media (min-width: 769px) {
+    @import url('_home-desktop.css');
+}
+@media (max-width: 768px) {
+    @import url('_home-mobile.css');
+}
+```
+
+### Naming Convention (OBLIGATORIO)
+
+**Desktop:**
+- Clases: Sufijo `-desktop`
+- Ejemplo: `.hero-grid-desktop`, `.hero-text-desktop`
+
+**Mobile:**
+- Clases: Sufijo `-mobile`
+- Ejemplo: `.hero-stack-mobile`, `.hero-title-mobile`
+
+**Regla:** NUNCA compartir clases entre desktop y mobile (excepto utilitarias).
+
+### HTML Structure
+
+**Desktop primero (SEO):**
+```html
+<section id="hero">
+    <div class="hero__desktop show-desktop">
+        <!-- Todo el contenido desktop aquí -->
+    </div>
+    <div class="hero__mobile show-mobile">
+        <!-- Todo el contenido mobile aquí -->
+    </div>
+</section>
+```
+
+### Imágenes Responsive
+
+**Crear 2 versiones:**
+- `image-large.png` (desktop, >1MB OK)
+- `image-small.png` (mobile, <300KB, WebP)
+
+### Interacciones
+
+| Aspecto | Desktop | Mobile |
+|---------|---------|--------|
+| Hover | ✅ `:hover` permitido | ❌ Usar `:active` |
+| Click | `click` event | `touchstart`/`touchend` |
+| Gestures | Keyboard arrows | Swipe gestures |
+
+### Contenido Condicional
+
+**Mobile puede tener:**
+- Textos abreviados
+- Menos elementos
+- Estructura simplificada
+
+**Regla:** Mobile = Lightweight, Desktop = Feature-rich
+
+### Testing Checklist (Pre-Commit)
+
+- [ ] Desktop (1920x1080)
+- [ ] Mobile (375x667 - iPhone SE)
+- [ ] Resize window (769 → 768 debe cambiar versión)
+- [ ] `.show-desktop` invisible en mobile
+- [ ] `.show-mobile` invisible en desktop
+
+---
+
 ### Scroll Behavior: **Scroll Snap**
 ```css
 .snap-container {

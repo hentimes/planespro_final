@@ -13,8 +13,17 @@
 /* 3. Layout system */
 @import url('_components.css');
 /* 4. Reusable components */
-@import url('_header-footer.css');
-/* 5. Header & Footer */
+
+/* Header - Desktop only */
+@media (min-width: 769px) {
+   @import url('_header-desktop.css');
+}
+
+/* Header - Mobile only */
+@media (max-width: 768px) {
+   @import url('_header-mobile.css');
+}
+
 @import url('_animations.css');
 /* 6. Animations & transitions */
 @import url('_home-page.css');
