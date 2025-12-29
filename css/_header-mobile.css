@@ -93,6 +93,17 @@
         overflow-y: auto;
         box-shadow: var(--shadow-xl);
         border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+
+        /* Hide scrollbar */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    /* Hide scrollbar for Chrome/Safari */
+    .mobile-menu-overlay::-webkit-scrollbar {
+        display: none;
     }
 
     .mobile-menu-overlay.active {
