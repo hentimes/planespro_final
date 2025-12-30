@@ -1,0 +1,18 @@
+/* ===================================
+   COMPONENTS - Mobile Responsive Adjustments
+   Platform-specific tweaks for modal/sidebar on mobile
+   =================================== */
+
+@media (max-width: 768px) {
+
+    /* Sidebar full width on mobile */
+    .sidebar-form {
+        width: 100%;
+    }
+
+    /* Modal adjustments for mobile */
+    .modal-content {
+        width: 95%;
+        padding: var(--space-xl);
+    }
+}

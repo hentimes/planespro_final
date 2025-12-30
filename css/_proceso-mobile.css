@@ -1,0 +1,79 @@
+/* ===================================
+   PROCESO SECTION - Mobile Version
+   Vertical steps list
+   =================================== */
+
+@media (max-width: 768px) {
+    .proceso-container-mobile {
+        padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .proceso-header-mobile {
+        text-align: center;
+        margin-bottom: var(--space-2xl);
+    }
+
+    .proceso-title-mobile {
+        font-size: var(--font-size-h2);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin-bottom: var(--space-sm);
+    }
+
+    .proceso-subtitle-mobile {
+        font-size: var(--font-size-body);
+        color: var(--color-gray-700);
+    }
+
+    /* Steps as vertical list */
+    .proceso-steps-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xl);
+    }
+
+    .proceso-step-mobile {
+        display: flex;
+        gap: var(--space-md);
+        background: var(--color-white);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+    }
+
+    .step-number-mobile {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-primary);
+        color: var(--color-white);
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-bold);
+        border-radius: var(--radius-full);
+    }
+
+    .step-content-mobile h3 {
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-dark);
+        margin-bottom: var(--space-xs);
+    }
+
+    .step-content-mobile p {
+        font-size: var(--font-size-small);
+        color: var(--color-gray-700);
+        line-height: var(--line-height-normal);
+    }
+
+    .proceso-cta-mobile {
+        margin-top: var(--space-2xl);
+        text-align: center;
+    }
+
+    .proceso-cta-mobile .btn-primary-mobile {
+        width: 100%;
+    }
+}

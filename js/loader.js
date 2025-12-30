@@ -43,9 +43,9 @@ async function loadAllComponents() {
 
     // Load sections
     await loadComponent('hero-placeholder', 'partials/sections/hero.html');
+    await loadComponent('proceso-placeholder', 'partials/sections/proceso.html');
 
     // Add more sections as they are created:
-    // await loadComponent('proceso-placeholder', 'partials/sections/proceso.html');
     // await loadComponent('planes-placeholder', 'partials/sections/planes.html');
     // await loadComponent('casos-placeholder', 'partials/sections/casos.html');
     // await loadComponent('testimonios-placeholder', 'partials/sections/testimonios.html');
