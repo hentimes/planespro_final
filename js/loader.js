@@ -80,6 +80,10 @@ async function init() {
         // Then initialize JavaScript modules
         await initializeModules();
 
+        // Finally, render content from data files
+        const { renderAll } = await import('./core/renderer.js');
+        await renderAll();
+
         console.log('🚀 Application ready');
 
     } catch (error) {
