@@ -9,11 +9,15 @@
 @import url('_variables.css');
 @import url('_base.css');
 @import url('_layout.css');
+@import url('_layout-desktop.css');
+@import url('_layout-mobile.css');
 @import url('_components.css');
+@import url('_components-mobile.css');
 @import url('_header-desktop.css');
 @import url('_header-mobile.css');
 @import url('_home-desktop.css');
 @import url('_home-mobile.css');
-@import url('_proceso.css');
+@import url('_proceso-desktop.css');
+@import url('_proceso-mobile.css');
 @import url('_animations.css');
 @import url('_responsive.css');
