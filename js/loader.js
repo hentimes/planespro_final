@@ -25,10 +25,10 @@ async function loadComponent(placeholderId, componentPath) {
         }
 
         placeholder.innerHTML = html;
-        console.log(`✅ Loaded: ${componentPath}`);
+        console.log(`[LOADER] Loaded: ${componentPath}`);
 
     } catch (error) {
-        console.error(`❌ Error loading component:`, error);
+        console.error(`[LOADER] Error loading component:`, error);
     }
 }
 
@@ -36,7 +36,7 @@ async function loadComponent(placeholderId, componentPath) {
  * Load all page components in sequence
  */
 async function loadAllComponents() {
-    console.log('🔄 Loading HTML components...');
+    console.log('[LOADER] Loading HTML components...');
 
     // Load header (desktop + mobile)
     await loadComponent('header-placeholder', 'partials/header.html');
@@ -53,20 +53,20 @@ async function loadAllComponents() {
     // Load footer
     // await loadComponent('footer-placeholder', 'partials/footer.html');
 
-    console.log('✅ All components loaded');
+    console.log('[LOADER] All components loaded');
 }
 
 /**
  * Initialize JavaScript modules after HTML is loaded
  */
 async function initializeModules() {
-    console.log('🔄 Initializing JavaScript modules...');
+    console.log('[LOADER] Initializing JavaScript modules...');
 
     // Import and initialize mobile menu
     const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
     initMobileMenu();
 
-    console.log('✅ JavaScript modules initialized');
+    console.log('[LOADER] JavaScript modules initialized');
 }
 
 /**
@@ -84,10 +84,10 @@ async function init() {
         const { renderAll } = await import('./core/renderer.js');
         await renderAll();
 
-        console.log('🚀 Application ready');
+        console.log('[LOADER] Application ready');
 
     } catch (error) {
-        console.error('❌ Initialization error:', error);
+        console.error('[LOADER] Initialization error:', error);
     }
 }
 

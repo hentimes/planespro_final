@@ -72,7 +72,7 @@ export function renderList(containerId, template, items) {
  */
 export async function renderAll() {
     try {
-        console.log('🎨 Starting data-driven rendering...');
+        console.log('[RENDERER] Starting data-driven rendering...');
 
         // Import data files
         const { heroContent } = await import('../data/hero_content.js');
@@ -80,9 +80,9 @@ export async function renderAll() {
         // Render hero content
         renderContent(heroContent, 'hero');
 
-        console.log('✅ Rendering complete');
+        console.log('[RENDERER] Rendering complete');
 
     } catch (error) {
-        console.error('❌ Rendering error:', error);
+        console.error('[RENDERER] Rendering error:', error);
     }
 }
