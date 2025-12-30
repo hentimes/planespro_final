@@ -2,7 +2,7 @@
    HEADER DESKTOP STYLES
    Only applies on desktop (≥769px)
    PREMIUM DESIGN: Glassmorphism + Gradients
-   V2 MATCHED SPECS
+   V2 EXACT STRUCTURE
    =================================== */
 
 @media (min-width: 769px) {
@@ -25,22 +25,15 @@
 
         z-index: var(--z-fixed);
 
+        /* V2: Only 2 children - logo and nav */
         display: flex;
         align-items: center;
         justify-content: space-between;
-        /* Logo left, nav+cta group right */
+        /* Logo left, nav right */
         padding: 0 5%;
-        /* V2: 5% padding */
+        /* V2: 5% padding = ~95px */
 
         transition: padding-right 0.3s ease-in-out;
-    }
-
-    .header-container-desktop {
-        /* Container that groups nav + CTA together on the right */
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        /* Space between nav and CTA button */
     }
 
     /* Logo/Brand */
@@ -74,11 +67,11 @@
         /* V2 tracking */
     }
 
-    /* Navigation */
+    /* Navigation (contains links AND CTA button as siblings) */
     .header-nav-desktop {
         display: flex;
         gap: 30px;
-        /* V2 gap */
+        /* V2 gap between ALL children (links + button) */
         align-items: center;
     }
 
@@ -125,7 +118,7 @@
         font-weight: 600;
     }
 
-    /* CTA Button - V2 PREMIUM STYLE */
+    /* CTA Button inside nav (V2 Structure) */
     .header-cta-desktop {
         /* Pill shape */
         padding: 8px 20px;
