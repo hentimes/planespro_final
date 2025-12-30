@@ -38,17 +38,25 @@ async function loadComponent(placeholderId, componentPath) {
 async function loadAllComponents() {
     console.log('[LOADER] Loading HTML components...');
 
-    // Load header (desktop + mobile)
+    // Platform detection
+    const isMobile = window.innerWidth <= 768;
+    console.log(`[LOADER] Platform detected: ${isMobile ? 'Mobile' : 'Desktop'}`);
+
+    // Load header (desktop + mobile in one file)
     await loadComponent('header-placeholder', 'partials/header.html');
 
-    // Load sections
-    await loadComponent('hero-placeholder', 'partials/sections/hero.html');
-    await loadComponent('proceso-placeholder', 'partials/sections/proceso.html');
+    // Load platform-specific sections
+    if (isMobile) {
+        await loadComponent('hero-placeholder', 'partials/sections/hero-mobile.html');
+        await loadComponent('proceso-placeholder', 'partials/sections/proceso-mobile.html');
+    } else {
+        await loadComponent('hero-placeholder', 'partials/sections/hero-desktop.html');
+        await loadComponent('proceso-placeholder', 'partials/sections/proceso-desktop.html');
+    }
 
     // Add more sections as they are created:
-    // await loadComponent('planes-placeholder', 'partials/sections/planes.html');
-    // await loadComponent('casos-placeholder', 'partials/sections/casos.html');
-    // await loadComponent('testimonios-placeholder', 'partials/sections/testimonios.html');
+    // await loadComponent('planes-placeholder', 'partials/sections/planes-desktop.html');
+    // await loadComponent('planes-placeholder', 'partials/sections/planes-mobile.html');
 
     // Load footer
     // await loadComponent('footer-placeholder', 'partials/footer.html');

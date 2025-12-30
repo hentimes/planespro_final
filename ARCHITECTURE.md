@@ -178,46 +178,199 @@ Antes de escribir **cualquier línea de código**, validar:
 
 **Justificación:** ARCH (DRY, mantenibilidad), UXI (mobile-first, accesibilidad), PROD (métricas unificadas), GROW (SEO, cero friction).
 
+
 ---
 
-## 🔒 REGLAS DE INDEPENDENCIA DESKTOP/MOBILE
+## 🔒 PATRÓN DE SEPARACIÓN TOTAL DESKTOP/MOBILE
+
+**PRINCIPIO FUNDAMENTAL:** Desktop y Mobile son **plataformas diferentes** con UX, comportamiento e incluso secciones distintas. NUNCA mezclar en un mismo archivo.
 
 ### Breakpoint Único
 - **Desktop:** `≥ 769px`
 - **Mobile:** `≤ 768px`
 - **NO usar breakpoint intermedio** (tablet = desktop)
 
-### Estructura CSS (Archivos Separados)
+### Regla de Oro: SEPARACIÓN TOTAL
+
+**TODAS las capas se dividen en desktop/mobile:**
+
 ```
-css/
-├── styles.css              # Maestro con @imports condicionales
-├── _variables.css          # Compartido
-├── _base.css               # Compartido
-├── _layout.css             # Compartido
-├── _components.css         # Compartido
-├── _home-desktop.css       # SOLO desktop
-├── _home-mobile.css        # SOLO mobile
-└── _responsive.css         # Ajustes finales
+✅ CORRECTO:
+HTML:   proceso-desktop.html + proceso-mobile.html
+CSS:    _proceso-desktop.css + _proceso-mobile.css
+JS:     proceso_desktop.js + proceso_mobile.js
+Data:   procesoData = { desktop: {...}, mobile: {...} }
+
+❌ INCORRECTO:
+HTML:   proceso.html (con ambas versiones)
+CSS:    _proceso.css (con @media queries mezclados)
+JS:     proceso.js (con if/else desktop/mobile)
 ```
 
-**Carga condicional en `styles.css`:**
-```css
-@media (min-width: 769px) {
-    @import url('_home-desktop.css');
-}
-@media (max-width: 768px) {
-    @import url('_home-mobile.css');
-}
+### Estructura de Archivos
+
+#### HTML Partials
+```
+partials/sections/
+├── hero-desktop.html
+├── hero-mobile.html
+├── proceso-desktop.html
+├── proceso-mobile.html
+├── planes-desktop.html
+└── planes-mobile.html
+```
+
+#### CSS
+```
+css/
+├── _variables.css           # SHARED (design tokens)
+├── _base.css                # SHARED (resets)
+├── _animations.css          # SHARED (keyframes puros)
+├── _layout-desktop.css      # Desktop layout
+├── _layout-mobile.css       # Mobile layout
+├── _components.css          # Shared component base
+├── _components-mobile.css   # Mobile-specific adjustments
+├── _header-desktop.css
+├── _header-mobile.css
+├── _home-desktop.css
+├── _home-mobile.css
+├── _proceso-desktop.css
+├── _proceso-mobile.css
+└── _responsive.css          # Final tweaks only
+```
+
+#### JavaScript Modules
+```
+js/modules/
+├── planes/
+│   ├── slider_desktop.js    # Desktop: arrows, hover
+│   └── slider_mobile.js     # Mobile: touch swipe
+├── proceso/
+│   ├── flip_cards_desktop.js  # Desktop: flip on hover
+│   └── static_mobile.js       # Mobile: no interaction
+└── testimonials/
+    ├── carousel_desktop.js
+    └── swipe_mobile.js
+```
+
+#### Data Files
+```javascript
+// js/data/proceso_content.js
+export const procesoContent = {
+    desktop: {
+        title: "Cómo Funciona",
+        subtitle: "4 pasos simples...",
+        // Desktop-specific content
+    },
+    mobile: {
+        title: "Cómo Funciona",
+        subtitle: "4 pasos",
+        // Mobile-specific (shorter)
+    }
+};
 ```
 
 ### Naming Convention (OBLIGATORIO)
 
-**Desktop:**
-- Clases: Sufijo `-desktop`
-- Ejemplo: `.hero-grid-desktop`, `.hero-text-desktop`
+**HTML Files:**
+- Desktop: `section-desktop.html`
+- Mobile: `section-mobile.html`
 
-**Mobile:**
-- Clases: Sufijo `-mobile`
+**CSS Files:**
+- Desktop: `_section-desktop.css`
+- Mobile: `_section-mobile.css`
+
+**CSS Classes:**
+- Desktop: `.hero-grid-desktop`, `.hero-text-desktop`
+- Mobile: `.hero-stack-mobile`, `.hero-text-mobile`
+
+**JS Modules:**
+- Desktop: `module_desktop.js`
+- Mobile: `module_mobile.js`
+- Shared utilities: `helpers.js` (sin sufijo)
+
+**JS Functions:**
+```javascript
+// Desktop module
+export function initDesktopSlider() { }
+
+// Mobile module
+export function initMobileSlider() { }
+```
+
+### Loader Pattern (Condicional)
+
+```javascript
+// loader.js
+async function loadAllComponents() {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Load header (desktop + mobile)
+    await loadComponent('header-placeholder', 'partials/header.html');
+    
+    // Load platform-specific sections
+    if (isMobile) {
+        await loadComponent('hero-placeholder', 'partials/sections/hero-mobile.html');
+        await loadComponent('proceso-placeholder', 'partials/sections/proceso-mobile.html');
+    } else {
+        await loadComponent('hero-placeholder', 'partials/sections/hero-desktop.html');
+        await loadComponent('proceso-placeholder', 'partials/sections/proceso-desktop.html');
+    }
+}
+
+async function initializeModules() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
+        const { initMobileSlider } = await import('./modules/planes/slider_mobile.js');
+        initMobileMenu();
+        initMobileSlider();
+    } else {
+        const { initDesktopSlider } = await import('./modules/planes/slider_desktop.js');
+        const { initFlipCards } = await import('./modules/proceso/flip_cards_desktop.js');
+        initDesktopSlider();
+        initFlipCards();
+    }
+}
+```
+
+### Decision Matrix: ¿Cuándo Dividir?
+
+| Layer | Split? | Reason |
+|-------|--------|---------|
+| **HTML** | ✅ ALWAYS | Different structure, content length, UX |
+| **CSS** | ✅ ALWAYS | Different visual design per platform |
+| **JS Interactive** | ✅ ALWAYS | Different behaviors (hover vs touch) |
+| **Data** | ✅ Variants | Desktop/mobile properties in same file |
+| **Utilities** | ❌ NEVER | Platform-agnostic helpers |
+| **Core** | ❌ NEVER | Rendering/orchestration logic |
+
+### Excepciones PERMITIDAS
+
+**Archivos que NO se dividen:**
+
+1. **`_variables.css`** - Design tokens (pueden tener @media para responsive typography)
+2. **`_base.css`** - Resets globales (solo @media para prefers-reduced-motion)
+3. **`_animations.css`** - Keyframes puros (sin @media)
+4. **`js/core/renderer.js`** - Lógica de rendering universal
+5. **`js/utils/dom_helpers.js`** - Utilidades DOM agnósticas
+
+### Por Qué Esta Separación
+
+**Ventajas:**
+1. **Cambios independientes** - Modificar desktop sin tocar mobile
+2. **Efectos diferentes** - Desktop hover, mobile touch
+3. **Secciones exclusivas** - Mobile puede tener secciones que desktop no
+4. **Mantenibilidad** - Archivos más pequeños, enfoque claro
+5. **Performance** - Loader solo carga lo necesario por plataforma
+6. **Escalabilidad total** - Agregar features sin afectar la otra plataforma
+
+**Ejemplos Reales:**
+- Desktop: Planes en grid 3x2 con comparison modal
+- Mobile: Planes en swiper horizontal, sin comparison
+- Desktop: Proceso con flip cards hover
+- Mobile: Proceso con steps estáticos verticales
 - Ejemplo: `.hero-stack-mobile`, `.hero-title-mobile`
 
 **Regla:** NUNCA compartir clases entre desktop y mobile (excepto utilitarias).
