@@ -13,9 +13,9 @@
         left: 0;
         width: 100%;
         height: 70px;
-        /* V2: 70px (was 80px) */
+        /* V2: 70px */
 
-        /* GLASS MORPHISM EFFECT (V2 Style) */
+        /* GLASSMORPHISM EFFECT (V2 Style) */
         background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
@@ -28,7 +28,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        /* V2: space-between */
+        /* Logo left, nav+cta group right */
         padding: 0 5%;
         /* V2: 5% padding */
 
@@ -36,8 +36,11 @@
     }
 
     .header-container-desktop {
-        /* Removed - header itself is the container now */
-        display: contents;
+        /* Container that groups nav + CTA together on the right */
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        /* Space between nav and CTA button */
     }
 
     /* Logo/Brand */
@@ -85,7 +88,7 @@
         font-weight: 500;
         /* Medium weight */
         color: #1A365D;
-        /* V2: Navy #1A365D, NOT green */
+        /* V2: Navy #1A365D */
         text-decoration: none;
         transition: color 0.3s;
         position: relative;
