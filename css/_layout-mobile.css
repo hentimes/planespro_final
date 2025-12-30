@@ -1,0 +1,19 @@
+/* ===================================
+   PlanesPro Final - Layout System Mobile
+   Mobile-specific layout utilities
+   =================================== */
+
+@media (max-width: 768px) {
+
+    /* === Responsive Display - Mobile === */
+    .show-mobile {
+        display: block;
+    }
+
+    .show-desktop {
+        display: none;
+    }
+
+    /* Grid System - Mobile baseline defined in shared */
+    /* Mobile uses 1fr columns by default (set in shared _layout.css) */
+}

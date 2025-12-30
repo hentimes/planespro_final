@@ -1,0 +1,29 @@
+/* ===================================
+   PlanesPro Final - Layout System Desktop
+   Desktop-specific layout utilities
+   =================================== */
+
+@media (min-width: 769px) {
+
+    /* === Grid System - Desktop === */
+    .grid--2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* === Responsive Display - Desktop === */
+    .show-mobile {
+        display: none;
+    }
+
+    .show-desktop {
+        display: block;
+    }
+}

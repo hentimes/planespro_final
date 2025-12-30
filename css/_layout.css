@@ -1,6 +1,7 @@
 /* ===================================
-   PlanesPro Final - Layout System
-   Consulted: ARCHITECTURE.md (Scroll Snap, 100vh sections)
+   PlanesPro Final - Layout System Shared
+   Platform-agnostic layout fundamentals
+   NOTE: Desktop/Mobile-specific overrides in separate files
    =================================== */
 
 /* === Snap Container === */
@@ -49,6 +50,7 @@
     gap: var(--space-lg);
 }
 
+/* Mobile-first grid defaults */
 .grid--2 {
     grid-template-columns: 1fr;
 }
@@ -61,19 +63,7 @@
     grid-template-columns: 1fr 1fr;
 }
 
-@media (min-width: 769px) {
-    .grid--2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid--3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid--4 {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+/* Desktop grid overrides in _layout-desktop.css */
 
 /* === Flex Utilities === */
 .flex {
@@ -108,24 +98,4 @@
 
 .gap-xl {
     gap: var(--space-xl);
-}
-
-/* === Responsive Display === */
-/* ARCHITECTURE.md: Dual Components */
-.show-mobile {
-    display: block;
-}
-
-.show-desktop {
-    display: none;
-}
-
-@media (min-width: 769px) {
-    .show-mobile {
-        display: none;
-    }
-
-    .show-desktop {
-        display: block;
-    }
 }
