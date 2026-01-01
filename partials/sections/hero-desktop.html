@@ -1,47 +1,126 @@
 <!-- ===================== -->
 <!-- HERO SECTION DESKTOP  -->
 <!-- ===================== -->
+<section id="inicio" class="snap-section hero-section-desktop">
+    <div class="content-wrapper centered-wrapper">
 
-<section id="hero" class="snap-section">
-    <div class="content-wrapper hero-grid-desktop">
+        <!-- MAIN CONTENT: Top section with text + image -->
+        <div class="hero-main-content">
 
-        <!-- Left Column: Text Content -->
-        <div class="hero-text-desktop">
-            <h1 class="hero-title-desktop" data-content="hero.title">
-                Optimiza tu 7%
-            </h1>
-            <p class="hero-subtitle-desktop" data-content="hero.subtitle">
-                Te ayudamos a encontrar el plan de Isapre perfecto para ti. Asesoría experta, 100% gratuita y
-                sin compromiso.
-            </p>
+            <!-- LEFT COLUMN: Text + Social Proof -->
+            <div class="hero-left">
+                <h1 class="hero-title">Deja de perder dinero en tu Isapre.</h1>
 
-            <!-- CTA Button -->
-            <a href="#contacto" class="btn-primary-desktop hero-cta-desktop">
-                Solicitar Análisis Gratuito
-            </a>
+                <p class="hero-description">
+                    Te mostramos exactamente cuánto puedes ahorrar y qué plan te conviene hoy. Cada mes que no revisas
+                    tu plan, sigues pagando de más.
+                    Asesoría experta, transparente y 100% gratuita.
+                </p>
 
-            <!-- Trust Pills -->
-            <div class="trust-pills-desktop">
-                <div class="trust-pill-desktop">
-                    <span class="pill-icon-desktop">✓</span>
-                    <span class="pill-text-desktop">Asesoría 100% Gratuita</span>
+                <!-- Social Proof -->
+                <div class="hero-bottom-area">
+                    <div class="social-proof-cluster">
+                        <!-- 1. AVATARS (Left) -->
+                        <div class="avatars-stack">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/women/12.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="avatar-circle"
+                                alt="Cliente">
+                            <img src="https://randomuser.me/api/portraits/women/90.jpg" class="avatar-circle"
+                                alt="Cliente">
+
+                            <span class="social-hidden-text">
+                                Cliente Satisfecho
+                                <!-- Verified Badge SVG -->
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                                        fill="#475569" />
+                                    <path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
+
+                        <!-- 2. WHATSAPP BUBBLE (Bottom) -->
+                        <div class="testimonial-bubble" id="hero-bubble">
+                            <div class="bubble-text" id="bubble-text"></div>
+
+                            <!-- Stars now injected inline with meta -->
+
+                            <!-- Meta added via JS -->
+                        </div>
+                    </div>
                 </div>
-                <div class="trust-pill-desktop">
-                    <span class="pill-icon-desktop">✓</span>
-                    <span class="pill-text-desktop">Sin Compromiso</span>
+            </div>
+
+            <!-- RIGHT COLUMN: Image + CTA -->
+            <div class="hero-right">
+                <div class="hero-image-area">
+                    <img src="assets/images/hero-person.png" alt="Asesora PlanesPro" class="hero-image">
                 </div>
-                <div class="trust-pill-desktop">
-                    <span class="pill-icon-desktop">✓</span>
-                    <span class="pill-text-desktop">Expertos Certificados</span>
+
+                <!-- CTA Button -->
+                <div class="hero-cta-group">
+                    <button class="cta-hero-blue" onclick="toggleSidebar()" data-cta-name="hero_main">
+                        Solicitar Análisis Gratuito
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TRUST PILLS: Centered row -->
+        <div class="hero-benefits-row">
+            <div class="benefit-pill benefit-accordion active" data-benefit="gratuita">
+                <i class="fas fa-check-circle pill-icon"></i>
+                <span>Asesoría 100% Gratuita</span>
+
+                <div class="pill-content">
+                    <p>Resolvemos tus dudas iniciales sin costo ni letra chica. Claridad total desde el primer paso.</p>
+                </div>
+            </div>
+            <div class="benefit-pill benefit-accordion" data-benefit="express">
+                <i class="fas fa-bolt pill-icon"></i>
+                <span>Análisis Express 24hs</span>
+
+                <div class="pill-content">
+                    <p>Diagnóstico completo de tu caso en un día. Sin esperas innecesarias para que avances rápido.</p>
+                </div>
+            </div>
+            <div class="benefit-pill benefit-accordion" data-benefit="tramites">
+                <i class="fas fa-file-signature pill-icon"></i>
+                <span>Gestionamos Trámites</span>
+
+                <div class="pill-content">
+                    <p>Estamos a tu lado de principio a fin. Te asistimos en cada etapa para garantizar el éxito.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column: Image -->
-        <div class="hero-image-desktop">
-            <img src="assets/images/hero-person.png"
-                alt="Mujer sonriente mostrando documento de salud con símbolo médico">
+        <!-- FOOTER: Logo Fader (always at bottom) -->
+        <div class="hero-footer">
+            <div class="hero__logos-group">
+                <h2 class="section-logos__title">Te ofrecemos asesoría certificada en todas las Isapres</h2>
+                <div class="logo-fader" id="logoFaderContainer">
+                    <!-- Logos injected by JS -->
+                </div>
+            </div>
         </div>
 
+    </div>
+
+    <!-- Scroll Hint -->
+    <div class="scroll-hint">
+        <i class="fas fa-chevron-down"></i>
     </div>
 </section>

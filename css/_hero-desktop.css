@@ -1,0 +1,818 @@
+/* ===================================
+   HERO SECTION - DESKTOP SPECIFIC
+   V2 Premium Styles
+   =================================== */
+
+@media (min-width: 769px) {
+
+    .hero-section-desktop {
+        /* Aurora Effect Background (Premium Mesh) */
+        background:
+            radial-gradient(circle at 15% 50%, rgba(5, 68, 204, 0.08) 0%, transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(0, 196, 140, 0.08) 0%, transparent 25%),
+            var(--color-bg-secondary);
+        position: relative;
+        padding-top: 0;
+        /* No padding - title starts immediately after header */
+        height: 100vh;
+        /* STRICT HEIGHT */
+        overflow: hidden;
+        /* NO SCROLL */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .centered-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* Fill container */
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 0;
+        justify-content: space-between;
+        /* Distribute vertically */
+        padding-bottom: 20px;
+        /* Safe area for footer */
+    }
+
+    /* === MAIN CONTENT GRID === */
+    .hero-main-content {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: var(--space-lg);
+        /* Reduced from xl */
+        align-items: start;
+        /* Changed from center to start to allow independent vertical movement */
+        width: 100%;
+        padding: 0 var(--space-xl);
+        margin-top: 100px;
+        /* Increased to fix "under header" issue (space gained from H2 removal) */
+        /* No large bottom margin */
+    }
+
+    /* ... skipped ... */
+
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+        max-height: 360px;
+        /* Reduced to fit 100vh */
+        object-fit: contain;
+        animation: float 6s ease-in-out infinite;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    }
+
+    /* === LEFT COLUMN === */
+    .hero-left {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    /* === RIGHT COLUMN === */
+    .hero-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-md);
+    }
+
+    /* === HERO TITLE (Clean Redo) === */
+    .hero-title {
+        font-size: 3.5rem;
+        /* Increased size */
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin-bottom: var(--space-md);
+        margin-top: 30px;
+        /* Pushed down from header */
+        font-weight: 800;
+        min-height: 100px;
+        /* Reserve vertical space */
+        display: block;
+        color: #111b21;
+        /* Solid base color */
+    }
+
+    /* 1. The typed text */
+    .hero-title .type-text {
+        color: #111b21;
+        position: relative;
+    }
+
+    /* 2. The Cursor (Standalone Element) */
+    .hero-title .cursor-blink {
+        display: inline-block;
+        width: 3px;
+        height: 0.9em;
+        background-color: var(--color-primary);
+        margin-left: 3px;
+        vertical-align: baseline;
+        animation: blink-caret 0.75s step-end infinite;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        /* Smooth fade out */
+    }
+
+    /* Cursor Hidden State (Retains Width = No Layout Shift) */
+    .hero-title .cursor-blink.invisible {
+        opacity: 0;
+        animation: none;
+    }
+
+    /* 3. The Second Line (Optimiza tu 7%) */
+    .hero-title .second-line {
+        background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0;
+        transition: opacity 1s ease;
+        /* Smoother 1s fade */
+        margin-left: 0;
+        /* Reset */
+        display: block;
+        /* FORCE NEW LINE */
+        margin-top: 10px;
+        /* Space between lines */
+    }
+
+    .hero-title .second-line.visible {
+        opacity: 1;
+    }
+
+    /* === ANIMATION SEQUENCE CONTROL (JS Triggers) === */
+    /* Init State: Hidden & Offset */
+    .hero-description,
+    .hero-cta-group,
+    .hero-image-area,
+    .hero-benefits-row,
+    .social-proof-cluster,
+    .hero-footer {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Step 2: Paragraph */
+    .hero-section-desktop.seq-step-2 .hero-description {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Step 3: Action Block (Left Cluster, CTA, Image) */
+    .hero-section-desktop.seq-step-3 .social-proof-cluster,
+    .hero-section-desktop.seq-step-3 .hero-cta-group,
+    .hero-section-desktop.seq-step-3 .hero-image-area {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Step 4: Pills */
+    .hero-section-desktop.seq-step-4 .hero-benefits-row {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Step 5: Footer */
+    .hero-section-desktop.seq-step-5 .hero-footer {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @keyframes blink-caret {
+
+        from,
+        to {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        color: var(--color-gray-500);
+        max-width: 90%;
+        margin-bottom: var(--space-lg);
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    /* CTA Button */
+    .hero-cta-group {
+        margin-bottom: var(--space-lg);
+    }
+
+    .cta-hero-blue {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        color: white;
+        padding: 18px 40px;
+        /* Larger touch target */
+        font-size: 1.125rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0 10px 20px rgba(2, 73, 255, 0.25);
+        /* Colored glow shadow */
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .cta-hero-blue:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(2, 73, 255, 0.35);
+        /* Enhanced glow on hover */
+    }
+
+    /* --- SOCIAL PROOF --- */
+    /* --- SOCIAL PROOF (Glass Container) --- */
+    /* --- SOCIAL PROOF (Glass Container) --- */
+    /* --- SOCIAL PROOF (Hybrid Connect / WhatsApp Header) --- */
+    .social-proof-cluster {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        /* Clean Layout (Floating) */
+        padding: 4px 0;
+        width: fit-content;
+        position: relative;
+        margin-top: 5px;
+        /* Tightened from 15px */
+    }
+
+    /* --- 1. AVATARS STACK (Refactored to Transitions) --- */
+    .avatars-stack {
+        display: flex;
+        position: relative;
+        height: 48px;
+        /* Width dynamically handled, but we need space for the text when retracted */
+        width: auto;
+        min-width: 240px;
+        /* Reserve space for text */
+        flex-shrink: 0;
+        align-items: center;
+    }
+
+    /* Text hidden behind spreading avatars */
+    /* Text hidden behind spreading avatars */
+    .social-hidden-text {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+        /* Darker for "Header" feel */
+        position: absolute;
+        left: 55px;
+        z-index: 0;
+        white-space: nowrap;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        letter-spacing: -0.01em;
+
+        /* Flex layout for Icon alignment */
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    /* --- 2. DYNAMIC STARS (Inside Bubble) --- */
+    .dynamic-stars-container {
+        display: flex;
+        gap: 2px;
+        margin-top: 6px;
+        /* Space from text */
+        height: 16px;
+        align-items: center;
+    }
+
+    .dynamic-star {
+        color: #F59E0B;
+        /* Amber/Gold */
+        font-size: 0.85rem;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* Bouncy pop */
+    }
+
+    .dynamic-star.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .dynamic-star.pop {
+        animation: star-pop-shake 0.4s forwards;
+    }
+
+    @keyframes star-pop-shake {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.6) rotate(10deg);
+        }
+
+        70% {
+            transform: scale(0.9) rotate(-10deg);
+        }
+
+        100% {
+            transform: scale(1) rotate(0);
+        }
+    }
+
+    .avatar-circle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        /* Default State: Stacked */
+        opacity: 0;
+        transform: translateX(0) scale(0.8);
+        z-index: 0;
+
+        /* Smooth Transition */
+        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Active State: Spread Out */
+    .avatar-circle.deal {
+        opacity: 1;
+        transform: translateX(var(--deal-offset)) scale(1);
+        z-index: 1;
+    }
+
+    /* Staggered Delays for Transition */
+    .avatar-circle:nth-child(1) {
+        --deal-offset: 0px;
+        transition-delay: 0.1s;
+        z-index: 7;
+    }
+
+    .avatar-circle:nth-child(2) {
+        --deal-offset: 30px;
+        transition-delay: 0.2s;
+        z-index: 6;
+    }
+
+    .avatar-circle:nth-child(3) {
+        --deal-offset: 60px;
+        transition-delay: 0.3s;
+        z-index: 5;
+    }
+
+    .avatar-circle:nth-child(4) {
+        --deal-offset: 90px;
+        transition-delay: 0.4s;
+        z-index: 4;
+    }
+
+    .avatar-circle:nth-child(5) {
+        --deal-offset: 120px;
+        transition-delay: 0.5s;
+        z-index: 3;
+    }
+
+    .avatar-circle:nth-child(6) {
+        --deal-offset: 150px;
+        transition-delay: 0.6s;
+        z-index: 2;
+    }
+
+    .avatar-circle:nth-child(7) {
+        --deal-offset: 180px;
+        transition-delay: 0.7s;
+        z-index: 1;
+    }
+
+    /* Active Speaker: When bubble is showing, one avatar pops up */
+    /* Moved here to override nth-child z-indices naturally via Cascade */
+    /* Active Speaker: When bubble is showing, one avatar pops up */
+    /* Moved here to override nth-child z-indices naturally via Cascade */
+    .avatar-circle.speaker {
+        z-index: 100;
+        /* Big Pop: 35% larger as requested */
+        /* REMOVED translateY to keep center alignment with text */
+        transform: scale(1.35);
+        /* Boosted Shadow from 0 8px to 0 12px to simulate "Jump" without moving */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        border-color: var(--color-primary);
+    }
+
+    /* --- TESTIMONIAL BUBBLE (WhatsApp Style - Green) --- */
+    .testimonial-bubble {
+        position: absolute;
+        /* Moved down to 130% to prevent overlap when avatar scales up 35% */
+        top: 130%;
+        /* Shift right to align tail with avatar center */
+        /* Bubble Left 5px + Triangle Start 12px + HalfWidth 10px = 27px (Approx Center) */
+        left: 5px;
+        min-width: 320px;
+        max-width: 450px;
+        background: #D9FDD3;
+        /* Rounded all corners so the Triangle is the ONLY point */
+        border-radius: 12px;
+        padding: 10px 16px 8px 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.95);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 50;
+        border: none;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        /* Ensure filter applies to tail too if we use drop-shadow on parent, but stick to box-shadow for bubble body */
+    }
+
+    .testimonial-bubble.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Bubble Tail (Points UP) - The Single Pointer */
+    .testimonial-bubble::before {
+        content: '';
+        position: absolute;
+        top: -12px;
+        /* Start AFTER the border-radius (12px) to avoid sitting on the curve */
+        left: 12px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        /* Standard Triangle Pointing UP - Slightly narrower */
+        border-width: 0 10px 12px 10px;
+        border-color: transparent transparent #D9FDD3 transparent;
+    }
+
+    .bubble-text {
+        font-size: 0.95rem;
+        color: #111b21;
+        /* WhatsApp Dark Text */
+        line-height: 1.4;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        min-height: 1.4em;
+
+        /* Max 2 lines limitation */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* --- BUBBLE METADATA (Refactored for Inline Stars) --- */
+    .bubble-meta {
+        display: flex;
+        justify-content: space-between;
+        /* Stars left, Time right */
+        align-items: center;
+        width: 100%;
+        /* Spans full width */
+        margin-top: 1px;
+        opacity: 1;
+        /* Visible so stars can animate immediately */
+        /* transition: opacity 0.3s ease; REMOVED - opacity is static now */
+    }
+
+    .meta-stars {
+        display: flex;
+        gap: 2px;
+        /* Aligned left by default */
+    }
+
+    .meta-info {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        /* Hidden initially */
+        transition: opacity 0.3s ease;
+    }
+
+    .meta-info.visible {
+        opacity: 1;
+        /* Fade in after typing */
+    }
+
+    .bubble-time {
+        font-size: 0.7rem;
+        color: rgba(17, 27, 33, 0.5);
+        font-weight: 400;
+    }
+
+    .bubble-checks {
+        color: #53bdeb;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Blinking Cursor - Unchanged */
+    .bubble-text::after {
+        content: '|';
+        color: var(--color-primary);
+        animation: typing-blink 0.8s infinite;
+        margin-left: 2px;
+        font-weight: 700;
+    }
+
+    .testimonial-bubble.finished-typing .bubble-text::after {
+        display: none;
+    }
+
+    @keyframes typing-blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* Old static stars/text removed */
+
+    /* --- IMAGE AREA --- */
+    .hero-image-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+        /* CHANGE: Reduced from 500px to 420px */
+        max-height: 420px;
+        object-fit: contain;
+        animation: float 6s ease-in-out infinite;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    /* === MIDDLE ROW: PILLS (Compact) === */
+    .hero-benefits-row {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-lg);
+        margin-bottom: 20px;
+        /* Reduced from 40px */
+        margin-top: 40px;
+        /* Added clearance for WhatsApp Bubble */
+        /* Reset */
+        position: relative;
+        z-index: 100;
+    }
+
+    .benefit-pill {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        padding: 6px 14px;
+        /* Ultra compact */
+        border-radius: 50px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .benefit-accordion {
+        /* Wrapper for icon + text */
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        /* Tighter */
+        align-items: center;
+    }
+
+    .benefit-pill:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Active state */
+    .benefit-pill.active {
+        background: rgba(10, 116, 218, 0.15);
+        border-color: var(--color-primary);
+    }
+
+    .pill-icon {
+        color: var(--color-primary);
+        font-size: 0.9rem;
+        /* Smaller */
+        flex-shrink: 0;
+    }
+
+    .benefit-pill span {
+        font-weight: 600;
+        color: var(--color-dark);
+        font-size: 0.8rem;
+        /* Smaller */
+    }
+
+    /* Expandable content */
+    /* Expandable content - Dropdown Style */
+    .pill-content {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-5px);
+        width: 220px;
+        /* Narrower */
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(10, 116, 218, 0.1);
+        padding: 12px;
+        /* Less padding */
+        margin-top: 8px;
+        opacity: 0;
+        text-align: justify;
+        /* Justified text as requested */
+    }
+
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+}
+
+/* Triangle pointer */
+.pill-content::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-left: 1px solid rgba(10, 116, 218, 0.1);
+    border-top: 1px solid rgba(10, 116, 218, 0.1);
+}
+
+.benefit-pill.active .pill-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.pill-content p {
+    font-size: 0.8rem;
+    /* Smaller text */
+    line-height: 1.35;
+    color: var(--color-gray-600);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Pulse animation for hint - SUBTLE */
+@keyframes pill-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(10, 116, 218, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(10, 116, 218, 0);
+    }
+}
+
+.pulse-hint {
+    animation: pill-pulse 3s infinite ease-in-out;
+}
+
+/* Remove pulse after first interaction */
+.benefit-pill.interacted {
+    animation: none;
+}
+
+/* === FOOTER: LOGO FADER === */
+.hero-footer {
+    margin-top: auto;
+    /* Push to bottom */
+    padding-bottom: var(--space-xl);
+}
+
+.hero__logos-group {
+    text-align: center;
+}
+
+.section-logos__title {
+    font-size: 0.9rem;
+    color: var(--color-gray-500);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.logo-fader {
+    height: auto;
+    /* Allow growth */
+    min-height: 50px;
+    width: 100%;
+    overflow: visible;
+    /* Prevent cutting off */
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    /* Fix overflow issues */
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: 0 var(--space-md);
+}
+
+.logo-fader__img {
+    height: 100%;
+    width: auto;
+    max-height: 32px;
+    object-fit: contain;
+    opacity: 0;
+    /* FADE OUT: 5s (Slower) */
+    transition: opacity 5s ease-in-out, filter 0.3s ease;
+    filter: grayscale(100%);
+    will-change: opacity;
+}
+
+.logo-fader__img.is-visible {
+    opacity: 0.7;
+    /* FADE IN: 3s (Standard) */
+    transition: opacity 3s ease-in-out, filter 0.3s ease;
+}
+
+.logo-fader__img.is-visible:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    /* Fast transition for hover interaction */
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* SCROLL HINT */
+.scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-gray-300);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0) translateX(-50%);
+    }
+
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}
+
+}
