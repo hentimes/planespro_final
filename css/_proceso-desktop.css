@@ -1,53 +1,145 @@
 /* ===================================
-   PROCESO SECTION - Desktop Version
-   How it works with flip cards
+   PROCESS SECTION - DESKTOP
+   V2 "How it Works" Styling
    =================================== */
 
 @media (min-width: 769px) {
-    .proceso-container-desktop {
+
+    .process-section-desktop {
+        background-color: white;
+        padding: var(--space-2xl) 0;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: var(--space-3xl);
-        padding: var(--space-4xl) 0;
+        justify-content: center;
     }
 
-    .proceso-header-desktop {
+    .proceso-container-desktop {
+        padding: 0 var(--space-xl);
+        padding-top: 90px;
+        /* 70px header + 20px gap - consistent with other sections */
+    }
+
+    .section-title-desktop {
+        font-size: 2.5rem;
         text-align: center;
-        max-width: 600px;
-    }
-
-    .proceso-title-desktop {
-        font-size: var(--font-size-h2);
-        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-lg);
         color: var(--color-dark);
-        margin-bottom: var(--space-md);
+        font-weight: 700;
     }
 
-    .proceso-subtitle-desktop {
-        font-size: var(--font-size-h4);
-        color: var(--color-gray-700);
+    /* Central Banner Illustration */
+    .proceso-illustration-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: var(--space-lg);
     }
 
-    /* Flip Cards Grid */
+    .process-banner-img {
+        max-width: 600px;
+        /* Adjust based on original size */
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .process-intro-desktop {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto var(--space-2xl);
+        font-size: 1.125rem;
+        color: var(--color-gray-600);
+        line-height: 1.6;
+    }
+
+    /* FLIP CARDS GRID */
     .proceso-grid-desktop {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-2xl);
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-lg);
         width: 100%;
-        max-width: 900px;
     }
 
-    /* Individual flip card styles in _components.css */
-    .flip-card-number {
+    /* --- FLIP CARD CORE STYLES --- */
+    .flip-card {
+        background-color: transparent;
+        width: 100%;
+        height: 220px;
+        /* Fixed height for consistency */
+        perspective: 1000px;
+        cursor: pointer;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Hover Effect */
+    .flip-card:hover .flip-card-inner,
+    .flip-card:focus .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Front Styling */
+    .flip-card-front {
+        background-color: white;
+        color: var(--color-dark);
+        border: 1px solid var(--color-gray-100);
+    }
+
+    .proceso-icon {
         font-size: 3rem;
-        font-weight: var(--font-weight-bold);
-        color: var(--color-primary);
-        opacity: 0.2;
         margin-bottom: var(--space-md);
+        color: var(--color-primary);
+        /* Gradient text for icon if possible, else solid color */
     }
 
-    .proceso-cta-desktop {
-        margin-top: var(--space-xl);
+    .flip-card-front h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
     }
+
+    /* Back Styling */
+    .flip-card-back {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        color: white;
+        transform: rotateY(180deg);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .flip-card-back p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* CTA Button (if used) */
+    .proceso-cta-desktop {
+        text-align: center;
+        margin-top: var(--space-2xl);
+    }
+
 }

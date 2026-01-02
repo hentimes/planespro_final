@@ -1,6 +1,7 @@
 /* ===================================
    LOADER - HTML Components System
    Loads HTML partials asynchronously
+   ARCH: Pure Utility - No Business Logic
    =================================== */
 
 /**
@@ -8,7 +9,7 @@
  * @param {string} placeholderId - ID of the placeholder element
  * @param {string} componentPath - Path to the HTML file (relative to project root)
  */
-async function loadComponent(placeholderId, componentPath) {
+export async function loadComponent(placeholderId, componentPath) {
     try {
         const response = await fetch(componentPath);
 
@@ -20,12 +21,12 @@ async function loadComponent(placeholderId, componentPath) {
         const placeholder = document.getElementById(placeholderId);
 
         if (!placeholder) {
-            console.error(`Placeholder element #${placeholderId} not found`);
+            console.error(`[LOADER] Placeholder element #${placeholderId} not found`);
             return;
         }
 
         placeholder.innerHTML = html;
-        console.log(`[LOADER] Loaded: ${componentPath}`);
+        // console.log(`[LOADER] Loaded: ${componentPath}`); // Optional: Uncomment for debug
 
     } catch (error) {
         console.error(`[LOADER] Error loading component:`, error);
@@ -34,74 +35,31 @@ async function loadComponent(placeholderId, componentPath) {
 
 /**
  * Load all page components in sequence
+ * Logic: Conditionally loads desktop/mobile HTML based on viewport
  */
-async function loadAllComponents() {
+export async function loadAllComponents() {
     console.log('[LOADER] Loading HTML components...');
 
-    // Platform detection
+    // Platform detection (Strictly for HTML loading structure)
     const isMobile = window.innerWidth <= 768;
     console.log(`[LOADER] Platform detected: ${isMobile ? 'Mobile' : 'Desktop'}`);
 
-    // Load header (desktop + mobile in one file)
+    // 1. Header (Shared)
     await loadComponent('header-placeholder', 'partials/header.html');
 
-    // Load platform-specific sections
+    // 2. Sections (Platform Specific)
     if (isMobile) {
         await loadComponent('hero-placeholder', 'partials/sections/hero-mobile.html');
         await loadComponent('proceso-placeholder', 'partials/sections/proceso-mobile.html');
+        await loadComponent('planes-placeholder', 'partials/sections/planes-mobile.html');
     } else {
         await loadComponent('hero-placeholder', 'partials/sections/hero-desktop.html');
         await loadComponent('proceso-placeholder', 'partials/sections/proceso-desktop.html');
+        await loadComponent('planes-placeholder', 'partials/sections/planes-desktop.html');
     }
 
-    // Add more sections as they are created:
-    // await loadComponent('planes-placeholder', 'partials/sections/planes-desktop.html');
-    // await loadComponent('planes-placeholder', 'partials/sections/planes-mobile.html');
-
-    // Load footer
+    // 3. Footer (Currently disabled in index, but logic remains valid)
     // await loadComponent('footer-placeholder', 'partials/footer.html');
 
-    console.log('[LOADER] All components loaded');
-}
-
-/**
- * Initialize JavaScript modules after HTML is loaded
- */
-async function initializeModules() {
-    console.log('[LOADER] Initializing JavaScript modules...');
-
-    // Import and initialize mobile menu
-    const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
-    initMobileMenu();
-
-    console.log('[LOADER] JavaScript modules initialized');
-}
-
-/**
- * Main initialization
- */
-async function init() {
-    try {
-        // First load all HTML components
-        await loadAllComponents();
-
-        // Then initialize JavaScript modules
-        await initializeModules();
-
-        // Finally, render content from data files
-        const { renderAll } = await import('./core/renderer.js');
-        await renderAll();
-
-        console.log('[LOADER] Application ready');
-
-    } catch (error) {
-        console.error('[LOADER] Initialization error:', error);
-    }
-}
-
-// Start when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
+    console.log('[LOADER] HTML Structure Ready');
 }

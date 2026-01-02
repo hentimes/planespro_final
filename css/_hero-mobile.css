@@ -48,6 +48,26 @@
         /* Allow wrapping if needed */
     }
 
+    .social-proof-mobile {
+        margin-top: var(--space-sm);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .stars-mobile {
+        color: #f1c40f;
+        font-size: 0.9rem;
+    }
+
+    .social-proof-mobile p {
+        font-size: 0.8rem;
+        color: var(--color-gray-600);
+        font-weight: 600;
+        margin: 0;
+    }
+
     .hero-image-mobile {
         flex-shrink: 1;
         /* Allow image to shrink */

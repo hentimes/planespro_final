@@ -1,7 +1,7 @@
 /* ===================================
    PlanesPro Final - Master Stylesheet
-   ARCH: Single source that imports all partials
-   =================================== */
+   ARCH: Single    Consulted: UXI (Cap. 6 - Visual Hierarchy) - Updated for Extra Slow Animation
+    =================================== */
 
 /* CRITICAL: @import must be at TOP of file */
 /* Order matters for CSS cascade */
@@ -11,12 +11,22 @@
 @import url('_layout-desktop.css');
 @import url('_layout-mobile.css');
 @import url('_components.css');
+/* Shared Base */
+@import url('_components-desktop.css');
+/* Desktop Visuals */
 @import url('_components-mobile.css');
+/* Mobile Visuals */
 @import url('_header-desktop.css');
 @import url('_header-mobile.css');
-@import url('_home-desktop.css');
-@import url('_home-mobile.css');
+@import url('_hero-desktop.css');
+/* Renamed from _home */
+@import url('_hero-mobile.css');
+/* Renamed from _home */
 @import url('_proceso-desktop.css');
 @import url('_proceso-mobile.css');
+@import url('_planes-desktop.css');
+/* New section */
+@import url('_planes-mobile.css');
+/* New section */
 @import url('_animations.css');
 @import url('_responsive.css');

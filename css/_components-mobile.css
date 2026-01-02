@@ -1,10 +1,119 @@
 /* ===================================
    COMPONENTS - Mobile Responsive Adjustments
-   Platform-specific tweaks for modal/sidebar on mobile
+   Platform-specific tweaks for modal/sidebar/components on mobile
    =================================== */
 
 @media (max-width: 768px) {
 
+    /* --- BUTTONS --- */
+    .btn-primary-mobile {
+        display: inline-block;
+        padding: var(--space-md) var(--space-xl);
+        background: var(--color-primary);
+        color: var(--color-white);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+        text-align: center;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary-mobile:active {
+        background: var(--color-primary-dark);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary-mobile:disabled {
+        background: var(--color-gray-300);
+        cursor: not-allowed;
+    }
+
+    .btn-secondary-mobile {
+        display: inline-block;
+        padding: var(--space-md) var(--space-xl);
+        background: transparent;
+        color: var(--color-primary);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+        text-align: center;
+        border: 2px solid var(--color-primary);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .btn-secondary-mobile:active {
+        background: var(--color-primary);
+        color: var(--color-white);
+    }
+
+    /* --- CARDS --- */
+    .card-mobile {
+        background: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        box-shadow: var(--shadow-md);
+    }
+
+    .card-plan-mobile {
+        background: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-lg);
+        box-shadow: var(--shadow-md);
+        border: 2px solid transparent;
+    }
+
+    .card-plan-mobile.active {
+        border-color: var(--color-primary);
+    }
+
+    .card-testimonial-mobile {
+        background: var(--color-bg-secondary);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .card-caso-mobile {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        color: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* --- PILLS & BADGES (Mobile) --- */
+    .pill-mobile {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-sm);
+        background: var(--color-gray-100);
+        color: var(--color-gray-700);
+        font-size: var(--font-size-tiny);
+        font-weight: var(--font-weight-medium);
+        border-radius: var(--radius-full);
+    }
+
+    .trust-pill-mobile {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-md);
+        background: var(--color-success);
+        color: var(--color-white);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-medium);
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* --- LAYOUT UTILITIES --- */
     /* Sidebar full width on mobile */
     .sidebar-form {
         width: 100%;

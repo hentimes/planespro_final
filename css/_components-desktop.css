@@ -1,0 +1,164 @@
+/* ===================================
+   COMPONENTS - DESKTOP SPECIFIC
+   Visual styles for desktop components (Buttons, Cards, Pills)
+   =================================== */
+
+@media (min-width: 769px) {
+
+    /* --- BUTTONS --- */
+    .btn-primary-desktop {
+        display: inline-block;
+        padding: var(--space-sm) var(--space-lg);
+        background: var(--color-primary);
+        color: var(--color-white);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary-desktop:hover {
+        background: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary-desktop:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary-desktop:disabled {
+        background: var(--color-gray-300);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .btn-secondary-desktop {
+        display: inline-block;
+        padding: var(--space-sm) var(--space-lg);
+        background: transparent;
+        color: var(--color-primary);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+        border: 2px solid var(--color-primary);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .btn-secondary-desktop:hover {
+        background: var(--color-primary);
+        color: var(--color-white);
+    }
+
+    .btn-secondary-desktop:disabled {
+        border-color: var(--color-gray-300);
+        color: var(--color-gray-300);
+        cursor: not-allowed;
+    }
+
+    /* --- CARDS --- */
+    /* Base Card - Desktop */
+    .card-desktop {
+        background: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .card-desktop:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+
+    /* Plan Card - For profile cards in Planes section */
+    .card-plan-desktop {
+        background: var(--color-white);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-md);
+        border: 2px solid transparent;
+        transition: all var(--transition-normal);
+        cursor: pointer;
+    }
+
+    .card-plan-desktop:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--color-primary);
+    }
+
+    .card-plan-desktop.active {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Testimonial Card */
+    .card-testimonial-desktop {
+        background: var(--color-bg-secondary);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        box-shadow: var(--shadow-sm);
+        position: relative;
+    }
+
+    .card-testimonial-desktop::before {
+        content: '"';
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        font-size: 4rem;
+        color: var(--color-primary);
+        opacity: 0.2;
+        line-height: 1;
+    }
+
+    /* Caso (Case Study) Card */
+    .card-caso-desktop {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        color: var(--color-white);
+        border-radius: var(--radius-xl);
+        padding: var(--space-2xl);
+        box-shadow: var(--shadow-lg);
+        transition: transform var(--transition-normal);
+    }
+
+    .card-caso-desktop:hover {
+        transform: scale(1.02);
+    }
+
+    /* --- PILLS & BADGES (Desktop) --- */
+    .pill-desktop {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-md);
+        background: var(--color-gray-100);
+        color: var(--color-gray-700);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-medium);
+        border-radius: var(--radius-full);
+    }
+
+    .trust-pill-desktop {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        padding: var(--space-sm) var(--space-lg);
+        background: var(--color-success);
+        color: var(--color-white);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-medium);
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-sm);
+    }
+
+}

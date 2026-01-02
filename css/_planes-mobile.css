@@ -1,0 +1,190 @@
+/* ===================================
+   PLANES MOBILE STYLES
+   Slider / Carousel Implementation
+   =================================== */
+
+@media (max-width: 768px) {
+
+    .planes-section-mobile {
+        background: var(--color-bg-secondary);
+        padding: var(--space-xl) 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+        /* Ensure it takes full screen if needed */
+    }
+
+    .planes-mobile-header {
+        padding: 0 var(--space-md);
+        margin-bottom: var(--space-md);
+        text-align: center;
+    }
+
+    .planes-title-mobile {
+        font-size: 2rem;
+        color: var(--color-dark);
+        margin-bottom: var(--space-xs);
+        font-weight: 700;
+    }
+
+    .planes-subtitle-mobile {
+        color: var(--color-gray-500);
+        font-size: 1rem;
+    }
+
+    /* SLIDER WRAPPER */
+    .planes-slider-wrapper {
+        width: 100%;
+        overflow-x: hidden;
+        /* Hide scrollbar if possible, handled by track */
+    }
+
+    .planes-slider-track {
+        display: flex;
+        gap: var(--space-md);
+        overflow-x: auto;
+        padding: var(--space-md) var(--space-xl);
+        /* Side padding for peek effect */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Hide scrollbar Firefox */
+    }
+
+    .planes-slider-track::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar Chrome */
+    }
+
+    /* CARD STYLES (Mobile Specific) */
+    .plan-card-mobile {
+        flex: 0 0 85%;
+        /* Card takes 85% of width */
+        max-width: 320px;
+        scroll-snap-align: center;
+        background: white;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-lg);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .plan-card-mobile.featured {
+        border: 2px solid var(--color-primary);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .plan-card-mobile.featured::before {
+        content: 'Recomendado';
+        position: absolute;
+        top: 12px;
+        right: -30px;
+        background: var(--color-primary);
+        color: white;
+        padding: 4px 30px;
+        transform: rotate(45deg);
+        font-size: 0.7rem;
+        font-weight: 700;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .plan-card-header {
+        margin-bottom: var(--space-md);
+        text-align: center;
+    }
+
+    .plan-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-sm);
+        display: block;
+    }
+
+    .plan-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-dark);
+        display: block;
+    }
+
+    .plan-price-area {
+        margin-bottom: var(--space-md);
+        text-align: center;
+    }
+
+    .plan-price {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-primary);
+        display: block;
+        line-height: 1;
+    }
+
+    .plan-coverage {
+        font-size: 0.9rem;
+        color: var(--color-gray-500);
+        display: block;
+    }
+
+    .plan-features-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-lg);
+        flex-grow: 1;
+        /* Push CTA down */
+    }
+
+    .plan-feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        color: var(--color-gray-700);
+    }
+
+    .plan-feature-item i {
+        color: var(--color-success);
+        font-size: 0.9rem;
+    }
+
+    .plan-cta-mobile {
+        width: 100%;
+        padding: 12px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+    }
+
+    .slider-hint-text {
+        text-align: center;
+        color: var(--color-gray-400);
+        font-size: 0.85rem;
+        margin-top: var(--space-sm);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 0.6;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+
+}

@@ -1,79 +1,128 @@
 /* ===================================
-   PROCESO SECTION - Mobile Version
-   Vertical steps list
+   PROCESS SECTION - MOBILE
+   Timeline Layout
    =================================== */
 
 @media (max-width: 768px) {
-    .proceso-container-mobile {
-        padding: var(--space-2xl) var(--space-lg);
+
+    .proceso-section-mobile {
+        background-color: white;
+        padding: var(--space-xl) 0;
+        min-height: auto;
+        /* Allow content to dictate height */
     }
 
-    .proceso-header-mobile {
+    .proceso-container-mobile {
+        padding: 0 var(--space-md);
         text-align: center;
-        margin-bottom: var(--space-2xl);
     }
 
     .proceso-title-mobile {
-        font-size: var(--font-size-h2);
-        font-weight: var(--font-weight-bold);
+        font-size: 2rem;
         color: var(--color-dark);
         margin-bottom: var(--space-sm);
+        font-weight: 700;
     }
 
-    .proceso-subtitle-mobile {
-        font-size: var(--font-size-body);
-        color: var(--color-gray-700);
+    .proceso-intro-mobile {
+        color: var(--color-gray-600);
+        margin-bottom: var(--space-lg);
+        font-size: 1rem;
     }
 
-    /* Steps as vertical list */
-    .proceso-steps-mobile {
+    /* Banner Image */
+    .proceso-banner-mobile {
+        margin-bottom: var(--space-lg);
+    }
+
+    .process-img-mobile {
+        max-width: 250px;
+        width: 100%;
+        height: auto;
+    }
+
+    /* TIMELINE STACK */
+    .process-steps-stack {
         display: flex;
         flex-direction: column;
-        gap: var(--space-xl);
+        gap: 0;
+        /* Gap handled by min-height and spacing */
+        text-align: left;
+        max-width: 400px;
+        margin: 0 auto var(--space-xl);
     }
 
-    .proceso-step-mobile {
+    .process-step-card {
         display: flex;
         gap: var(--space-md);
-        background: var(--color-white);
-        padding: var(--space-lg);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-md);
+        position: relative;
+        padding-bottom: var(--space-lg);
     }
 
-    .step-number-mobile {
+    /* Icon Column & Connecting Line */
+    .step-icon-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40px;
         flex-shrink: 0;
-        width: 50px;
-        height: 50px;
+    }
+
+    .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--color-bg-secondary);
+        color: var(--color-primary);
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--color-primary);
-        color: var(--color-white);
-        font-size: var(--font-size-h4);
-        font-weight: var(--font-weight-bold);
-        border-radius: var(--radius-full);
+        font-size: 1.1rem;
+        border: 2px solid var(--color-primary-light);
+        z-index: 2;
+        /* Content above line */
     }
 
-    .step-content-mobile h3 {
-        font-size: var(--font-size-h4);
-        font-weight: var(--font-weight-semibold);
+    .icon-circle.success {
+        background: var(--color-success);
+        color: white;
+        border-color: var(--color-success);
+    }
+
+    .step-line {
+        width: 2px;
+        background: var(--color-gray-200);
+        flex-grow: 1;
+        min-height: 40px;
+        margin-top: -5px;
+        /* Pull up to connect */
+        margin-bottom: -5px;
+    }
+
+    .end-step .step-line {
+        display: none;
+    }
+
+    /* Text Content */
+    .step-content-col {
+        padding-top: 5px;
+    }
+
+    .step-content-col h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
         color: var(--color-dark);
-        margin-bottom: var(--space-xs);
+        margin-bottom: 4px;
     }
 
-    .step-content-mobile p {
-        font-size: var(--font-size-small);
-        color: var(--color-gray-700);
-        line-height: var(--line-height-normal);
+    .step-content-col p {
+        font-size: 0.95rem;
+        color: var(--color-gray-600);
+        line-height: 1.4;
     }
 
+    /* CTA */
     .proceso-cta-mobile {
-        margin-top: var(--space-2xl);
-        text-align: center;
-    }
-
-    .proceso-cta-mobile .btn-primary-mobile {
-        width: 100%;
+        margin-top: var(--space-md);
     }
 }

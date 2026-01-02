@@ -1,121 +1,14 @@
 /* ===================================
-   COMPONENTS - Reusable UI Elements
-   Consulted: UXI (Visual Hierarchy)
+   COMPONENTS - Reusable UI Elements (SHARED)
+   Platform-agnostic base styles (Forms, Modal Overlay, Alerts, etc.)
    =================================== */
 
 /* ==================== */
-/* BUTTONS              */
+/* BUTTONS (Shared Core)*/
 /* ==================== */
+/* Platform specifics moved to _components-desktop/mobile.css */
 
-/* Primary Button - Desktop */
-.btn-primary-desktop {
-    display: inline-block;
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-primary);
-    color: var(--color-white);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-primary-desktop:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-primary-desktop:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-primary-desktop:disabled {
-    background: var(--color-gray-300);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Primary Button - Mobile */
-.btn-primary-mobile {
-    display: inline-block;
-    padding: var(--space-md) var(--space-xl);
-    background: var(--color-primary);
-    color: var(--color-white);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary-mobile:active {
-    background: var(--color-primary-dark);
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-primary-mobile:disabled {
-    background: var(--color-gray-300);
-    cursor: not-allowed;
-}
-
-/* Secondary Button - Desktop */
-.btn-secondary-desktop {
-    display: inline-block;
-    padding: var(--space-sm) var(--space-lg);
-    background: transparent;
-    color: var(--color-primary);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.btn-secondary-desktop:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
-.btn-secondary-desktop:disabled {
-    border-color: var(--color-gray-300);
-    color: var(--color-gray-300);
-    cursor: not-allowed;
-}
-
-/* Secondary Button - Mobile */
-.btn-secondary-mobile {
-    display: inline-block;
-    padding: var(--space-md) var(--space-xl);
-    background: transparent;
-    color: var(--color-primary);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    text-align: center;
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.btn-secondary-mobile:active {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
-/* Outline Button */
+/* Outline Button (Shared) */
 .btn-outline {
     display: inline-block;
     padding: var(--space-sm) var(--space-lg);
@@ -136,115 +29,72 @@
 }
 
 /* ==================== */
-/* CARDS                */
+/* MODAL OVERLAY        */
 /* ==================== */
 
-/* Base Card - Desktop */
-.card-desktop {
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-modal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
     background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    box-shadow: var(--shadow-md);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.card-desktop:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-}
-
-/* Base Card - Mobile */
-.card-mobile {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    box-shadow: var(--shadow-md);
-}
-
-/* Plan Card - For profile cards in Planes section */
-.card-plan-desktop {
-    background: var(--color-white);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    box-shadow: var(--shadow-md);
-    border: 2px solid transparent;
-    transition: all var(--transition-normal);
-    cursor: pointer;
-}
-
-.card-plan-desktop:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--color-primary);
-}
-
-.card-plan-desktop.active {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-}
-
-.card-plan-mobile {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    box-shadow: var(--shadow-md);
-    border: 2px solid transparent;
-}
-
-.card-plan-mobile.active {
-    border-color: var(--color-primary);
-}
-
-/* Testimonial Card */
-.card-testimonial-desktop {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-}
-
-.card-testimonial-desktop::before {
-    content: '"';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-size: 4rem;
-    color: var(--color-primary);
-    opacity: 0.2;
-    line-height: 1;
-}
-
-.card-testimonial-mobile {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-md);
-    padding: var(--space-lg);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Caso (Case Study) Card */
-.card-caso-desktop {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-white);
     border-radius: var(--radius-xl);
     padding: var(--space-2xl);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9);
     transition: transform var(--transition-normal);
 }
 
-.card-caso-desktop:hover {
-    transform: scale(1.02);
+.modal-overlay.active .modal-content {
+    transform: scale(1);
 }
 
-.card-caso-mobile {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    box-shadow: var(--shadow-md);
+/* Sidebar Form Foundation */
+.sidebar-form {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background: var(--color-white);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: var(--z-modal);
+    padding: var(--space-2xl);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
 }
 
-/* Flip Card - For Proceso section */
+.sidebar-form.active {
+    transform: translateX(0);
+}
+
+/* ==================== */
+/* FLIP CARD (Process)  */
+/* ==================== */
+
 .flip-card {
     background: transparent;
     perspective: 1000px;
@@ -337,7 +187,6 @@
     cursor: not-allowed;
 }
 
-/* Error state */
 .input-field.error {
     border-color: var(--color-error);
 }
@@ -353,78 +202,23 @@
     margin-top: var(--space-xs);
 }
 
-/* Success state */
 .input-field.success {
     border-color: var(--color-success);
 }
 
-/* Textarea */
 textarea.input-field {
     min-height: 120px;
     resize: vertical;
 }
 
-/* Select */
 select.input-field {
     cursor: pointer;
 }
 
 /* ==================== */
-/* PILLS & BADGES       */
+/* BADGES (Shared)      */
 /* ==================== */
 
-.pill-desktop {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xs) var(--space-md);
-    background: var(--color-gray-100);
-    color: var(--color-gray-700);
-    font-size: var(--font-size-small);
-    font-weight: var(--font-weight-medium);
-    border-radius: var(--radius-full);
-}
-
-.pill-mobile {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--color-gray-100);
-    color: var(--color-gray-700);
-    font-size: var(--font-size-tiny);
-    font-weight: var(--font-weight-medium);
-    border-radius: var(--radius-full);
-}
-
-/* Trust Pills (special variant) */
-.trust-pill-desktop {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-success);
-    color: var(--color-white);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-medium);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-sm);
-}
-
-.trust-pill-mobile {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xs) var(--space-md);
-    background: var(--color-success);
-    color: var(--color-white);
-    font-size: var(--font-size-small);
-    font-weight: var(--font-weight-medium);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Badge variants */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -452,92 +246,15 @@ select.input-field {
 }
 
 /* ==================== */
-/* MODAL & SIDEBAR      */
+/* UTILITIES            */
 /* ==================== */
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: var(--z-modal);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-normal);
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.modal-content {
-    background: var(--color-white);
-    border-radius: var(--radius-xl);
-    padding: var(--space-2xl);
-    box-shadow: var(--shadow-xl);
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    transform: scale(0.9);
-    transition: transform var(--transition-normal);
-}
-
-.modal-overlay.active .modal-content {
-    transform: scale(1);
-}
-
-/* Sidebar Form */
-.sidebar-form {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 400px;
-    height: 100vh;
-    background: var(--color-white);
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-    z-index: var(--z-modal);
-    padding: var(--space-2xl);
-    overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform var(--transition-normal);
-}
-
-.sidebar-form.active {
-    transform: translateX(0);
-}
-
-/* Mobile sidebar full width */
-@media (max-width: 768px) {
-    .sidebar-form {
-        width: 100%;
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: var(--space-xl);
-    }
-}
-
-/* ==================== */
-/* UTILITY COMPONENTS   */
-/* ==================== */
-
-/* Divider */
 .divider {
     height: 1px;
     background: var(--color-gray-300);
     margin: var(--space-xl) 0;
 }
 
-/* Loading Spinner */
 .spinner {
     border: 3px solid var(--color-gray-300);
     border-top-color: var(--color-primary);
@@ -559,7 +276,6 @@ select.input-field {
     border-width: 2px;
 }
 
-/* Alert / Notification */
 .alert {
     padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-md);
