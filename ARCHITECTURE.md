@@ -69,12 +69,17 @@ planespro_final/
 │   ├── styles.css           # Maestro (@imports)
 │   ├── _variables.css       # Tokens (colores, fuentes)
 │   ├── _base.css            # Resets, tipografía
-│   ├── _layout.css          # Grid, containers
+│   ├── _layout-desktop.css  # Grid, containers (Desktop)
+│   ├── _layout-mobile.css   # Grid, containers (Mobile)
 │   ├── _components.css      # Botones, cards, inputs
 │   ├── _header-desktop.css  # Header desktop (glassmorphism)
 │   ├── _header-mobile.css   # Header mobile
-│   ├── _home-desktop.css    # Home desktop
-│   ├── _home-mobile.css     # Home mobile
+│   ├── _hero-desktop.css    # Hero desktop
+│   ├── _hero-mobile.css     # Hero mobile
+│   ├── _planes-desktop.css  # Planes desktop
+│   ├── _planes-mobile.css   # Planes mobile
+│   ├── _proceso-desktop.css # Proceso desktop
+│   ├── _proceso-mobile.css  # Proceso mobile
 │   ├── _animations.css
 │   └── _responsive.css      # Media queries globales
 │
@@ -90,19 +95,20 @@ planespro_final/
     │   ├── header_content.js
     │   ├── hero_content.js
     │   ├── planes_data.js
-    │   ├── testimonials_data.js
-    │   └── asesores_data.js
+    │   ├── testimonials.js
+    │   └── proceso_content.js
     │
     ├── modules/             # Componentes UI
     │   ├── header/
     │   │   └── mobile_menu.js
     │   ├── hero/
-    │   ├── planes_slider/
-    │   ├── comparison_widget/
-    │   ├── logo_fader/
-    │   ├── testimonials/
-    │   ├── casosDeExito/
-    │   └── sidebar_form/
+    │   │   ├── benefit_accordion.js
+    │   │   ├── logo_fader.js
+    │   │   ├── social_proof.js
+    │   │   └── title_animation.js
+    │   ├── planes/
+    │   │   └── planes_ui.js
+    │   └── ui/               # (Empty - reserved for future shared UI)
     │
     └── utils/
         ├── dom_helpers.js
@@ -186,9 +192,11 @@ Antes de escribir **cualquier línea de código**, validar:
 **PRINCIPIO FUNDAMENTAL:** Desktop y Mobile son **plataformas diferentes** con UX, comportamiento e incluso secciones distintas. NUNCA mezclar en un mismo archivo.
 
 ### Breakpoint Único
-- **Desktop:** `≥ 769px`
-- **Mobile:** `≤ 768px`
-- **NO usar breakpoint intermedio** (tablet = desktop)
+### Breakpoints (Hybrid Strategy)
+- **Header Breakpoint:** `860px` (Menú hamburguesa aparece antes para evitar colisiones)
+- **Content Breakpoint:** `720px` (Cambio de layout principal Hero/Grid)
+- **Tablet State (Hybrid):** Entre `720px` y `860px` (Header móvil + Contenido desktop)
+
 
 ### Regla de Oro: SEPARACIÓN TOTAL
 

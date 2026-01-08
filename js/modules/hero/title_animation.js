@@ -3,10 +3,6 @@
  * Hero Title Animation - Final Stable Version
  * Logic: Simple appending + Opacity toggle for layout stability
  */
-/**
- * Hero Title Animation - Final Stable Version
- * Logic: Simple appending + Opacity toggle for layout stability
- */
 export function initHeroTitleAnimation() {
     const titleElement = document.querySelector('.hero-title');
     if (!titleElement) return;
@@ -144,12 +140,5 @@ export function initHeroTitleAnimation() {
     }
 }
 
-// Auto-init
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initHeroTitleAnimation();
-    });
-} else {
-    // If already loaded
-    initHeroTitleAnimation();
-}
+// Auto-init handled by main.js
+// if (document.readyState === 'loading') { ... }

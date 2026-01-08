@@ -4,6 +4,7 @@
    =================================== */
 
 import { select, setText } from '../utils/dom_helpers.js';
+import { Logger } from '../utils/logger.js';
 
 /**
  * Render content to elements with data-content attributes
@@ -58,7 +59,7 @@ export function renderTemplate(template, data) {
 export function renderList(containerId, template, items) {
     const container = select(`#${containerId}`);
     if (!container) {
-        console.error(`Container #${containerId} not found`);
+        Logger.error(`Container #${containerId} not found`);
         return;
     }
 
@@ -72,7 +73,7 @@ export function renderList(containerId, template, items) {
  */
 export async function renderAll() {
     try {
-        console.log('[RENDERER] Starting data-driven rendering...');
+        Logger.log('Starting data-driven rendering...');
 
         // Import data files
         const { heroContent } = await import('../data/hero_content.js');
@@ -80,9 +81,9 @@ export async function renderAll() {
         // Render hero content
         renderContent(heroContent, 'hero');
 
-        console.log('[RENDERER] Rendering complete');
+        Logger.log('Rendering complete');
 
     } catch (error) {
-        console.error('[RENDERER] Rendering error:', error);
+        Logger.error('Rendering error:', error);
     }
 }

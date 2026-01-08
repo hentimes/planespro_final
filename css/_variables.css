@@ -35,6 +35,18 @@
     --color-bg-primary: #ffffff;
     --color-bg-secondary: #f9fafb;
     --color-bg-tertiary: #f3f4f6;
+    --color-bg-azure-50: #F0F9FF;
+    --color-bg-azure-100: #E0F2FE;
+
+    /* === Brand Colors (Specific) === */
+    --color-brand-navy: #1A365D;
+    --color-brand-blue: #0A74DA;
+    --color-brand-blue-dark: #005AAE;
+
+    /* === Social Media Colors === */
+    --color-whatsapp-bg: #D9FDD3;
+    --color-whatsapp-text: #111b21;
+    --color-whatsapp-tick: #53bdeb;
 
     /* === Typography === */
     /* GROW: Clear hierarchy for messaging */
@@ -139,8 +151,7 @@
 @media (min-width: 769px) {
     :root {
         /* Standard Fluid Typography */
-        /* Adjusted Max Size (3.8rem) to keep Title in 2 lines */
-        /* Adjusted Max Size (3.8rem) to keep Title in 2 lines */
+        /* Adjusted Max Size (3.2rem) to keep Title in 2 lines */
         --font-size-h1: clamp(2rem, 3.2vw, 3.2rem);
         --font-size-h2: clamp(2rem, 2.5vw, 2.8rem);
         --font-size-h3: clamp(1.5rem, 2vw, 2.2rem);

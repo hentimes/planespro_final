@@ -14,7 +14,9 @@
 
 @media (max-width: 860px) {
 
-    .header-mobile {
+    #header-mobile {
+        display: block;
+        /* Override .show-mobile (layout-desktop) */
         position: fixed;
         top: 0;
         left: 0;
@@ -52,7 +54,7 @@
         /* Match Desktop */
         font-weight: 400;
         /* Match Desktop (Regular) */
-        color: #1A365D;
+        color: var(--color-brand-navy);
         /* Match Desktop (Navy) */
         letter-spacing: -0.5px;
         /* Match Desktop */

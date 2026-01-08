@@ -3,7 +3,7 @@
    Only applies on mobile (≤768px)
    =================================== */
 
-@media (max-width: 860px) {
+@media (max-width: 720px) {
 
     /* TOGGLE: Hide Desktop, Show Mobile */
     /* ID Specificity handles toggling without !important */
@@ -67,7 +67,7 @@
     }
 
     .stars-mobile {
-        color: #f1c40f;
+        color: var(--color-warning);
         font-size: 0.9rem;
     }
 
@@ -94,6 +94,17 @@
         /* Limit height to 45% of viewport */
         object-fit: contain;
         margin: 0 auto;
+    }
+
+    /* Extracted from hero-mobile.html inline style */
+    .gradient-text-mobile {
+        display: block;
+        margin-top: 10px;
+        background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 1.1em;
     }
 
 }

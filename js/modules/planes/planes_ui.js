@@ -1,4 +1,4 @@
-import { profilesData } from '../../data/planes_data.js';
+import { planesData } from '../../data/planes_data.js';
 
 /**
  * Render Planes Cards into the Grid Container
@@ -11,7 +11,7 @@ export function renderPlanes() {
     const desktopContainer = document.getElementById('planes-grid-desktop');
     if (desktopContainer) {
         desktopContainer.innerHTML = '';
-        profilesData.forEach(profile => {
+        planesData.forEach(profile => {
             desktopContainer.insertAdjacentHTML('beforeend', createDesktopCardHTML(profile));
         });
     }
@@ -20,7 +20,7 @@ export function renderPlanes() {
     const mobileContainer = document.getElementById('planesSliderContainer');
     if (mobileContainer) {
         mobileContainer.innerHTML = '';
-        profilesData.forEach(profile => {
+        planesData.forEach(profile => {
             mobileContainer.insertAdjacentHTML('beforeend', createMobileCardHTML(profile));
         });
     }
@@ -62,7 +62,7 @@ function createDesktopCardHTML(profile) {
  * Generate HTML for Mobile Slider Card (Enhanced Layout)
  */
 function createMobileCardHTML(profile) {
-    const { id, label, icon, recommendedPlan, validation } = profile;
+    const { id, label, icon, recommendedPlan } = profile;
     const p = recommendedPlan; // shortcut
 
     // Determine features list (handle both simple benefits array and denseMetrics)
@@ -73,7 +73,7 @@ function createMobileCardHTML(profile) {
             <li class="plan-feature-item">
                 <i class="fas fa-check-circle"></i> ${b}
             </li>
-         `).join('');
+        `).join('');
     } else if (p.denseMetrics && Array.isArray(p.denseMetrics)) {
         // Fallback for profiles using denseMetrics (like 'joven')
         featuresListHTML = p.denseMetrics.slice(0, 3).map(m => `

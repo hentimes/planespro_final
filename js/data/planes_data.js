@@ -2,7 +2,7 @@
 // Datos para el Selector de Perfiles (Advisor 2.0)
 // ===================================
 
-export const profilesData = [
+export const planesData = [
     {
         id: "joven",
         label: "Joven",

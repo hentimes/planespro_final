@@ -4,6 +4,8 @@
    ARCH: Pure Utility - No Business Logic
    =================================== */
 
+import { Logger } from './utils/logger.js';
+
 /**
  * Load an HTML component from partials directory
  * @param {string} placeholderId - ID of the placeholder element
@@ -21,15 +23,15 @@ export async function loadComponent(placeholderId, componentPath) {
         const placeholder = document.getElementById(placeholderId);
 
         if (!placeholder) {
-            console.error(`[LOADER] Placeholder element #${placeholderId} not found`);
+            Logger.error(`Placeholder element #${placeholderId} not found`);
             return;
         }
 
         placeholder.innerHTML = html;
-        // console.log(`[LOADER] Loaded: ${componentPath}`); // Optional: Uncomment for debug
+        Logger.log(`Loaded: ${componentPath}`);
 
     } catch (error) {
-        console.error(`[LOADER] Error loading component:`, error);
+        Logger.error(`Error loading component:`, error);
     }
 }
 
@@ -40,7 +42,7 @@ async function fetchPartial(path) {
         if (!res.ok) return '';
         return await res.text();
     } catch (e) {
-        console.error('Fetch error:', e);
+        Logger.error('Fetch error:', e);
         return '';
     }
 }
@@ -56,11 +58,11 @@ function setPlaceholder(id, content) {
  * Logic: Conditionally loads desktop/mobile HTML based on viewport
  */
 export async function loadAllComponents() {
-    console.log('[LOADER] Loading HTML components...');
+    Logger.log('Loading HTML components...');
 
     // Platform detection (Strictly for HTML loading structure)
     const isMobile = window.innerWidth <= 860;
-    console.log(`[LOADER] Platform detected: ${isMobile ? 'Mobile' : 'Desktop'}`);
+    Logger.log(`Platform detected: ${isMobile ? 'Mobile' : 'Desktop'}`);
 
     // 1. Header (Shared)
     await loadComponent('header-placeholder', 'partials/header.html');
@@ -86,5 +88,5 @@ export async function loadAllComponents() {
     // 3. Footer (Currently disabled in index, but logic remains valid)
     // await loadComponent('footer-placeholder', 'partials/footer.html');
 
-    console.log('[LOADER] HTML Structure Ready');
+    Logger.log('HTML Structure Ready');
 }

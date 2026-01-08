@@ -1,23 +1,6 @@
 // ===================================
 // HERO SOCIAL PROOF MODULE
 // Handles dynamic avatar cycle + WhatsApp Testimonials
-// Logic:
-// 1. Start: Only 1 Avatar visible (Protagonist).
-// 2. Protagonist speaks (Bubble + Typing).
-// 3. Bubble closes.
-// 4. Deal: Other avatars expand from behind protagonist.
-// 5. Wait 8s.
-// 6. Collect: Other avatars retract behind protagonist.
-// 7. Swap: The hidden avatars update their images. The protagonist updates to a NEW person for the next turn (cross-fade or instant swap while hidden? 
-//    User wants: "Una de las fotos que se desplegaron de primero queda". 
-//    So, we shuffle the stack so index 1 becomes index 0? That's complex DOM manipulation.
-//    Simpler: Just update images for indices 1-6 while hidden. Index 0 stays. Next cycle, index 0 updates?)
-//    Let's stick to the visual request: Protagonist stays solid.
-// ===================================
-
-// ===================================
-// HERO SOCIAL PROOF MODULE
-// Handles dynamic avatar cycle + WhatsApp Testimonials
 // ===================================
 
 // import { testimonials } from '../../data/testimonials.js'; // REMOVED (Static Cache Issue)
@@ -32,8 +15,8 @@ export async function initSocialProof() {
 
     try {
         const module = await import(`../../data/testimonials.js?t=${Date.now()}`);
-        testimonials = module.testimonials;
-        // console.log('[SOCIAL PROOF] ...');'[SOCIAL PROOF] Testimonials loaded (Fresh):', testimonials.length);
+        testimonials = module.testimonialsData;
+        // console.log('[SOCIAL PROOF] Testimonials loaded (Fresh):', testimonials.length);
     } catch (e) {
         console.error('[SOCIAL PROOF] Could not load testimonials', e);
         return;
@@ -46,7 +29,7 @@ export async function initSocialProof() {
         // Refill deck if empty
         if (testimonialDeck.length === 0) {
             testimonialDeck = [...testimonials];
-            // Optional: // console.log('[SOCIAL PROOF] ...');'[SOCIAL PROOF] Deck reshuffled');
+            // Optional: console.log('[SOCIAL PROOF] Deck reshuffled');
         }
 
         // Pick random from remaining
@@ -70,7 +53,7 @@ export async function initSocialProof() {
     let isVisible = false;
 
 
-    let currentSpeakerIndex = 0;
+    // let currentSpeakerIndex = 0; // Unused
 
     // --- UTILS ---
     function getRandomInt(min, max) {
@@ -340,7 +323,7 @@ export async function initSocialProof() {
 
         // Listener for Title Animation Trigger V2
         document.addEventListener('hero-start-social-proof-v2', () => {
-            // console.log('[SOCIAL PROOF] ...');'[SOCIAL PROOF] Trigger V2 received. Starting animation...');
+            // console.log('[SOCIAL PROOF] Trigger V2 received. Starting animation...');
             hasStarted = true;
             if (isVisible) startLoopRecursion();
         }, { once: true });

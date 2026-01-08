@@ -3,7 +3,7 @@
    Mobile layout utilities and fundamentals
    =================================== */
 
-@media (max-width: 860px) {
+@media (max-width: 720px) {
 
     /* === Snap Container === */
     .snap-container {

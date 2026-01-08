@@ -3,7 +3,7 @@
    Slider / Carousel Implementation
    =================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 720px) {
 
     .planes-section-mobile {
         background: var(--color-bg-secondary);

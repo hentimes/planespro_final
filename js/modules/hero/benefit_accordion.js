@@ -8,7 +8,7 @@
 // ===================================
 
 export function initBenefitAccordion() {
-    console.log('✅ [ACCORDION] Initializing module...');
+    // console.log('[ACCORDION] Initializing module...');
 
     function togglePulse(forceOff = false) {
         const pills = document.querySelectorAll('.benefit-accordion');

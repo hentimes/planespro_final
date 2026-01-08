@@ -5,47 +5,57 @@
  */
 
 import { loadAllComponents } from './loader.js';
+import { Logger } from './utils/logger.js';
 
 /**
  * Initialize JavaScript modules based on platform
  */
 async function initModules() {
-    // console.log('[MAIN] Initializing JavaScript modules...');
-    // console.log('[MAIN] Initializing JavaScript modules...');
-
     // 1. Mobile Menu (Always loaded for resize handling)
     const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
     initMobileMenu();
 
     // 2. Planes Data Rendering (Always loaded)
-    const { renderPlanes } = await import('./modules/planes/planes_ui.js');
-    renderPlanes();
+    try {
+        const { renderPlanes } = await import('./modules/planes/planes_ui.js');
+        renderPlanes();
+    } catch (e) { Logger.error('Planes UI load failed', e); }
 
     // 3. Desktop-specific modules (Loaded unconditionally for responsive resize)
     // Benefit Accordion
     try {
         const { initBenefitAccordion } = await import('./modules/hero/benefit_accordion.js');
         initBenefitAccordion();
-    } catch (e) { console.error('❌ [MAIN] Accordion load failed', e); }
+    } catch (e) { Logger.error('Accordion load failed', e); }
 
     // Hero Title Animation
     try {
         const { initHeroTitleAnimation } = await import('./modules/hero/title_animation.js?v=2.9');
         initHeroTitleAnimation();
-    } catch (e) { console.error('❌ [MAIN] Title Animation load failed', e); }
+    } catch (e) { Logger.error('Title Animation load failed', e); }
 
     // Social Proof (Avatars)
     try {
         // Cache bust to ensure latest logic loaded
         const { initSocialProof } = await import(`./modules/hero/social_proof.js?v=${Date.now()}`);
         initSocialProof();
-    } catch (e) { console.error('❌ [MAIN] Social Proof load failed', e); }
+    } catch (e) { Logger.error('Social Proof load failed', e); }
 
     // 4. Logo Fader (Always loaded)
-    const { initLogoFader } = await import('./modules/ui/logo_fader.js');
+    const { initLogoFader } = await import('./modules/hero/logo_fader.js');
     initLogoFader();
 
-    // console.log('[MAIN] ...');'[MAIN] Modules initialized');
+    // 5. Sidebar Logic (Global event delegation)
+    // Replaces inline onclick="toggleSidebar()"
+    document.addEventListener('click', (e) => {
+        // Check for specific ID or data-action
+        if (e.target.matches('#hero-main-cta') || e.target.closest('#hero-main-cta') || e.target.matches('[data-action="open-sidebar"]')) {
+            // Logic to open sidebar
+            const sidebar = document.getElementById('sidebar-form');
+            if (sidebar) sidebar.classList.add('active');
+        }
+    });
+
 }
 
 /**
@@ -53,22 +63,20 @@ async function initModules() {
  */
 async function init() {
     try {
-        // console.log('[MAIN] ...');'[MAIN] Starting application...');
-
         // 1. Load HTML Structure
         await loadAllComponents();
 
-        // 2. Initialize Interactive Modules
-        await initModules();
-
-        // 3. Render Dynamic Content (Data Layer)
+        // 2. Render Dynamic Content (Data Layer)
+        // Must run BEFORE modules so animations can manipulate the final content
         const { renderAll } = await import('./core/renderer.js');
         await renderAll();
 
-        // console.log('[MAIN] ...');'✅ [MAIN] Application Ready');
+        // 3. Initialize Interactive Modules
+        // Now safe to run: animation scripts will find populated elements (or wipe them if needed)
+        await initModules();
 
     } catch (error) {
-        console.error('❌ [MAIN] Critical Initialization Error:', error);
+        Logger.error('Critical Initialization Error:', error);
     }
 }
 

@@ -67,7 +67,7 @@
         font-size: 1.25rem;
         font-weight: 400;
         /* Regular weight like V2 */
-        color: #1A365D;
+        color: var(--color-brand-navy);
         /* V2: Navy --secondary-color */
         letter-spacing: -0.5px;
         /* V2 tracking */
@@ -88,7 +88,7 @@
         /* V2 size */
         font-weight: 500;
         /* Medium weight */
-        color: #1A365D;
+        color: var(--color-brand-navy);
         /* V2: Navy #1A365D */
         text-decoration: none;
         transition: color 0.3s;
@@ -103,7 +103,7 @@
 
     .nav-link-desktop:hover {
         /* Color remains default #1A365D */
-        color: #1A365D;
+        color: var(--color-brand-navy);
     }
 
     /* Animated Underline */
@@ -115,7 +115,7 @@
         bottom: -2px;
         /* Position slightly below text */
         left: 0;
-        background-color: #0a74da;
+        background-color: var(--color-primary);
         transition: width 0.3s ease-in-out;
     }
 
@@ -129,7 +129,7 @@
     .header-cta-desktop {
         /* Pill shape */
         padding: 8px 20px;
-        background-color: #0a74da;
+        background-color: var(--color-primary);
         /* V2: Primary blue */
         color: white;
         font-weight: 600;
