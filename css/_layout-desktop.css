@@ -99,10 +99,8 @@
 
     /* === Responsive Display === */
     .show-mobile {
-        display: none;
+        display: none !important;
     }
 
-    .show-desktop {
-        display: block;
-    }
+    /* .show-desktop removed - elements preserve their natural display (flex, grid, block, etc.) */
 }

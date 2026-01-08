@@ -99,11 +99,9 @@
     }
 
     /* === Responsive Display === */
-    .show-mobile {
-        display: block;
+    .show-desktop {
+        display: none !important;
     }
 
-    .show-desktop {
-        display: none;
-    }
+    /* .show-mobile removed - elements preserve their natural display (flex, grid, block, etc.) */
 }
