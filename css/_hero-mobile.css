@@ -3,7 +3,16 @@
    Only applies on mobile (≤768px)
    =================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
+
+    /* TOGGLE: Hide Desktop, Show Mobile */
+    .hero-section-desktop {
+        display: none !important;
+    }
+
+    #hero-mobile {
+        display: flex !important;
+    }
 
     /* Hero Section */
     .hero__mobile {

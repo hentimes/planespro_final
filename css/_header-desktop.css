@@ -5,7 +5,13 @@
    V2 EXACT STRUCTURE
    =================================== */
 
-@media (min-width: 769px) {
+@media (max-width: 860px) {
+    .header-desktop {
+        display: none !important;
+    }
+}
+
+@media (min-width: 861px) {
 
     .header-desktop {
         position: fixed;
@@ -73,6 +79,8 @@
         gap: 30px;
         /* V2 gap between ALL children (links + button) */
         align-items: center;
+        flex-wrap: nowrap;
+        /* Prevent wrapping */
     }
 
     .nav-link-desktop {
@@ -85,38 +93,37 @@
         text-decoration: none;
         transition: color 0.3s;
         position: relative;
-        padding-bottom: 4px;
-        /* Space for underline */
+        /* Removed padding-bottom for better vertical centering */
+        padding-bottom: 0;
+        white-space: nowrap;
+        /* Prevent text wrap */
+        flex-shrink: 0;
+        /* Prevent shrinking */
     }
 
     .nav-link-desktop:hover {
-        color: #0a74da;
-        /* V2: Blue primary */
+        /* Color remains default #1A365D */
+        color: #1A365D;
     }
 
-    /* ANIMATED UNDERLINE (V2 Style) */
+    /* Animated Underline */
     .nav-link-desktop::after {
         content: '';
         position: absolute;
         width: 0;
         height: 2px;
-        bottom: -4px;
+        bottom: -2px;
+        /* Position slightly below text */
         left: 0;
         background-color: #0a74da;
-        /* V2: Blue primary */
-        transition: width 0.3s ease;
+        transition: width 0.3s ease-in-out;
     }
 
-    .nav-link-desktop:hover::after,
-    .nav-link-active-desktop::after {
+    .nav-link-desktop:hover::after {
         width: 100%;
     }
 
-    .nav-link-active-desktop {
-        color: #0a74da;
-        /* V2: Blue primary */
-        font-weight: 600;
-    }
+    /* ... skipped ... */
 
     /* CTA Button inside nav (V2 Structure) */
     .header-cta-desktop {
@@ -130,6 +137,8 @@
         border-radius: 50px;
         /* Full pill */
         text-decoration: none;
+        white-space: nowrap;
+        /* Prevent CTA text wrapping */
 
         border: none;
 

@@ -4,7 +4,7 @@
    =================================== */
 
 /* ENSURE MOBILE ELEMENTS ARE HIDDEN ON DESKTOP */
-@media (min-width: 769px) {
+@media (min-width: 861px) {
 
     .header-mobile,
     .mobile-menu-overlay {
@@ -12,7 +12,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
 
     .header-mobile {
         position: fixed;
@@ -36,19 +36,26 @@
     .header-brand-mobile {
         display: flex;
         align-items: center;
-        gap: var(--space-xs);
+        gap: 12px;
+        /* Match Desktop */
         text-decoration: none;
     }
 
     .header-logo-mobile {
-        height: 32px;
+        height: 40px;
+        /* Match Desktop 40px */
         width: auto;
     }
 
     .header-name-mobile {
-        font-size: 1rem;
-        font-weight: var(--font-weight-semibold);
-        color: var(--color-primary);
+        font-size: 1.25rem;
+        /* Match Desktop */
+        font-weight: 400;
+        /* Match Desktop (Regular) */
+        color: #1A365D;
+        /* Match Desktop (Navy) */
+        letter-spacing: -0.5px;
+        /* Match Desktop */
     }
 
     /* Hamburger Button */

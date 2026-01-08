@@ -3,7 +3,7 @@
    Desktop layout utilities and fundamentals
    =================================== */
 
-@media (min-width: 769px) {
+@media (min-width: 861px) {
 
     /* === Snap Container === */
     .snap-container {

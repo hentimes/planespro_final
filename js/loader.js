@@ -33,6 +33,24 @@ export async function loadComponent(placeholderId, componentPath) {
     }
 }
 
+// Helper: Fetch raw HTML string
+async function fetchPartial(path) {
+    try {
+        const res = await fetch(path);
+        if (!res.ok) return '';
+        return await res.text();
+    } catch (e) {
+        console.error('Fetch error:', e);
+        return '';
+    }
+}
+
+// Helper: Set innerHTML
+function setPlaceholder(id, content) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = content;
+}
+
 /**
  * Load all page components in sequence
  * Logic: Conditionally loads desktop/mobile HTML based on viewport
@@ -47,16 +65,23 @@ export async function loadAllComponents() {
     // 1. Header (Shared)
     await loadComponent('header-placeholder', 'partials/header.html');
 
-    // 2. Sections (Platform Specific)
-    if (isMobile) {
-        await loadComponent('hero-placeholder', 'partials/sections/hero-mobile.html');
-        await loadComponent('proceso-placeholder', 'partials/sections/proceso-mobile.html');
-        await loadComponent('planes-placeholder', 'partials/sections/planes-mobile.html');
-    } else {
-        await loadComponent('hero-placeholder', 'partials/sections/hero-desktop.html');
-        await loadComponent('proceso-placeholder', 'partials/sections/proceso-desktop.html');
-        await loadComponent('planes-placeholder', 'partials/sections/planes-desktop.html');
-    }
+    // 2. Sections (Load BOTH to support resize without reload)
+    // We combine mobile + desktop HTML into the placeholder so CSS can toggle them.
+
+    // HERO
+    const heroMobile = await fetchPartial('partials/sections/hero-mobile.html');
+    const heroDesktop = await fetchPartial('partials/sections/hero-desktop.html');
+    setPlaceholder('hero-placeholder', heroMobile + heroDesktop);
+
+    // PROCESO
+    const procesoMobile = await fetchPartial('partials/sections/proceso-mobile.html');
+    const procesoDesktop = await fetchPartial('partials/sections/proceso-desktop.html');
+    setPlaceholder('proceso-placeholder', procesoMobile + procesoDesktop);
+
+    // PLANES
+    const planesMobile = await fetchPartial('partials/sections/planes-mobile.html');
+    const planesDesktop = await fetchPartial('partials/sections/planes-desktop.html');
+    setPlaceholder('planes-placeholder', planesMobile + planesDesktop);
 
     // 3. Footer (Currently disabled in index, but logic remains valid)
     // await loadComponent('footer-placeholder', 'partials/footer.html');

@@ -70,6 +70,8 @@ export async function initSocialProof() {
     let isVisible = false;
 
 
+    let currentSpeakerIndex = 0;
+
     // --- UTILS ---
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -94,7 +96,7 @@ export async function initSocialProof() {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
 
-    function updateHiddenAvatars(skipIndex = 0) {
+    function updateHiddenAvatars(skipIndex) {
         // Update all EXCEPT the protagonist (index 0)
         avatars.forEach((img, index) => {
             if (index === skipIndex) return;
@@ -112,19 +114,28 @@ export async function initSocialProof() {
         const bubbleText = document.getElementById('bubble-text');
 
         // --- STEP 1: COLLECT (Others hide behind protagonist) ---
-        // Protagonist (index 0) stays put. Others remove .deal
+        // Protagonist stays put. Others remove .deal
         avatars.forEach(avatar => {
             avatar.classList.remove('deal');
             avatar.classList.remove('speaker');
         });
 
-        // Wait for retraction (2s)
-        await new Promise(r => setTimeout(r, 2000));
+        // Wait for retraction (0.8s transition + 0.1s buffer)
+        await new Promise(r => setTimeout(r, 900));
 
-        // --- STEP 2: PREPARE NEXT (Logically) ---
-        // The user wants 'one of the displayed photos to remain'.
-        // Visual trick: The one at index 0 IS the one remaining.
-        // We will update indices 1-6 now (they are hidden).
+        // --- STEP 2: NEXT SPEAKER LOGIC (Source Swap) ---
+        // We want the person who was at index 1 (or next) to become the protagonist.
+        // Since avatars[0] is physically the top of the stack, we swap SOURCES.
+
+        // 1. Pick the "Next Face" from the deck (conceptually the one at index 1)
+        // Actually, we just want to ensure avatars[0] changes to a valid face that was visible.
+        if (avatars[1]) {
+            const nextFaceSrc = avatars[1].src;
+            avatars[0].src = nextFaceSrc;
+        }
+
+        // 2. Refresh the others (hidden behind) with new random faces for next deal
+        // This ensures infinite variety
         updateHiddenAvatars(0);
 
         // --- STEP 3: PROTAGONIST SPEAKS ---
@@ -136,7 +147,7 @@ export async function initSocialProof() {
             // Pick testimonial (Non-repeating deck)
             const text = getNextTestimonial();
 
-            // Highlight Speaker
+            // Highlight Speaker (ALWAYS Index 0 - Stack Top)
             const speaker = avatars[0];
             speaker.classList.add('speaker');
 

@@ -6,19 +6,19 @@
 /* CRITICAL: @import must be at TOP of file */
 /* Order matters for CSS cascade */
 
-@import url('_variables.css');
+@import url('_variables.css?v=2.3');
 @import url('_base.css');
-@import url('_layout-desktop.css');
-@import url('_layout-mobile.css');
+@import url('_layout-desktop.css?v=2.5');
+@import url('_layout-mobile.css?v=2.5');
 @import url('_components.css');
 /* Shared Base */
 @import url('_components-desktop.css');
 /* Desktop Visuals */
 @import url('_components-mobile.css');
 /* Mobile Visuals */
-@import url('_header-desktop.css');
-@import url('_header-mobile.css');
-@import url('_hero-desktop.css');
+@import url('_header-desktop.css?v=2.4');
+@import url('_header-mobile.css?v=2.4');
+@import url('_hero-desktop.css?v=2.4');
 /* Renamed from _home */
 @import url('_hero-mobile.css');
 /* Renamed from _home */

@@ -21,27 +21,25 @@ async function initModules() {
     const { renderPlanes } = await import('./modules/planes/planes_ui.js');
     renderPlanes();
 
-    // 3. Desktop-specific modules
-    if (!isMobile) {
-        // Benefit Accordion
-        try {
-            const { initBenefitAccordion } = await import('./modules/hero/benefit_accordion.js');
-            initBenefitAccordion();
-        } catch (e) { console.error('❌ [MAIN] Accordion load failed', e); }
+    // 3. Desktop-specific modules (Loaded unconditionally for responsive resize)
+    // Benefit Accordion
+    try {
+        const { initBenefitAccordion } = await import('./modules/hero/benefit_accordion.js');
+        initBenefitAccordion();
+    } catch (e) { console.error('❌ [MAIN] Accordion load failed', e); }
 
-        // Hero Title Animation
-        try {
-            const { initHeroTitleAnimation } = await import('./modules/hero/title_animation.js');
-            initHeroTitleAnimation();
-        } catch (e) { console.error('❌ [MAIN] Title Animation load failed', e); }
+    // Hero Title Animation
+    try {
+        const { initHeroTitleAnimation } = await import('./modules/hero/title_animation.js?v=2.9');
+        initHeroTitleAnimation();
+    } catch (e) { console.error('❌ [MAIN] Title Animation load failed', e); }
 
-        // Social Proof (Avatars)
-        try {
-            // Cache bust to ensure latest logic loaded
-            const { initSocialProof } = await import(`./modules/hero/social_proof.js?v=${Date.now()}`);
-            initSocialProof();
-        } catch (e) { console.error('❌ [MAIN] Social Proof load failed', e); }
-    }
+    // Social Proof (Avatars)
+    try {
+        // Cache bust to ensure latest logic loaded
+        const { initSocialProof } = await import(`./modules/hero/social_proof.js?v=${Date.now()}`);
+        initSocialProof();
+    } catch (e) { console.error('❌ [MAIN] Social Proof load failed', e); }
 
     // 4. Logo Fader (Always loaded)
     const { initLogoFader } = await import('./modules/ui/logo_fader.js');
