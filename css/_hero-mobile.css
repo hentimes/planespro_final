@@ -6,12 +6,13 @@
 @media (max-width: 860px) {
 
     /* TOGGLE: Hide Desktop, Show Mobile */
-    .hero-section-desktop {
-        display: none !important;
+    /* ID Specificity handles toggling without !important */
+    #inicio.hero-section-desktop {
+        display: none;
     }
 
     #hero-mobile {
-        display: flex !important;
+        display: flex;
     }
 
     /* Hero Section */

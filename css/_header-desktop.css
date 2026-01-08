@@ -6,8 +6,8 @@
    =================================== */
 
 @media (max-width: 860px) {
-    .header-desktop {
-        display: none !important;
+    #header-desktop {
+        display: none;
     }
 }
 

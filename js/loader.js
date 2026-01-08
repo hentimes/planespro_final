@@ -59,7 +59,7 @@ export async function loadAllComponents() {
     console.log('[LOADER] Loading HTML components...');
 
     // Platform detection (Strictly for HTML loading structure)
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 860;
     console.log(`[LOADER] Platform detected: ${isMobile ? 'Mobile' : 'Desktop'}`);
 
     // 1. Header (Shared)

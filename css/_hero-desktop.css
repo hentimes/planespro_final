@@ -6,12 +6,13 @@
 @media (min-width: 861px) {
 
     /* TOGGLE: Show Desktop, Hide Mobile */
-    .hero-section-desktop {
-        display: flex !important;
+    /* ID Specificity (110) beats Class (10) */
+    #inicio.hero-section-desktop {
+        display: flex;
     }
 
     #hero-mobile {
-        display: none !important;
+        display: none;
     }
 
     .hero-section-desktop {

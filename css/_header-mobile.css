@@ -6,9 +6,9 @@
 /* ENSURE MOBILE ELEMENTS ARE HIDDEN ON DESKTOP */
 @media (min-width: 861px) {
 
-    .header-mobile,
+    #header-mobile,
     .mobile-menu-overlay {
-        display: none !important;
+        display: none;
     }
 }
 

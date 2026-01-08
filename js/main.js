@@ -10,8 +10,8 @@ import { loadAllComponents } from './loader.js';
  * Initialize JavaScript modules based on platform
  */
 async function initModules() {
-    // console.log('[MAIN] ...');'[MAIN] Initializing JavaScript modules...');
-    const isMobile = window.innerWidth <= 768;
+    // console.log('[MAIN] Initializing JavaScript modules...');
+    // console.log('[MAIN] Initializing JavaScript modules...');
 
     // 1. Mobile Menu (Always loaded for resize handling)
     const { initMobileMenu } = await import('./modules/header/mobile_menu.js');

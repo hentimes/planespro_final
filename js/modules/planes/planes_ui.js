@@ -7,26 +7,23 @@ import { profilesData } from '../../data/planes_data.js';
 export function renderPlanes() {
     // console.log('[PLANES Renderer] Starting render...');
 
-    // Detect container based on platform
-    const isMobile = window.innerWidth <= 768;
-    // IDs must match what is defined in planes-desktop.html and planes-mobile.html
-    const containerId = isMobile ? 'planesSliderContainer' : 'planes-grid-desktop';
-    const container = document.getElementById(containerId);
-
-    if (!container) {
-        console.warn(`[PLANES Renderer] Container #${containerId} not found. Skipping render.`);
-        return;
+    // Desktop Container
+    const desktopContainer = document.getElementById('planes-grid-desktop');
+    if (desktopContainer) {
+        desktopContainer.innerHTML = '';
+        profilesData.forEach(profile => {
+            desktopContainer.insertAdjacentHTML('beforeend', createDesktopCardHTML(profile));
+        });
     }
 
-    // Clear previous content
-    container.innerHTML = '';
-
-    profilesData.forEach(profile => {
-        const cardHTML = isMobile ? createMobileCardHTML(profile) : createDesktopCardHTML(profile);
-        container.insertAdjacentHTML('beforeend', cardHTML);
-    });
-
-    // console.log(`[PLANES Renderer] Rendered ${profilesData.length} profiles to #${containerId}.`);
+    // Mobile Container
+    const mobileContainer = document.getElementById('planesSliderContainer');
+    if (mobileContainer) {
+        mobileContainer.innerHTML = '';
+        profilesData.forEach(profile => {
+            mobileContainer.insertAdjacentHTML('beforeend', createMobileCardHTML(profile));
+        });
+    }
 }
 
 /**
