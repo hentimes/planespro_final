@@ -1,104 +1,125 @@
 # ARCHITECTURE.md - PlanesPro Final
-**Versión:** 1.0  
-**Fecha:** 2025-12-27  
-**Estado:** DOCUMENTO MAESTRO - LEY DEL PROYECTO
+
+**Versión:** 2.0  
+**Última Actualización:** 2026-01-08
 
 ---
 
-## 🎯 PROPÓSITO DE ESTE DOCUMENTO
+## PARTE I: FUNDAMENTOS
 
-Este archivo es la **constitución técnica** de `planespro_final`. Toda decisión de código, diseño, estructura, o contenido debe validarse contra este documento ANTES de su implementación.
+### 1.1 Propósito de Este Documento
+
+Este archivo define las reglas técnicas, convenciones y patrones que gobiernan todo el código del proyecto `planespro_final`. Cualquier código nuevo o modificación debe validarse contra este documento antes de su implementación.
+
+**Regla:** Si algo no está aquí documentado, se considera prohibido hasta que se agregue explícitamente.
+
+### 1.2 Stack Tecnológico
+
+| Capa | Tecnología | Justificación |
+|------|------------|---------------|
+| Markup | HTML5 Semántico | Estructura clara, SEO, accesibilidad |
+| Estilos | CSS3 Vanilla | Control total, sin dependencias |
+| Lógica | JavaScript ES6+ | Modules nativos, sin transpilación |
+| Build | Ninguno | Desarrollo directo, sin compilación |
+| Server | Static file serving | Simplicidad de deploy |
+
+**Prohibido:**
+- Frameworks CSS (Tailwind, Bootstrap)
+- Frameworks JS (React, Vue, Angular)
+- Preprocesadores CSS (SASS, LESS)
+- Bundlers (Webpack, Vite) - excepto para producción futura
+
+### 1.3 Estrategia Responsive
+
+El proyecto implementa **Separación Total Desktop/Mobile**. Esto significa:
+
+- **Archivos separados** para cada plataforma (no media queries mezclados)
+- **Clases específicas** por plataforma
+- **Comportamientos diferentes** según dispositivo
+
+**Justificación:** Desktop y Mobile son experiencias fundamentalmente distintas. Mantenerlas separadas permite:
+- Cambios independientes sin afectar la otra plataforma
+- Optimización específica para cada contexto
+- Mantenibilidad a largo plazo
+
+### 1.4 Breakpoints
+
+| Nombre | Valor | Uso |
+|--------|-------|-----|
+| Header Breakpoint | 860px | Menú hamburguesa aparece |
+| Content Breakpoint | 720px | Layout hero/planes/proceso cambia |
+| Desktop Minimum | 769px | Punto de switch en algunos componentes |
+
+**Implementación en código:**
+- Header: `@media (max-width: 860px)` activa versión móvil
+- Contenido: `@media (max-width: 720px)` activa versión móvil
+- Algunos componentes legacy usan 768px
+
+**Regla:** Nuevos archivos deben usar 720px (contenido) y 860px (header).
 
 ---
 
-## 📚 FUENTES DE CONOCIMIENTO (Context)
+## PARTE II: ESTRUCTURA DEL PROYECTO
 
-Ubicación: `C:\Users\henti\Documents\PLANESPRO\context\`
-
-### Los 4 Expertos
-1. **ARCH.txt** - Arquitectura y Clean Code (Robert C. Martin)
-2. **UXI.txt** - Usabilidad y UX (Steve Krug - "No me hagas pensar")
-3. **PROD.txt** - Producto y Estrategia (The Product Book)
-4. **GROW.txt** - Marketing y Crecimiento (Seth Godin, Hacking Growth, Digital Marketing)
-
-### Jerarquía de Decisión
-```
-PROD (estrategia, alcance)
-  ↓
-UXI (experiencia, claridad)
-  ↓
-GROW (mensajes, conversión)
-  ↓
-ARCH (implementación técnica)
-```
-
----
-
-## 🏗️ ESTRUCTURA DE DIRECTORIOS
+### 2.1 Árbol de Directorios
 
 ```
 planespro_final/
-├── ARCHITECTURE.md          # Este archivo
-├── README.md
+├── ARCHITECTURE.md          # Este documento
+├── README.md                # Descripción para GitHub
 ├── .gitignore
+├── index.html               # Orquestador principal
 │
-├── index.html               # Orquestador mínimo (~40 líneas)
-├── nosotros.html
-├── asesores.html
-├── noticias.html
-│
-├── partials/                # ⭐ COMPONENTES HTML REUTILIZABLES
-│   ├── header.html          # Header compartido (todas las páginas)
-│   ├── footer.html          # Footer compartido
+├── partials/                # Componentes HTML reutilizables
+│   ├── header.html          # Header compartido
 │   └── sections/            # Secciones de index.html
-│       ├── hero.html
-│       ├── proceso.html
-│       ├── planes.html
-│       ├── casos.html
-│       └── testimonios.html
+│       ├── hero-desktop.html
+│       ├── hero-mobile.html
+│       ├── proceso-desktop.html
+│       ├── proceso-mobile.html
+│       ├── planes-desktop.html
+│       └── planes-mobile.html
 │
 ├── assets/
 │   ├── images/
 │   ├── icons/
-│   ├── logos/
-│   │   ├── logos_isapre/
-│   │   └── logos_pp/
-│   └── ilustraciones/
+│   └── logos_pp/            # Logos del proyecto
 │
-├── css/                     # Arquitectura CSS (Partials)
-│   ├── styles.css           # Maestro (@imports)
-│   ├── _variables.css       # Tokens (colores, fuentes)
-│   ├── _base.css            # Resets, tipografía
-│   ├── _layout-desktop.css  # Grid, containers (Desktop)
-│   ├── _layout-mobile.css   # Grid, containers (Mobile)
-│   ├── _components.css      # Botones, cards, inputs
-│   ├── _header-desktop.css  # Header desktop (glassmorphism)
-│   ├── _header-mobile.css   # Header mobile
-│   ├── _hero-desktop.css    # Hero desktop
-│   ├── _hero-mobile.css     # Hero mobile
-│   ├── _planes-desktop.css  # Planes desktop
-│   ├── _planes-mobile.css   # Planes mobile
-│   ├── _proceso-desktop.css # Proceso desktop
-│   ├── _proceso-mobile.css  # Proceso mobile
-│   ├── _animations.css
-│   └── _responsive.css      # Media queries globales
+├── css/
+│   ├── styles.css           # Maestro (solo @imports)
+│   ├── _variables.css       # Design tokens
+│   ├── _base.css            # Resets, tipografía global
+│   ├── _layout-desktop.css
+│   ├── _layout-mobile.css
+│   ├── _components.css      # Componentes compartidos
+│   ├── _components-desktop.css
+│   ├── _components-mobile.css
+│   ├── _header-desktop.css
+│   ├── _header-mobile.css
+│   ├── _hero-desktop.css
+│   ├── _hero-mobile.css
+│   ├── _planes-desktop.css
+│   ├── _planes-mobile.css
+│   ├── _proceso-desktop.css
+│   ├── _proceso-mobile.css
+│   ├── _animations.css      # Keyframes
+│   └── _responsive.css      # Ajustes finales
 │
 └── js/
-    ├── main.js              # Orquestador
-    ├── loader.js            # ⭐ Carga HTML partials
+    ├── main.js              # Orquestador principal
+    ├── loader.js            # Carga de HTML partials
     │
     ├── core/
-    │   ├── config.js
-    │   └── state.js
+    │   └── renderer.js      # Motor de renderizado
     │
     ├── data/
-    │   ├── header_content.js
+    │   ├── planes_data.js   # Datos de perfiles
+    │   ├── testimonials.js  # Testimonios
+    │   ├── proceso_content.js
     │   ├── hero_content.js
-    │   ├── planes_data.js
-    │   ├── testimonials.js
-    │   └── proceso_content.js
+    │   └── header_content.js
     │
-    ├── modules/             # Componentes UI
+    ├── modules/
     │   ├── header/
     │   │   └── mobile_menu.js
     │   ├── hero/
@@ -108,573 +129,969 @@ planespro_final/
     │   │   └── title_animation.js
     │   ├── planes/
     │   │   └── planes_ui.js
-    │   └── ui/               # (Empty - reserved for future shared UI)
+    │   └── ui/              # Reservado para UI compartido
     │
     └── utils/
-        ├── dom_helpers.js
-        ├── formatters.js
-        └── animations.js
+        ├── logger.js        # Logger centralizado
+        └── dom_helpers.js
 ```
+
+### 2.2 Convención de Nombrado de Archivos
+
+| Tipo | Patrón | Ejemplo |
+|------|--------|---------|
+| CSS | `_nombre-plataforma.css` | `_hero-desktop.css` |
+| CSS Shared | `_nombre.css` | `_variables.css` |
+| JS Modules | `nombre_modulo.js` | `mobile_menu.js` |
+| JS Single | `nombre.js` | `loader.js` |
+| HTML Partials | `nombre-plataforma.html` | `hero-mobile.html` |
+| HTML Shared | `nombre.html` | `header.html` |
+
+**Prohibido:**
+- camelCase en nombres de archivo (`mobileMenu.js`)
+- Hyphens en JS (`mobile-menu.js`)
+- Mayúsculas (`Header.html`)
+
+### 2.3 Responsabilidad de Cada Carpeta
+
+| Carpeta | Contenido | Restricciones |
+|---------|-----------|---------------|
+| `css/` | Solo archivos CSS | Sin lógica, sin datos |
+| `js/data/` | Datos estáticos (JSON-like) | Sin lógica de UI |
+| `js/modules/` | Componentes interactivos | Un módulo = una funcionalidad |
+| `js/core/` | Lógica de infraestructura | Sin UI específica |
+| `js/utils/` | Helpers reutilizables | Sin estado, funciones puras |
+| `partials/` | Fragmentos HTML | Sin scripts inline |
+| `assets/` | Recursos estáticos | Organizados por tipo |
 
 ---
 
-## ⚖️ REGLAS ABSOLUTAS
+## PARTE III: CONVENCIONES DE CÓDIGO
 
-### 1. HTML
-- ✅ **Solo estructura semántica**
-- ❌ Cero `onclick=""`, `style=""`, o JavaScript inline
-- ❌ Cero CSS inline
-- ✅ Atributos `data-*` para JS hooks
-- ✅ ARIA labels para accesibilidad
+### 3.1 HTML
 
-### 2. CSS
-- ✅ Arquitectura de **partials** (`@import` en `styles.css`)
-- ✅ Mobile-first (UXI Cap. 13)
-- ✅ Naming: BEM simplificado (`.block__element--modifier`)
-- ❌ **PROHIBIDO `!important`** - Todo debe resolverse orgánicamente via especificidad
-  - ⚠️ Solo permitido temporalmente para debugging (debe eliminarse antes de commit)
-  - Si necesitas `!important`, la arquitectura CSS está mal → refactorizar
-- ✅ Variables CSS para tokens de diseño
+#### 3.1.1 Principios Generales
 
-### 3. JavaScript
-- ✅ **Un archivo, una responsabilidad** (ARCH Cap. 10)
-- ✅ Funciones pequeñas (ARCH Cap. 3)
-- ✅ Naming: `camelCase` para funciones/variables, `PascalCase` para clases
-- ✅ ES6 modules (`import/export`)
-- ❌ Cero variables globales no justificadas
-- ✅ Event delegation sobre listeners individuales
+- Solo estructura semántica
+- Cero JavaScript inline (`onclick=""`)
+- Cero CSS inline (`style=""`)
+- Atributos `data-*` para hooks de JavaScript
+- ARIA labels para accesibilidad
 
-### 4. Data
-- ✅ **Single Source of Truth** en `js/data/`
-- ❌ Cero data hardcodeada en HTML o CSS
-- ✅ Estructuras JSON claras y documentadas
+#### 3.1.2 Orden de Atributos
 
----
-
-## 🚨 CHECKLIST PRE-CAMBIO OBLIGATORIO
-
-Antes de escribir **cualquier línea de código**, validar:
-
-```
-[ ] ¿Consulté ARCH para arquitectura/naming?
-[ ] ¿Consulté UXI para diseño/usabilidad?
-[ ] ¿Consulté GROW si escribo texto/copy?
-[ ] ¿Consulté PROD si afecta alcance/funcionalidad?
-[ ] ¿El cambio respeta la estructura de directorios?
-[ ] ¿El archivo va en la carpeta correcta?
-[ ] ¿El naming es descriptivo y consistente?
-[ ] ¿Código limpio (funciones pequeñas, cero duplicación)?
-[ ] ¿Mobile-first considerado?
-[ ] ¿Accesibilidad considerada?
-```
-
-**Si un checklist falla → DETENER y ajustar.**
-
----
-
-## 🎨 DECISIONES DE DISEÑO CLAVE
-
-### Responsive Strategy: **Componentes Duales**
 ```html
-<section class="hero">
-    <div class="hero__desktop"><!-- Desktop UI --></div>
-    <div class="hero__mobile"><!-- Mobile UI --></div>
-</section>
+<element
+    id="identificador"
+    class="clases css"
+    data-action="valor"
+    data-id="valor"
+    aria-label="descripción"
+    type="tipo"
+    href="url"
+    src="recurso"
+>
 ```
 
-**Justificación:** ARCH (DRY, mantenibilidad), UXI (mobile-first, accesibilidad), PROD (métricas unificadas), GROW (SEO, cero friction).
+**Orden:** ID → Class → Data-* → ARIA-* → Otros atributos
 
+#### 3.1.3 Formato de Comentarios
+
+```html
+<!-- ===================== -->
+<!-- NOMBRE DE SECCIÓN     -->
+<!-- ===================== -->
+
+<!-- Descripción breve si no es obvio -->
+<div class="contenedor">
+    <!-- Propósito del elemento si es complejo -->
+    <p>Contenido</p>
+</div>
+```
+
+**Prohibido:**
+- Comentarios con emojis
+- Comentarios que explican código obvio
+- Comentarios TODO sin plan de resolución
+
+#### 3.1.4 Accesibilidad
+
+| Requisito | Implementación |
+|-----------|----------------|
+| Contraste | Mínimo 4.5:1 (texto), 3:1 (UI) |
+| Alt text | Obligatorio en imágenes informativas |
+| Keyboard nav | Todos los interactivos accesibles |
+| Focus visible | Outline visible en :focus |
+| ARIA | Labels en elementos sin texto visible |
 
 ---
 
-## 🔒 PATRÓN DE SEPARACIÓN TOTAL DESKTOP/MOBILE
+### 3.2 CSS
 
-**PRINCIPIO FUNDAMENTAL:** Desktop y Mobile son **plataformas diferentes** con UX, comportamiento e incluso secciones distintas. NUNCA mezclar en un mismo archivo.
+#### 3.2.1 Naming de Clases
 
-### Breakpoint Único
-### Breakpoints (Hybrid Strategy)
-- **Header Breakpoint:** `860px` (Menú hamburguesa aparece antes para evitar colisiones)
-- **Content Breakpoint:** `720px` (Cambio de layout principal Hero/Grid)
-- **Tablet State (Hybrid):** Entre `720px` y `860px` (Header móvil + Contenido desktop)
+**Patrón:** `.bloque-plataforma` o `.bloque__elemento-plataforma`
 
+```css
+/* CORRECTO */
+.hero-title-desktop { }
+.hero-title-mobile { }
+.card-plan-desktop { }
+.nav-link-desktop { }
 
-### Regla de Oro: SEPARACIÓN TOTAL
-
-**TODAS las capas se dividen en desktop/mobile:**
-
-```
-✅ CORRECTO:
-HTML:   proceso-desktop.html + proceso-mobile.html
-CSS:    _proceso-desktop.css + _proceso-mobile.css
-JS:     proceso_desktop.js + proceso_mobile.js
-Data:   procesoData = { desktop: {...}, mobile: {...} }
-
-❌ INCORRECTO:
-HTML:   proceso.html (con ambas versiones)
-CSS:    _proceso.css (con @media queries mezclados)
-JS:     proceso.js (con if/else desktop/mobile)
+/* INCORRECTO */
+.heroTitleDesktop { }     /* camelCase prohibido */
+.desktop-hero-title { }   /* plataforma primero prohibido */
+.hero_title_desktop { }   /* underscores prohibido en CSS */
 ```
 
-### Estructura de Archivos
+**Modificadores:**
 
-#### HTML Partials
-```
-partials/sections/
-├── hero-desktop.html
-├── hero-mobile.html
-├── proceso-desktop.html
-├── proceso-mobile.html
-├── planes-desktop.html
-└── planes-mobile.html
-```
+```css
+/* CORRECTO */
+.card-plan-desktop { }
+.card-plan-desktop.active { }
+.card-plan-desktop.featured { }
 
-#### CSS
-```
-css/
-├── _variables.css           # SHARED (design tokens)
-├── _base.css                # SHARED (resets)
-├── _animations.css          # SHARED (keyframes puros)
-├── _layout-desktop.css      # Desktop layout
-├── _layout-mobile.css       # Mobile layout
-├── _components.css          # Shared component base
-├── _components-mobile.css   # Mobile-specific adjustments
-├── _header-desktop.css
-├── _header-mobile.css
-├── _home-desktop.css
-├── _home-mobile.css
-├── _proceso-desktop.css
-├── _proceso-mobile.css
-└── _responsive.css          # Final tweaks only
+/* INCORRECTO */
+.card-plan-desktop--active { }  /* BEM completo no usado */
 ```
 
-#### JavaScript Modules
-```
-js/modules/
-├── planes/
-│   ├── slider_desktop.js    # Desktop: arrows, hover
-│   └── slider_mobile.js     # Mobile: touch swipe
-├── proceso/
-│   ├── flip_cards_desktop.js  # Desktop: flip on hover
-│   └── static_mobile.js       # Mobile: no interaction
-└── testimonials/
-    ├── carousel_desktop.js
-    └── swipe_mobile.js
+#### 3.2.2 Orden de Propiedades
+
+Todas las declaraciones CSS deben seguir este orden:
+
+```css
+.selector {
+    /* 1. Positioning */
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    
+    /* 2. Display & Box Model */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    margin: 0 auto;
+    
+    /* 3. Typography */
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+    text-align: left;
+    
+    /* 4. Visual */
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    
+    /* 5. Animation */
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s;
+}
 ```
 
-#### Data Files
+#### 3.2.3 Variables CSS
+
+Todas las propiedades visuales deben usar variables definidas en `_variables.css`:
+
+```css
+/* CORRECTO */
+color: var(--text-primary);
+background: var(--bg-card);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-lg);
+
+/* INCORRECTO */
+color: #333333;           /* Valor hardcodeado */
+background: white;        /* Sin variable */
+border-radius: 8px;       /* Valor mágico */
+```
+
+**Categorías de Variables:**
+- `--color-*` : Paleta de colores
+- `--text-*` : Colores de texto
+- `--bg-*` : Colores de fondo
+- `--border-*` : Bordes
+- `--radius-*` : Border radius
+- `--shadow-*` : Sombras
+- `--font-*` : Tipografías
+- `--spacing-*` : Espaciado
+- `--z-*` : Z-index
+
+#### 3.2.4 Formato de Comentarios
+
+```css
+/* ==================== */
+/* NOMBRE DE SECCIÓN    */
+/* ==================== */
+
+/* Subsección o grupo de reglas */
+.clase-uno {
+    /* Explicación solo si no es obvio */
+    property: value;
+}
+
+.clase-dos { }
+```
+
+#### 3.2.5 Prohibiciones CSS
+
+| Prohibido | Razón | Alternativa |
+|-----------|-------|-------------|
+| `!important` | Rompe cascada | Aumentar especificidad |
+| Inline styles | Inmantenible | Clases CSS |
+| IDs para estilos | Especificidad alta | Clases |
+| `@media` en archivos de componente | Mezcla plataformas | Archivos separados |
+| Valores hardcodeados | Inconsistencia | Variables CSS |
+| Selectores anidados > 3 niveles | Fragilidad | Refactorizar |
+
+**Excepción permitida:** `!important` solo en `prefers-reduced-motion` para accesibilidad.
+
+---
+
+### 3.3 JavaScript
+
+#### 3.3.1 Naming de Variables
+
+```javascript
+// Variables: camelCase
+const userName = 'John';
+const isActive = true;
+let itemCount = 0;
+
+// Constantes: UPPER_SNAKE_CASE
+const MAX_RETRY_ATTEMPTS = 3;
+const API_TIMEOUT_MS = 5000;
+
+// Clases: PascalCase
+class UserProfile { }
+class DataRenderer { }
+```
+
+#### 3.3.2 Naming de Funciones
+
+```javascript
+// Acciones: verbo + sustantivo
+function loadComponent() { }
+function renderContent() { }
+function toggleMenu() { }
+function validateForm() { }
+function calculateTotal() { }
+
+// Booleanos: is/has/can + condición
+function isValid() { }
+function hasPermission() { }
+function canSubmit() { }
+
+// INCORRECTO
+function component() { }     // Sin verbo
+function menu() { }          // Sin verbo
+function valid() { }         // Debería ser isValid()
+function get_user_data() { } // snake_case prohibido
+```
+
+#### 3.3.3 Naming de Exports (Data Files)
+
+**Regla:** El nombre del export debe coincidir con el nombre del archivo.
+
+```javascript
+// Archivo: planes_data.js
+export const planesData = [...];
+
+// Archivo: testimonials.js
+export const testimonialsData = [...];
+
+// Archivo: proceso_content.js
+export const procesoContent = {...};
+```
+
+**Patrón:** `nombre_archivo.js` → `nombreArchivoData` o `nombreArchivoContent`
+
+#### 3.3.4 Logger Centralizado
+
+**Ubicación:** `js/utils/logger.js`
+
+**Uso obligatorio:**
+
+```javascript
+import { Logger } from './utils/logger.js';
+
+// En desarrollo
+Logger.log('Mensaje informativo');
+Logger.info('Información adicional');
+
+// Siempre visibles
+Logger.warn('Advertencia');
+Logger.error('Error crítico', errorObject);
+```
+
+**Prohibido:**
+- `console.log()` directo en código de producción
+- `console.error()` sin contexto
+
+**Configuración:**
+- `DEBUG = false` en producción (silencia log/info)
+- `DEBUG = true` en desarrollo (muestra todo)
+
+#### 3.3.5 Funciones: Tamaño y Responsabilidad
+
+**Regla del Tamaño:**
+- Máximo 50 líneas por función
+- Ideal: 20-30 líneas
+- Si supera 50: refactorizar en subfunciones
+
+**Regla de Responsabilidad Única:**
+- Una función hace UNA cosa
+- La hace BIEN
+- La hace SOLAMENTE
+
+```javascript
+// CORRECTO: Responsabilidad única
+function loadComponent(id, path) {
+    return fetch(path)
+        .then(response => response.text());
+}
+
+function insertComponent(id, html) {
+    document.getElementById(id).innerHTML = html;
+}
+
+// INCORRECTO: Múltiples responsabilidades
+function loadAndInsertAndAnimate(id, path) {
+    // Carga + inserta + anima = 3 cosas
+}
+```
+
+#### 3.3.6 Error Handling
+
+**Patrón obligatorio:**
+
+```javascript
+// CORRECTO: Try/catch con Logger
+async function loadData() {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        Logger.error('Failed to load data', error);
+        return null; // o valor por defecto
+    }
+}
+
+// CORRECTO: Validación temprana
+function processUser(user) {
+    if (!user) {
+        Logger.warn('processUser called with null user');
+        return;
+    }
+    // Continuar con lógica
+}
+```
+
+**Prohibido:**
+- Catch vacíos (`catch (e) { }`)
+- Ignorar errores silenciosamente
+- Retornar `undefined` sin intención
+
+#### 3.3.7 Formato de Comentarios
+
+```javascript
+/* ===================================
+   NOMBRE DEL MÓDULO
+   Descripción breve de propósito
+   =================================== */
+
+/**
+ * Descripción de la función
+ * @param {string} selector - Descripción del parámetro
+ * @returns {HTMLElement|null} Descripción del retorno
+ */
+function selectElement(selector) {
+    // Comentario inline solo si es necesario
+    return document.querySelector(selector);
+}
+
+// Comentario de una línea para explicaciones breves
+const MAX_WIDTH = 1200; // en píxeles
+```
+
+**Prohibido:**
+- Emojis en comentarios
+- Comentarios que repiten el código
+- TODOs sin plan de resolución
+
+#### 3.3.8 ES6 Modules
+
+**Obligatorio:**
+- `import`/`export` para modularidad
+- Un archivo = un módulo = una responsabilidad
+
+```javascript
+// CORRECTO: Named exports
+export function initModule() { }
+export const MODULE_CONFIG = { };
+
+// CORRECTO: Import específico
+import { initModule } from './module.js';
+
+// EVITAR: Default exports (excepto casos justificados)
+export default function() { } // Menos claro
+```
+
+#### 3.3.9 Prohibiciones JavaScript
+
+| Prohibido | Razón | Alternativa |
+|-----------|-------|-------------|
+| Variables globales | Contamina namespace | Modules, closures |
+| `var` | Scope confuso | `const`, `let` |
+| `console.log` en prod | Ruido en consola | `Logger` |
+| Funciones > 50 líneas | Inmantenible | Dividir |
+| Callbacks anidados > 2 | Callback hell | async/await |
+| `eval()` | Seguridad | Nunca usar |
+| `document.write()` | Obsoleto | DOM manipulation |
+
+---
+
+### 3.4 Data Files
+
+#### 3.4.1 Single Source of Truth
+
+**Regla:** Todos los datos viven en `js/data/`. Cero datos hardcodeados en HTML o JS de UI.
+
+```javascript
+// js/data/planes_data.js
+export const planesData = [
+    {
+        id: "joven",
+        label: "Joven",
+        icon: "fa-rocket",
+        // ... resto de propiedades
+    }
+];
+```
+
+#### 3.4.2 Estructura para Variantes Desktop/Mobile
+
+Cuando el contenido difiere por plataforma:
+
 ```javascript
 // js/data/proceso_content.js
 export const procesoContent = {
     desktop: {
         title: "Cómo Funciona",
-        subtitle: "4 pasos simples...",
-        // Desktop-specific content
+        subtitle: "4 pasos simples para optimizar tu plan",
+        steps: [...]
     },
     mobile: {
         title: "Cómo Funciona",
-        subtitle: "4 pasos",
-        // Mobile-specific (shorter)
+        subtitle: "4 pasos", // Más corto
+        steps: [...]         // Puede tener menos elementos
     }
 };
 ```
 
-### Naming Convention (OBLIGATORIO)
+---
 
-**HTML Files:**
-- Desktop: `section-desktop.html`
-- Mobile: `section-mobile.html`
+## PARTE IV: PATRÓN DE SEPARACIÓN DESKTOP/MOBILE
 
-**CSS Files:**
-- Desktop: `_section-desktop.css`
-- Mobile: `_section-mobile.css`
+### 4.1 Principio Fundamental
 
-**CSS Classes:**
-- Desktop: `.hero-grid-desktop`, `.hero-text-desktop`
-- Mobile: `.hero-stack-mobile`, `.hero-text-mobile`
+**REGLA:** Desktop y Mobile son plataformas diferentes con UX, comportamiento e incluso contenido distinto. NUNCA mezclar en un mismo archivo.
 
-**JS Modules:**
-- Desktop: `module_desktop.js`
-- Mobile: `module_mobile.js`
-- Shared utilities: `helpers.js` (sin sufijo)
+### 4.2 Estructura por Plataforma
 
-**JS Functions:**
-```javascript
-// Desktop module
-export function initDesktopSlider() { }
+**Todas las capas se dividen:**
 
-// Mobile module
-export function initMobileSlider() { }
+| Capa | Desktop | Mobile |
+|------|---------|--------|
+| HTML | `seccion-desktop.html` | `seccion-mobile.html` |
+| CSS | `_seccion-desktop.css` | `_seccion-mobile.css` |
+| JS (si difiere) | `modulo_desktop.js` | `modulo_mobile.js` |
+
+**Ejemplo completo:**
+```
+partials/sections/
+├── hero-desktop.html
+├── hero-mobile.html
+
+css/
+├── _hero-desktop.css
+├── _hero-mobile.css
+
+js/modules/hero/
+├── animation_desktop.js  (si comportamiento difiere)
+├── touch_mobile.js
 ```
 
-### Loader Pattern (Condicional)
+### 4.3 Naming Convention Obligatoria
 
-```javascript
-// loader.js
-async function loadAllComponents() {
-    const isMobile = window.innerWidth <= 768;
-    
-    // Load header (desktop + mobile)
-    await loadComponent('header-placeholder', 'partials/header.html');
-    
-    // Load platform-specific sections
-    if (isMobile) {
-        await loadComponent('hero-placeholder', 'partials/sections/hero-mobile.html');
-        await loadComponent('proceso-placeholder', 'partials/sections/proceso-mobile.html');
-    } else {
-        await loadComponent('hero-placeholder', 'partials/sections/hero-desktop.html');
-        await loadComponent('proceso-placeholder', 'partials/sections/proceso-desktop.html');
-    }
-}
+| Tipo | Desktop | Mobile | Shared |
+|------|---------|--------|--------|
+| HTML | `name-desktop.html` | `name-mobile.html` | `name.html` |
+| CSS | `_name-desktop.css` | `_name-mobile.css` | `_name.css` |
+| CSS Class | `.element-desktop` | `.element-mobile` | `.element` |
+| JS Module | `module_desktop.js` | `module_mobile.js` | `module.js` |
 
-async function initializeModules() {
-    const isMobile = window.innerWidth <= 768;
-    
-    if (isMobile) {
-        const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
-        const { initMobileSlider } = await import('./modules/planes/slider_mobile.js');
-        initMobileMenu();
-        initMobileSlider();
-    } else {
-        const { initDesktopSlider } = await import('./modules/planes/slider_desktop.js');
-        const { initFlipCards } = await import('./modules/proceso/flip_cards_desktop.js');
-        initDesktopSlider();
-        initFlipCards();
-    }
-}
-```
+### 4.4 Decision Matrix
 
-### Decision Matrix: ¿Cuándo Dividir?
+| Pregunta | Sí → Dividir | No → Compartir |
+|----------|--------------|----------------|
+| ¿Layout diferente? | Dividir | |
+| ¿Interacción diferente (hover vs touch)? | Dividir | |
+| ¿Contenido diferente (textos, elementos)? | Dividir | |
+| ¿Solo utilidad/helper? | | Compartir |
+| ¿Design tokens (colores, fuentes)? | | Compartir |
 
-| Layer | Split? | Reason |
-|-------|--------|---------|
-| **HTML** | ✅ ALWAYS | Different structure, content length, UX |
-| **CSS** | ✅ ALWAYS | Different visual design per platform |
-| **JS Interactive** | ✅ ALWAYS | Different behaviors (hover vs touch) |
-| **Data** | ✅ Variants | Desktop/mobile properties in same file |
-| **Utilities** | ❌ NEVER | Platform-agnostic helpers |
-| **Core** | ❌ NEVER | Rendering/orchestration logic |
-
-### Excepciones PERMITIDAS
+### 4.5 Excepciones Permitidas
 
 **Archivos que NO se dividen:**
 
-1. **`_variables.css`** - Design tokens (pueden tener @media para responsive typography)
-2. **`_base.css`** - Resets globales (solo @media para prefers-reduced-motion)
-3. **`_animations.css`** - Keyframes puros (sin @media)
-4. **`js/core/renderer.js`** - Lógica de rendering universal
-5. **`js/utils/dom_helpers.js`** - Utilidades DOM agnósticas
+| Archivo | Razón |
+|---------|-------|
+| `_variables.css` | Design tokens universales |
+| `_base.css` | Resets globales |
+| `_animations.css` | Keyframes puros sin layout |
+| `js/core/renderer.js` | Lógica de rendering universal |
+| `js/utils/*.js` | Helpers agnósticos de plataforma |
+| `js/data/*.js` | Datos (pueden tener variantes internas) |
 
-### Por Qué Esta Separación
+### 4.6 Testing Checklist Desktop/Mobile
 
-**Ventajas:**
-1. **Cambios independientes** - Modificar desktop sin tocar mobile
-2. **Efectos diferentes** - Desktop hover, mobile touch
-3. **Secciones exclusivas** - Mobile puede tener secciones que desktop no
-4. **Mantenibilidad** - Archivos más pequeños, enfoque claro
-5. **Performance** - Loader solo carga lo necesario por plataforma
-6. **Escalabilidad total** - Agregar features sin afectar la otra plataforma
+Antes de commit, verificar:
 
-**Ejemplos Reales:**
-- Desktop: Planes en grid 3x2 con comparison modal
-- Mobile: Planes en swiper horizontal, sin comparison
-- Desktop: Proceso con flip cards hover
-- Mobile: Proceso con steps estáticos verticales
-- Ejemplo: `.hero-stack-mobile`, `.hero-title-mobile`
-
-**Regla:** NUNCA compartir clases entre desktop y mobile (excepto utilitarias).
-
-### HTML Structure
-
-**Desktop primero (SEO):**
-```html
-<section id="hero">
-    <div class="hero__desktop show-desktop">
-        <!-- Todo el contenido desktop aquí -->
-    </div>
-    <div class="hero__mobile show-mobile">
-        <!-- Todo el contenido mobile aquí -->
-    </div>
-</section>
-```
-
-### Imágenes Responsive
-
-**Crear 2 versiones:**
-- `image-large.png` (desktop, >1MB OK)
-- `image-small.png` (mobile, <300KB, WebP)
-
-### Interacciones
-
-| Aspecto | Desktop | Mobile |
-|---------|---------|--------|
-| Hover | ✅ `:hover` permitido | ❌ Usar `:active` |
-| Click | `click` event | `touchstart`/`touchend` |
-| Gestures | Keyboard arrows | Swipe gestures |
-
-### Contenido Condicional
-
-**Mobile puede tener:**
-- Textos abreviados
-- Menos elementos
-- Estructura simplificada
-
-**Regla:** Mobile = Lightweight, Desktop = Feature-rich
-
-### Testing Checklist (Pre-Commit)
-
-- [ ] Desktop (1920x1080)
-- [ ] Mobile (375x667 - iPhone SE)
-- [ ] Resize window (769 → 768 debe cambiar versión)
-- [ ] `.show-desktop` invisible en mobile
-- [ ] `.show-mobile` invisible en desktop
+- [ ] Resize 861px → 860px: Header cambia a móvil
+- [ ] Resize 721px → 720px: Contenido cambia a móvil
+- [ ] Desktop renderiza correctamente (1920x1080)
+- [ ] Mobile renderiza correctamente (375x667)
+- [ ] Clases `.show-desktop` invisibles en mobile
+- [ ] Clases `.show-mobile` invisibles en desktop
+- [ ] No hay elementos huérfanos en ninguna vista
 
 ---
 
-### Scroll Behavior: **Scroll Snap**
-```css
-.snap-container {
-    scroll-snap-type: y mandatory;
-}
-.snap-section {
-    scroll-snap-align: start;
-    height: 100vh;
-}
-```
+## PARTE V: PRINCIPIOS DE DISEÑO Y UX
 
-### Secciones (index.html)
-1. **Hero** (100vh) - Texto + CTA + Trust Pills + Logo Fader (footer de sección)
-2. **Proceso** (100vh) - Flip cards
-3. **Planes** (100vh) - Grid perfiles + Comparación + Footer sticky
-4. **Casos de Éxito** (100vh) - Slider
-5. **Testimonios** (100vh) - Lo que dicen nuestros clientes
-6. **CTA Final + Footer** (100vh)
+### 5.1 Mobile-First
+
+**Regla:** El diseño comienza por mobile, luego se expande a desktop.
+
+**Implicaciones:**
+- Mobile es la experiencia base
+- Desktop añade features, no al revés
+- Si algo no funciona en mobile, no se implementa
+
+### 5.2 Claridad sobre Creatividad
+
+**Regla:** La claridad siempre gana sobre la originalidad.
+
+- Interfaces auto-evidentes, no solo "aprendibles"
+- El usuario debe "entender" sin leer
+- Cero fricción cognitiva
+
+**Test:** Si hay que explicar un elemento, simplificarlo.
+
+### 5.3 Jerarquía Visual
+
+**Principios:**
+- Un solo CTA primario por vista
+- Contraste claro entre elementos
+- Espaciado consistente (usar variables)
+- Tipografía con escala definida
+
+**Patrones de escaneo:**
+- Desktop: F-pattern (izquierda a derecha, arriba a abajo)
+- Mobile: Scroll vertical, CTAs prominentes
+
+### 5.4 Navegación
+
+**Requisitos:**
+- El usuario siempre sabe dónde está
+- El usuario sabe qué puede hacer
+- El usuario sabe cómo volver
+
+**Implementación:**
+- Header persistente
+- Menú claro y conciso
+- Breadcrumbs si hay profundidad
+- Links de retorno explícitos
+
+### 5.5 Accesibilidad
+
+| Área | Requisito | Valor |
+|------|-----------|-------|
+| Contraste texto | WCAG AA | 4.5:1 mínimo |
+| Contraste UI | WCAG AA | 3:1 mínimo |
+| Alt text | Imágenes informativas | Obligatorio |
+| Focus | Visible | Outline claro |
+| Keyboard | Navegable | Tab funcional |
+| Touch targets | Tamaño | 44x44px mínimo |
+
+### 5.6 Interacciones
+
+| Tipo | Desktop | Mobile |
+|------|---------|--------|
+| Hover | `:hover` permitido | No usar |
+| Click | `click` event | `click` (touch handled) |
+| Gestures | Keyboard arrows | Swipe |
+| Feedback | Cursor change | Visual feedback |
+
+### 5.7 Trust Indicators
+
+**Elementos obligatorios en landing:**
+- Social proof (testimonios, números)
+- Logos de clientes/partners
+- Indicadores de seguridad
+- Claridad en propuesta de valor
+
+**Ubicación:**
+- Above the fold: propuesta + CTA + trust mínimo
+- Below: trust expandido, testimonios, casos
 
 ---
 
-## 🔄 WORKFLOW DE DESARROLLO
+## PARTE VI: GIT WORKFLOW
 
-### Git Branches Strategy
+### 6.1 Estrategia de Branches
 
-**Ramas Principales:**
-- `main` - **PRODUCCIÓN** (código aprobado, funcional, deployable)
-  - Protegida: requiere pull request + aprobación del usuario
-  - Solo código 100% testeado y validado
-  - Representa versión "deployable" en cualquier momento
-  
-- `dev` - **DESARROLLO** (trabajo activo, iteraciones)
-  - Rama de trabajo principal del desarrollador
-  - Permite experimentación y pruebas
-  - Código funcional pero en validación
+| Branch | Propósito | Protección |
+|--------|-----------|------------|
+| `main` | Producción, deployable | Requiere PR + aprobación |
+| `dev` | Desarrollo activo | Trabajo diario |
+| `feature/*` | Features grandes | Temporal |
+| `fix/*` | Correcciones | Temporal |
 
-**Ramas Temporales (opcional):**
-- `feature/nombre-feature` - Para features grandes que requieren múltiples sesiones
-- `fix/nombre-bug` - Para correcciones específicas
-- `test/nombre-experimento` - Para pruebas que pueden descartarse
+### 6.2 Flujo de Trabajo
 
-### Flujo de Trabajo
-
-1. **Desarrollo en `dev`:**
-   ```bash
-   # Siempre trabajar en dev
+```
+1. Desarrollo en dev
    git checkout dev
    git pull origin dev
-   
-   # Hacer cambios
-   # Probar localmente
-   # Commit
+   [hacer cambios]
    git add .
-   git commit -m "feat: add hero section desktop layout"
+   git commit -m "tipo: descripción"
    git push origin dev
-   ```
 
-2. **Revisión del Usuario:**
-   - Desarrollador notifica que feature está lista
-   - Usuario revisa código y funcionalidad
-   - Usuario prueba en `dev` branch
+2. Review por usuario
+   [usuario revisa en dev]
+   [usuario prueba funcionalidad]
 
-3. **Merge a `main` (solo tras aprobación):**
-   ```bash
-   # Usuario aprueba
+3. Merge a main (solo tras aprobación)
    git checkout main
-   git merge dev --no-ff  # No fast-forward (preserva historial)
+   git merge dev --no-ff
    git push origin main
-   ```
+```
 
-4. **Tags para Releases (opcional):**
-   ```bash
-   # Al completar milestone importante
-   git tag -a v1.0.0 -m "Release: Hero + Proceso sections"
-   git push origin v1.0.0
-   ```
-
-### Convención de Commits
+### 6.3 Convención de Commits
 
 **Formato:** `tipo: descripción breve`
 
-**Tipos:**
-- `feat:` - Nueva funcionalidad
-- `fix:` - Corrección de bug
-- `style:` - Cambios de CSS/estilos
-- `refactor:` - Refactorización sin cambio funcional
-- `docs:` - Documentación
-- `test:` - Pruebas
-- `chore:` - Tareas de mantenimiento
+| Tipo | Uso |
+|------|-----|
+| `feat:` | Nueva funcionalidad |
+| `fix:` | Corrección de bug |
+| `style:` | Cambios CSS/visuales |
+| `refactor:` | Refactorización sin cambio funcional |
+| `docs:` | Documentación |
+| `chore:` | Mantenimiento |
 
 **Ejemplos:**
 ```
 feat: add hero section with dual layout
-fix: correct logo fader rotation timing
+fix: correct logo fader timing issue
 style: adjust button hover states
 refactor: extract planes data to separate file
-docs: update ARCHITECTURE.md with Git workflow
+docs: update ARCHITECTURE.md breakpoints
+chore: cleanup unused CSS classes
 ```
 
-**Reglas de Commit:**
-- ✅ Commits pequeños y atómicos (un cambio lógico por commit)
-- ✅ Mensaje descriptivo (qué + por qué si no es obvio)
-- ❌ No commitear código con `!important` (debugging)
-- ❌ No commitear console.logs de prueba
-- ❌ No commitear archivos de configuración personal (.vscode/)
-
-### Desarrollo vs Producción
-
-**`dev` (Desarrollo):**
-- Permite código en progreso
-- Permite console.logs temporales
-- Permite comentarios de debugging
-- Validación en curso
-
-**`main` (Producción):**
-- Solo código limpio y finalizado
-- Cero console.logs
-- Cero TODOs sin resolver
-- Cero `!important`
-- Validado por usuario
-- Performance optimizada
-
-### Criterios para Merge a `main`
+### 6.4 Criterios para Merge a Main
 
 **Solo mergear si:**
-- ✅ Feature completamente funcional
-- ✅ Probado en mobile y desktop
-- ✅ Código pasa `ARCHITECTURE.md`
-- ✅ Cero `!important` en código final
-- ✅ Cero console.logs
-- ✅ Usuario aprobó explícitamente
-- ✅ No rompe features existentes
+- [ ] Feature completamente funcional
+- [ ] Probado en mobile Y desktop
+- [ ] Código cumple ARCHITECTURE.md
+- [ ] Cero `!important`
+- [ ] Cero `console.log`
+- [ ] Usuario aprobó explícitamente
+- [ ] No rompe features existentes
 
-**Si falla un criterio → continuar en `dev`**
+### 6.5 Dev vs Producción
+
+| Aspecto | `dev` | `main` |
+|---------|-------|--------|
+| Console.logs | Permitido temporalmente | Prohibido |
+| TODOs | Permitido | Prohibido |
+| !important | Debugging temporal | Prohibido |
+| Código incompleto | Permitido | Prohibido |
 
 ---
 
-## 🧪 FUNCIONALIDADES CORE
+## PARTE VII: FUNCIONALIDADES CORE
 
-### Planes Slider
-- Auto-rotation cada 4s (hasta interacción)
-- 6 perfiles (Joven, Familia, Compensado, Freelance, Maternidad, Voluntario)
-- Botón "Ver vs Fonasa" → abre comparison widget
-- Tabs: GES, CAEC, Reembolsos
+### 7.1 Hero Section
 
-### Comparison Widget
-- Tabla interactiva Fonasa vs Isapre
-- Hover sobre categorías → explicación dinámica
-- Animación `fadeInMoveUp` al abrir
+**Componentes:**
+- Title Animation (typing effect)
+- Social Proof (avatars + bubble)
+- Logo Fader (rotación de logos)
+- Trust Pills
 
-### Logo Fader
-- Rotación cada 6s
+**Archivos:**
+- `partials/sections/hero-desktop.html`
+- `partials/sections/hero-mobile.html`
+- `js/modules/hero/title_animation.js`
+- `js/modules/hero/social_proof.js`
+- `js/modules/hero/logo_fader.js`
+
+### 7.2 Logo Fader
+
+- Rotación automática cada 6 segundos
 - Logos pre-cargados al inicio
+- Transición fade entre logos
 - Footer de sección Hero
 
-### Sidebar Form
+### 7.3 Planes Section
+
+**Estructura:**
+- Grid de perfiles en desktop
+- Cards scrolleables en mobile
+- 6 perfiles: Joven, Familia, Compensado, Freelance, Maternidad, Voluntario
+
+**Datos:** `js/data/planes_data.js`
+**UI:** `js/modules/planes/planes_ui.js`
+
+### 7.4 Sidebar Form
+
 - Modal/sidebar responsivo
-- Validación en tiempo real
-- Integración con backend (futuro)
+- Apertura via CTAs
+- Validación futura
+- Integración backend pendiente
 
 ---
 
-## 🎯 PRINCIPIOS DE CÓDIGO
+## PARTE VIII: ANTI-PATTERNS PROHIBIDOS
 
-### ARCH (Clean Code)
-- Funciones: máx 20 líneas
-- Clases: una responsabilidad
-- Naming: auto-explicativo
-- Cero comentarios innecesarios
+### Lista Consolidada
 
-### UXI (Usabilidad)
-- Cero fricción cognitiva
-- Jerarquía visual clara
-- Mobile-first
-- Accesibilidad (WCAG básico)
+| Prohibición | Categoría | Justificación |
+|-------------|-----------|---------------|
+| `!important` | CSS | Rompe cascada, indica problema de arquitectura |
+| Inline styles | HTML | Inmantenible, no cacheable |
+| Inline scripts | HTML | Seguridad, separación de concerns |
+| `console.log` en prod | JS | Ruido en consola |
+| Variables globales | JS | Contamina namespace |
+| Funciones > 50 líneas | JS | Inmantenible |
+| Archivos > 500 líneas | General | Dividir en módulos |
+| Nombres crípticos | General | `x`, `temp`, `data` prohibidos |
+| Comentarios de código malo | General | Mejorar el código, no explicarlo |
+| TODOs sin plan | General | Crear issue o resolver |
+| Data hardcodeada | General | Centralizar en `js/data/` |
+| Media queries mezclados | CSS | Usar archivos separados |
+| Callbacks > 2 niveles | JS | Usar async/await |
+| Selectores > 3 niveles | CSS | Refactorizar |
 
-### PROD (Producto)
-- Cada feature debe tener métrica de éxito
-- MVP antes de escalar
-- Validar antes de construir
+### Code Smells a Detectar
 
-### GROW (Marketing)
-- Copy claro y directo
-- Mensajes consistentes
-- Trust signals visibles
-- Optimización de conversión
-
----
-
-## 🚫 ANTI-PATTERNS PROHIBIDOS
-
-❌ Código espagueti (lógica mezclada)  
-❌ Duplicación de data  
-❌ Variables globales sin justificación  
-❌ CSS inline  
-❌ JavaScript inline  
-❌ Funciones >50 líneas  
-❌ Nombres crípticos (`x`, `temp`, `data`)  
-❌ Comentarios que explican código malo  
-❌ `!important` (NUNCA - resolver con especificidad)  
-❌ Archivos >500 líneas  
-❌ console.logs en código final (solo debugging temporal)  
-❌ TODOs sin issue/plan de resolución  
+| Smell | Síntoma | Acción |
+|-------|---------|--------|
+| Long Method | Función > 50 líneas | Dividir |
+| Large Class | Archivo > 500 líneas | Modularizar |
+| Duplicate Code | Código repetido | Extraer helper |
+| Dead Code | Código no usado | Eliminar |
+| Feature Envy | Función usa más datos de otro módulo | Mover |
+| Primitive Obsession | Muchos params primitivos | Crear objeto |
 
 ---
 
-## 🔍 COMANDO DE EMERGENCIA
+## PARTE IX: MÉTRICAS Y PERFORMANCE
 
-Si detectas violación de arquitectura:
+### 9.1 Performance Targets
+
+| Métrica | Target | Herramienta |
+|---------|--------|-------------|
+| First Contentful Paint | < 1.5s | Lighthouse |
+| Time to Interactive | < 3s | Lighthouse |
+| Cumulative Layout Shift | < 0.1 | Lighthouse |
+| Total JS Size | < 100KB | Network tab |
+| Total CSS Size | < 50KB | Network tab |
+
+### 9.2 Performance Budgets
+
+| Recurso | Límite |
+|---------|--------|
+| Imagen hero | < 200KB |
+| Imagen secundaria | < 100KB |
+| Single JS module | < 15KB |
+| Single CSS file | < 10KB |
+| Fuentes | < 100KB total |
+
+### 9.3 Código Targets
+
+| Métrica | Target |
+|---------|--------|
+| Complejidad ciclomática | < 10 por función |
+| Cobertura de comentarios | < 5% (código auto-explicativo) |
+| Duplicación | 0% |
+| Funciones > 50 líneas | 0 |
+| Archivos > 500 líneas | 0 |
+
+---
+
+## PARTE X: TESTING (FUTURO)
+
+### 10.1 Estructura de Tests
+
+**Cuando se implementen tests, seguir:**
+
+**Principios FIRST:**
+- **F**ast: Tests rápidos
+- **I**ndependent: Sin dependencias entre tests
+- **R**epeatable: Mismo resultado siempre
+- **S**elf-validating: Pass/Fail claro
+- **T**imely: Escritos antes o junto al código
+
+**Naming:**
+```javascript
+// Patrón: describe_when_then
+test('loadComponent_whenPathValid_returnsHTML')
+test('renderPlanes_whenDataEmpty_showsEmptyState')
 ```
-Usuario dice: "ARCH"
-→ Detenerse inmediatamente
-→ Validar contra este documento
-→ Justificar o corregir
+
+### 10.2 Cobertura Recomendada
+
+| Tipo | Prioridad | Cobertura Target |
+|------|-----------|------------------|
+| Utils/Helpers | Alta | 90%+ |
+| Core Logic | Alta | 80%+ |
+| UI Modules | Media | 60%+ |
+| Integration | Media | Paths críticos |
+
+---
+
+## PARTE XI: ESCALABILIDAD (FUTURO)
+
+### 11.1 API Integration Patterns
+
+**Cuando se agregue backend:**
+
+```javascript
+// Patrón: Wrapper/Adapter
+// js/api/client.js
+export const ApiClient = {
+    async get(endpoint) {
+        try {
+            const response = await fetch(`${BASE_URL}${endpoint}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            Logger.error('API Error', error);
+            throw error;
+        }
+    }
+};
+
+// Uso en módulos
+import { ApiClient } from '../api/client.js';
+const data = await ApiClient.get('/planes');
+```
+
+### 11.2 State Management
+
+**Si la app crece en interactividad:**
+
+```javascript
+// Patrón simple: Store centralizado
+// js/core/store.js
+const state = {
+    user: null,
+    selectedPlan: null
+};
+
+export const Store = {
+    get(key) { return state[key]; },
+    set(key, value) { 
+        state[key] = value;
+        // Notificar observers si se implementa
+    }
+};
+```
+
+### 11.3 Component Lifecycle
+
+**Patrón para módulos complejos:**
+
+```javascript
+export const MyModule = {
+    init() {
+        // Setup inicial
+        this.bindEvents();
+        this.render();
+    },
+    
+    bindEvents() {
+        // Event listeners
+    },
+    
+    render() {
+        // Render inicial
+    },
+    
+    update(data) {
+        // Re-render con nuevos datos
+    },
+    
+    destroy() {
+        // Cleanup: remove listeners, clear intervals
+    }
+};
 ```
 
 ---
 
-## 📊 MÉTRICAS DE CALIDAD
+## PARTE XII: CHECKLIST PRE-COMMIT
 
-### Código
-- Complejidad ciclomática: <10 por función
-- Cobertura de comentarios: <5% (código auto-explicativo)
-- Duplicación: 0%
+### Antes de cada commit, verificar:
 
-### Performance
-- First Contentful Paint: <1.5s
-- Time to Interactive: <3s
-- Cumulative Layout Shift: <0.1
+**Código:**
+- [ ] Sin `!important` en CSS
+- [ ] Sin `console.log` (usar Logger)
+- [ ] Sin inline styles/scripts
+- [ ] Funciones < 50 líneas
+- [ ] Naming correcto (camelCase, etc.)
 
-### Accesibilidad
-- WCAG 2.1 AA mínimo
-- Contraste: 4.5:1 texto, 3:1 UI
-- Keyboard navigation: 100%
+**Estructura:**
+- [ ] Archivos en carpeta correcta
+- [ ] Naming de archivos correcto
+- [ ] Desktop/Mobile separados si aplica
+
+**Funcionalidad:**
+- [ ] Funciona en desktop (1920x1080)
+- [ ] Funciona en mobile (375x667)
+- [ ] No rompe features existentes
+
+**Documentación:**
+- [ ] Comentarios necesarios presentes
+- [ ] Sin TODOs sin resolver
+- [ ] ARCHITECTURE.md actualizado si hay cambios estructurales
 
 ---
 
-## 🎓 REFERENCIAS
+## REFERENCIAS
 
-- Clean Code (Robert C. Martin) → ARCH
-- Don't Make Me Think (Steve Krug) → UXI
-- The Product Book (Product School) → PROD
-- Esto es Marketing (Seth Godin) → GROW
-- Hacking Growth (Sean Ellis) → GROW
+Este documento está basado en principios de:
+
+- **Clean Code** (Robert C. Martin) - Arquitectura y calidad de código
+- **Don't Make Me Think** (Steve Krug) - Usabilidad y UX
+- **Hacking Growth** (Sean Ellis) - Patrones de crecimiento
 
 ---
 
-**Fin de ARCHITECTURE.md - Versión 1.0**
+**Fin de ARCHITECTURE.md - Versión 2.0**
