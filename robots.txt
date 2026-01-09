@@ -1,0 +1,33 @@
+# PlanesPro - Robots.txt
+# Actualizado: 2026-01-09
+# Control de acceso para bots de búsqueda y crawlers de IA
+
+# Permitir a todos los bots acceso general
+User-agent: *
+Allow: /
+
+# Bloquear bots de entrenamiento de IA (proteger contenido propietario)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Permitir bots de búsqueda en vivo de IA (aparición en resultados)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Sitemap (pendiente de crear)
+# Sitemap: https://planespro.cl/sitemap.xml
