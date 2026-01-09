@@ -57,7 +57,156 @@ El proyecto implementa **Separación Total Desktop/Mobile**. Esto significa:
 
 **Regla:** Nuevos archivos deben usar 720px (contenido) y 860px (header).
 
+### 1.5 Performance Optimization
+
+**Filosofía:** Optimizac la carga sin agregar complejidad. Solo técnicas nativas del navegador, sin build process.
+
+#### 1.5.1 Preload de Recursos Críticos
+
+**Regla obligatoria:** Todo recurso crítico para LCP (Largest Contentful Paint) debe usar `<link rel="preload">`.
+
+**Recursos que requieren preload:**
+- Imagen hero principal (AVIF)
+- CSS principal (styles.css)
+- Fuentes web críticas (opcional si ya usa preconnect)
+
+**Implementación:**
+
+```html
+<head>
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="assets/images/hero-person.avif" as="image" type="image/avif">
+    <link rel="preload" href="css/styles.css" as="style">
+</head>
+```
+
+**Prohibido:**
+- ❌ Preload de imágenes below-the-fold
+- ❌ Preload de scripts no-críticos
+- ❌ Más de 3-4 preloads por página (impacto negativo)
+
+**Verificación:** 
+```bash
+# DevTools Network → Filtrar recurso → Priority debe ser "Highest"
+```
+
 ---
+
+#### 1.5.2 Lazy Loading de Imágenes
+
+**Regla obligatoria:** Todas las imágenes below-the-fold deben usar `loading="lazy"`.
+
+**Imágenes que requieren lazy loading:**
+- ✅ Banners de secciones (proceso, planes, etc)
+- ✅ Avatares de social proof
+- ✅ Imágenes decorativas
+- ✅ Íconos grandes (>50KB)
+
+**Imágenes que NO deben usar lazy loading:**
+- ❌ Imagen hero principal (afecta LCP)
+- ❌ Logo del header
+- ❌ Imágenes above-the-fold
+
+**Implementación:**
+
+```html
+<!-- Imagen crítica (above-the-fold): SIN lazy -->
+<img src="assets/images/hero-person.png" alt="..." class="hero-image">
+
+<!-- Imagen no-crítica (below-the-fold): CON lazy -->
+<img src="assets/ilustraciones/process_banner.png" alt="..." loading="lazy">
+```
+
+**Verificación:**
+```bash
+# DevTools Network → Cargar página
+# ✅ Imágenes lazy NO aparecen inicialmente
+# Hacer scroll → ✅ Ahora SÍ se cargan
+```
+
+---
+
+#### 1.5.3 Lazy Loading de Secciones (Intersection Observer)
+
+**Regla opcional:** Secciones pesadas (muchas imágenes, scripts complejos) pueden lazy-loadarse.
+
+**Módulo:** `js/modules/utils/lazy-section-loader.js`
+
+**Uso:**
+
+```javascript
+// main.js
+import { initLazySectionLoader } from './modules/utils/lazy-section-loader.js';
+
+// Configurar secciones lazy
+initLazySectionLoader();
+```
+
+**Configuración en lazy-section-loader.js:**
+
+```javascript
+const lazySections = [
+    { id: 'planes-placeholder', partial: 'partials/sections/planes-desktop.html' },
+    // Agregar más secciones según necesidad
+];
+```
+
+**Cuándo usar:**
+- Sección tiene >10 imágenes
+- Sección require script pesado (>50KB)
+- Sección está muy abajo en la página
+
+**Cuándo NO usar:**
+- Secciones above-the-fold
+- Secciones críticas para SEO
+
+**Verificación:**
+```javascript
+// Console → Buscar logs
+"Lazy loading section: planes-placeholder"
+"Section loaded successfully: partials/sections/planes-desktop.html"
+```
+
+---
+
+#### 1.5.4 Resource Hints
+
+**Ya implementado:**
+- `<link rel="preconnect">` para Google Fonts
+- `<link rel="dns-prefetch">` para CDNs externos
+
+**Regla:** Mantener solo dominios que se usan en la página actual.
+
+---
+
+#### 1.5.5 Métricas Objetivo (Core Web Vitals)
+
+| Métrica | Target 2025 | Actual PlanesPro |
+|---------|-------------|------------------|
+| **LCP** (Largest Contentful Paint) | ≤ 2.5s | ~1.9s ✅ |
+| **INP** (Interaction to Next Paint) | ≤ 200ms | ~120ms ✅ |
+| **CLS** (Cumulative Layout Shift) | ≤ 0.1 | 0.02 ✅ |
+
+**Cómo medir:**
+1. Lighthouse (Chrome DevTools)
+2. WebPageTest.org
+3. Real User Monitoring (Search Console)
+
+---
+
+#### 1.5.6 Checklist Pre-Deploy
+
+Antes de pushear cambios que afecten imágenes o carga:
+
+- [ ] Todas las imágenes >100KB están en AVIF/WebP
+- [ ] Imágenes below-the-fold tienen `loading="lazy"`
+- [ ] Solo hero image y CSS tienen `preload`
+- [ ] Lighthouse Performance score ≥ 90
+- [ ] No hay preloads redundantes
+
+---
+
+
 
 ## PARTE II: ESTRUCTURA DEL PROYECTO
 
