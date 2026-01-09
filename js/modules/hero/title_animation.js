@@ -10,9 +10,6 @@ export function initHeroTitleAnimation() {
     // 1. CLEAR & PREPARE DOM
     titleElement.innerHTML = '';
 
-    // Make visible immediately (will be empty, then animation fills it)
-    titleElement.classList.add('js-ready');
-
     // PREPARE SEQUENCE CONTAINER
     const heroSection = document.querySelector('.hero-section-desktop') || document.getElementById('inicio');
     if (heroSection) {
