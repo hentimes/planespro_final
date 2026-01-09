@@ -118,9 +118,8 @@
         font-weight: 800;
         min-height: 120px;
         /* Prevent layout shift when content loads */
-        display: flex;
-        align-items: center;
-        /* Center text vertically in reserved space */
+        display: block;
+        /* Keep block for proper multi-line layout */
         color: var(--color-whatsapp-text);
     }
 
