@@ -32,7 +32,14 @@ async function initModules() {
     try {
         const { initHeroTitleAnimation } = await import('./modules/hero/title_animation.js?v=2.9');
         initHeroTitleAnimation();
-    } catch (e) { Logger.error('Title Animation load failed', e); }
+    } catch (e) {
+        Logger.error('Title Animation load failed', e);
+        // Failsafe: If animation fails and H1 is empty, show static text
+        const title = document.querySelector('.hero-title');
+        if (title && !title.textContent.trim()) {
+            title.innerHTML = 'Deja de perder dinero <br> en tu Isapre.';
+        }
+    }
 
     // Social Proof (Avatars)
     try {

@@ -116,8 +116,11 @@
         margin-bottom: var(--space-md);
         margin-top: 0;
         font-weight: 800;
-        min-height: auto;
-        display: block;
+        min-height: 120px;
+        /* Prevent layout shift when content loads */
+        display: flex;
+        align-items: center;
+        /* Center text vertically in reserved space */
         color: var(--color-whatsapp-text);
     }
 
