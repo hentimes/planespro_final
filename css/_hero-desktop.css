@@ -119,6 +119,13 @@
         min-height: auto;
         display: block;
         color: var(--color-whatsapp-text);
+        /* Prevent flash before JS loads */
+        visibility: hidden;
+    }
+
+    /* Make visible when JS is ready */
+    .hero-title.js-ready {
+        visibility: visible;
     }
 
     /* Removed redundant Media Queries for Font Size - handled by variable */
