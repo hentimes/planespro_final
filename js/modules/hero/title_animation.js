@@ -10,6 +10,9 @@ export function initHeroTitleAnimation() {
     // 1. CLEAR & PREPARE DOM
     titleElement.innerHTML = '';
 
+    // Make visible immediately (will be empty, then animation fills it)
+    titleElement.classList.add('js-ready');
+
     // PREPARE SEQUENCE CONTAINER
     const heroSection = document.querySelector('.hero-section-desktop') || document.getElementById('inicio');
     if (heroSection) {
@@ -56,10 +59,6 @@ export function initHeroTitleAnimation() {
             if (charIndex1 < textLine1.length) {
                 line1.textContent += textLine1.charAt(charIndex1);
                 charIndex1++;
-                // Make visible on first character
-                if (charIndex1 === 1) {
-                    titleElement.classList.add('js-ready');
-                }
                 setTimeout(typeLine1, 30 + Math.random() * 40);
             } else {
                 // Line 1 Done. 
