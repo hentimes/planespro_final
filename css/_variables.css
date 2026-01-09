@@ -148,7 +148,7 @@
 }
 
 /* Desktop Adjustments: Override defaults with Scale-aware values */
-@media (min-width: 769px) {
+@media (min-width: 721px) {
     :root {
         /* Standard Fluid Typography */
         /* Adjusted Max Size (3.2rem) to keep Title in 2 lines */

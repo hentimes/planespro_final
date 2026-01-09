@@ -3,7 +3,7 @@
    Visual styles for desktop components (Buttons, Cards, Pills)
    =================================== */
 
-@media (min-width: 769px) {
+@media (min-width: 721px) {
 
     /* --- BUTTONS --- */
     .btn-primary-desktop {
