@@ -5,15 +5,7 @@
 
 @media (max-width: 720px) {
 
-    /* TOGGLE: Hide Desktop, Show Mobile */
-    /* ID Specificity handles toggling without !important */
-    #inicio.hero-section-desktop {
-        display: none;
-    }
-
-    #hero-mobile {
-        display: flex;
-    }
+    /* Visibility now controlled by .show-mobile class in _layout-mobile.css */
 
     /* Hero Section */
     .hero__mobile {

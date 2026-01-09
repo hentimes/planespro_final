@@ -5,15 +5,7 @@
 
 @media (min-width: 721px) {
 
-    /* TOGGLE: Show Desktop, Hide Mobile */
-    /* ID Specificity (110) beats Class (10) */
-    #inicio.hero-section-desktop {
-        display: flex;
-    }
-
-    #hero-mobile {
-        display: none;
-    }
+    /* Visibility now controlled by .show-desktop class in _layout-desktop.css */
 
     .hero-section-desktop {
         /* Aurora Effect Background (Premium Mesh) */
