@@ -1,26 +1,26 @@
-import { planesData } from '../../data/planes_data.js';
+import { perfilesData } from '../../data/perfiles_data.js';
 
 /**
- * Render Planes Cards into the Grid Container
+ * Render Perfiles Cards into the Grid Container
  * Supports both Desktop (grid) and Mobile (slider/stack) containers
  */
-export function renderPlanes() {
-    // console.log('[PLANES Renderer] Starting render...');
+export function renderPerfiles() {
+    // console.log('[PERFILES Renderer] Starting render...');
 
     // Desktop Container
-    const desktopContainer = document.getElementById('planes-grid-desktop');
+    const desktopContainer = document.getElementById('perfiles-grid-desktop');
     if (desktopContainer) {
         desktopContainer.innerHTML = '';
-        planesData.forEach(profile => {
+        perfilesData.forEach(profile => {
             desktopContainer.insertAdjacentHTML('beforeend', createDesktopCardHTML(profile));
         });
     }
 
     // Mobile Container
-    const mobileContainer = document.getElementById('planesSliderContainer');
+    const mobileContainer = document.getElementById('perfilesSliderContainer');
     if (mobileContainer) {
         mobileContainer.innerHTML = '';
-        planesData.forEach(profile => {
+        perfilesData.forEach(profile => {
             mobileContainer.insertAdjacentHTML('beforeend', createMobileCardHTML(profile));
         });
     }
@@ -31,7 +31,7 @@ export function renderPlanes() {
  */
 function createDesktopCardHTML(profile) {
     const { id, label, icon, validation, recommendedPlan } = profile;
-    const namespace = 'planes';
+    const namespace = 'perfiles';
 
     const iconClass = `fas ${icon}`;
 

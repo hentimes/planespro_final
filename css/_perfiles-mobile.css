@@ -5,7 +5,7 @@
 
 @media (max-width: 720px) {
 
-    .planes-section-mobile {
+    .perfiles-section-mobile {
         background: var(--color-bg-secondary);
         padding: var(--space-xl) 0;
         display: flex;
@@ -15,32 +15,32 @@
         /* Ensure it takes full screen if needed */
     }
 
-    .planes-mobile-header {
+    .perfiles-mobile-header {
         padding: 0 var(--space-md);
         margin-bottom: var(--space-md);
         text-align: center;
     }
 
-    .planes-title-mobile {
+    .perfiles-title-mobile {
         font-size: 2rem;
         color: var(--color-dark);
         margin-bottom: var(--space-xs);
         font-weight: 700;
     }
 
-    .planes-subtitle-mobile {
+    .perfiles-subtitle-mobile {
         color: var(--color-gray-500);
         font-size: 1rem;
     }
 
     /* SLIDER WRAPPER */
-    .planes-slider-wrapper {
+    .perfiles-slider-wrapper {
         width: 100%;
         overflow-x: hidden;
         /* Hide scrollbar if possible, handled by track */
     }
 
-    .planes-slider-track {
+    .perfiles-slider-track {
         display: flex;
         gap: var(--space-md);
         overflow-x: auto;
@@ -52,7 +52,7 @@
         /* Hide scrollbar Firefox */
     }
 
-    .planes-slider-track::-webkit-scrollbar {
+    .perfiles-slider-track::-webkit-scrollbar {
         display: none;
         /* Hide scrollbar Chrome */
     }

@@ -6,7 +6,7 @@
 export function initLazySectionLoader() {
     // Only lazy load below-the-fold sections
     const lazySections = [
-        { id: 'planes-placeholder', partial: 'partials/sections/planes-desktop.html' },
+        { id: 'perfiles-placeholder', partial: 'partials/sections/perfiles-desktop.html' },
         // Add more sections here as needed
     ];
 

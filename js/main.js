@@ -15,11 +15,11 @@ async function initModules() {
     const { initMobileMenu } = await import('./modules/header/mobile_menu.js');
     initMobileMenu();
 
-    // 2. Planes Data Rendering (Always loaded)
+    // 2. Perfiles Data Rendering (Always loaded)
     try {
-        const { renderPlanes } = await import('./modules/planes/planes_ui.js');
-        renderPlanes();
-    } catch (e) { Logger.error('Planes UI load failed', e); }
+        const { renderPerfiles } = await import('./modules/perfiles/perfiles_ui.js');
+        renderPerfiles();
+    } catch (e) { Logger.error('Perfiles UI load failed', e); }
 
     // 3. Desktop-specific modules (Loaded unconditionally for responsive resize)
     // Benefit Accordion

@@ -24,9 +24,9 @@
 /* Renamed from _home */
 @import url('_proceso-desktop.css');
 @import url('_proceso-mobile.css');
-@import url('_planes-desktop.css');
-/* New section */
-@import url('_planes-mobile.css');
-/* New section */
+@import url('_perfiles-desktop.css');
+/* Selector de perfiles */
+@import url('_perfiles-mobile.css');
+/* Selector de perfiles */
 @import url('_animations.css');
 @import url('_responsive.css');

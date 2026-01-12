@@ -81,10 +81,10 @@ export async function loadAllComponents() {
     const procesoDesktop = await fetchPartial('partials/sections/proceso-desktop.html');
     setPlaceholder('proceso-placeholder', procesoMobile + procesoDesktop);
 
-    // PLANES
-    const planesMobile = await fetchPartial('partials/sections/planes-mobile.html');
-    const planesDesktop = await fetchPartial('partials/sections/planes-desktop.html');
-    setPlaceholder('planes-placeholder', planesMobile + planesDesktop);
+    // PERFILES
+    const perfilesMobile = await fetchPartial('partials/sections/perfiles-mobile.html');
+    const perfilesDesktop = await fetchPartial('partials/sections/perfiles-desktop.html');
+    setPlaceholder('perfiles-placeholder', perfilesMobile + perfilesDesktop);
 
     // 3. Footer (Currently disabled in index, but logic remains valid)
     // await loadComponent('footer-placeholder', 'partials/footer.html');

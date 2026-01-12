@@ -5,7 +5,7 @@
 
 @media (min-width: 721px) {
 
-    .planes-section-desktop {
+    .perfiles-section-desktop {
         background-color: var(--color-bg-secondary);
         display: flex;
         align-items: center;
@@ -13,7 +13,7 @@
     }
 
     /* Section Header */
-    .planes-header-desktop {
+    .perfiles-header-desktop {
         /* text-align: center; Handled by .section-standard-header */
         /* padding-top: 90px; Handled by .section-standard-header */
         /* margin-bottom: var(--space-2xl); Handled by .section-standard-header */
@@ -22,7 +22,7 @@
         margin-right: auto;
     }
 
-    .planes-title-desktop {
+    .perfiles-title-desktop {
         font-size: var(--font-size-h2);
         font-weight: var(--font-weight-bold);
 
@@ -41,14 +41,14 @@
         margin-bottom: var(--space-sm);
     }
 
-    .planes-subtitle-desktop {
+    .perfiles-subtitle-desktop {
         font-size: 1.125rem;
         color: var(--color-gray-500);
         line-height: var(--line-height-relaxed);
     }
 
     /* Grid Layout */
-    .planes-grid-desktop {
+    .perfiles-grid-desktop {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-xl);
@@ -56,7 +56,7 @@
     }
 
     /* V2 Card Style */
-    .planes-card {
+    .perfiles-card {
         background: var(--color-white);
         border-radius: 20px;
         padding: var(--space-xl);
@@ -70,14 +70,14 @@
         overflow: hidden;
     }
 
-    .planes-card:hover {
+    .perfiles-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px -5px rgba(0, 116, 218, 0.15);
         border-color: rgba(10, 116, 218, 0.2);
     }
 
     /* PREMIUM GLOW for Recommended Card */
-    .planes-card.featured {
+    .perfiles-card.featured {
         border-color: rgba(10, 116, 218, 0.3);
         box-shadow: 0 0 0 4px rgba(2, 73, 255, 0.05), var(--shadow-lg);
         position: relative;
@@ -85,7 +85,7 @@
         /* Elevate slightly */
     }
 
-    .planes-card.featured::before {
+    .perfiles-card.featured::before {
         content: "RECOMENDADO";
         position: absolute;
         top: -12px;
@@ -102,7 +102,7 @@
     }
 
     /* Card Icon Wrapper */
-    .planes-card-icon-wrapper {
+    .perfiles-card-icon-wrapper {
         width: 60px;
         height: 60px;
         border-radius: 16px;
@@ -116,21 +116,21 @@
         transition: all var(--transition-fast);
     }
 
-    .planes-card:hover .planes-card-icon-wrapper {
+    .perfiles-card:hover .perfiles-card-icon-wrapper {
         background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-brand-blue-dark) 100%);
         color: white;
         transform: scale(1.1) rotate(5deg);
     }
 
     /* Card Typography */
-    .planes-card-title {
+    .perfiles-card-title {
         font-size: 1.25rem;
         font-weight: var(--font-weight-bold);
         color: var(--color-dark);
         margin-bottom: var(--space-xs);
     }
 
-    .planes-card-tagline {
+    .perfiles-card-tagline {
         font-size: 0.875rem;
         font-weight: var(--font-weight-medium);
         color: var(--color-primary);
@@ -139,7 +139,7 @@
         margin-bottom: var(--space-md);
     }
 
-    .planes-card-desc {
+    .perfiles-card-desc {
         font-size: 0.95rem;
         color: var(--color-gray-500);
         line-height: 1.6;
@@ -149,7 +149,7 @@
     }
 
     /* Card Button */
-    .planes-card-btn {
+    .perfiles-card-btn {
         width: 100%;
         padding: 12px;
         text-align: center;
@@ -162,7 +162,7 @@
         border: 1px solid transparent;
     }
 
-    .planes-card:hover .planes-card-btn {
+    .perfiles-card:hover .perfiles-card-btn {
         background-color: var(--color-primary);
         color: white;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
