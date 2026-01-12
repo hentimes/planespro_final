@@ -14,10 +14,9 @@
 
     /* Section Header */
     .planes-header-desktop {
-        text-align: center;
-        padding-top: 90px;
-        /* 70px header + 20px gap - consistent with hero */
-        margin-bottom: var(--space-2xl);
+        /* text-align: center; Handled by .section-standard-header */
+        /* padding-top: 90px; Handled by .section-standard-header */
+        /* margin-bottom: var(--space-2xl); Handled by .section-standard-header */
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
@@ -27,12 +26,11 @@
         font-size: var(--font-size-h2);
         font-weight: var(--font-weight-bold);
 
-        /* ABSOLUTE POSITIONING - EXACT PLACEMENT */
-        position: absolute;
-        top: 90px;
-        /* 70px header + 20px gap */
-        left: 50%;
-        transform: translateX(-50%);
+        /* REMOVED ABSOLUTE POSITIONING to standardize flow */
+        /* position: absolute; */
+        /* top: 90px; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         width: 100%;
         text-align: center;
 
@@ -54,9 +52,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-xl);
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
+        /* width: 100%; max-width: 1200px; margin: 0 auto; - Controlled by .standard-wrapper in HTML now */
     }
 
     /* V2 Card Style */

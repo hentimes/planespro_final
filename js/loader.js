@@ -13,7 +13,8 @@ import { Logger } from './utils/logger.js';
  */
 export async function loadComponent(placeholderId, componentPath) {
     try {
-        const response = await fetch(componentPath);
+        // Cache Busting: Force fresh fetch
+        const response = await fetch(`${componentPath}?v=${Date.now()}`);
 
         if (!response.ok) {
             throw new Error(`Failed to load ${componentPath}: ${response.status}`);

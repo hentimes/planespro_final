@@ -87,7 +87,8 @@
 
     /* Section H1 Positioning Standards */
     --header-height: 70px;
-    --section-h1-top: 90px;
+    --section-h1-top: 100px;
+    /* Standardized to match Proceso */
     /* Distance from page top to H1 */
     --section-h1-gap: 20px;
     /* Gap between header and H1 (90 - 70) */

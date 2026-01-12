@@ -789,55 +789,74 @@
         /* Allow growth */
         min-height: 50px;
         width: 100%;
-        overflow: visible;
-        /* Prevent cutting off */
+        max-width: 100%;
+        margin: 0;
+        overflow: hidden;
+        /* Hide if overflow, but nowrap ensures line */
         position: relative;
         display: flex;
-        flex-wrap: wrap;
-        /* Fix overflow issues */
+        flex-wrap: nowrap;
+        /* CRITICAL: Never Wrap */
         justify-content: center;
         align-items: center;
-        gap: var(--space-xl);
+        gap: var(--space-3xl);
+        /* Wider gap */
         padding: 0 var(--space-md);
     }
 
     .logo-fader__img {
         height: 100%;
         width: auto;
+        /* Restore original discrete size */
         max-height: 28px;
-        /* Consistent height */
-        opacity: 0.6;
-        transition: all 0.3s ease;
+        opacity: 0;
+        /* HIDDEN by default - Logic controls visibility */
+        transition: all 0.8s ease;
+        /* Smoother base transition */
         filter: grayscale(100%);
+        /* Grayscale by default */
+        /* Ensure responsive hiding works */
+        display: inline-block;
+        flex-shrink: 0;
+        /* Prevent squishing */
     }
 
     /* Responsive Logo Hiding to Force Single Line */
-    /* Responsive Logo Hiding to Force Single Line */
-    /* < 1280px: Hide last 2 logos (Esencial & Banmedica approx) */
+    /* < 1280px: Hide last 2 logos */
     @media (max-width: 1279px) {
         .logo-fader__img:nth-last-child(-n+2) {
             display: none;
         }
     }
 
-    /* < 1024px: Hide last 3 logos to be safe */
+    /* < 1024px: Hide last 3 logos */
     @media (max-width: 1023px) {
         .logo-fader__img:nth-last-child(-n+3) {
             display: none;
         }
     }
 
+    /* Active State (JS adds this) */
     .logo-fader__img.is-visible {
-        opacity: 0.7;
-        /* FADE IN: 3s (Standard) */
-        transition: opacity 3s ease-in-out, filter 0.3s ease;
+        opacity: 0.6;
+        /* Visible State (Gray) */
+        /* Standard fade speed */
+        transition: opacity 2s ease-in-out, filter 0.5s ease;
+    }
+
+    /* Hover Effect: Subtle Color Fade - SUPER SMOOTH */
+    .logo-fader__img:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+        transform: scale(1.1);
+        transition: all 1.0s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Cinematic Transition */
     }
 
     .logo-fader__img.is-visible:hover {
         opacity: 1;
         filter: grayscale(0%);
-        /* Fast transition for hover interaction */
-        transition: opacity 0.3s ease, filter 0.3s ease;
+        transition: all 1.0s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* SCROLL HINT */

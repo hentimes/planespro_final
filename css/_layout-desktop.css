@@ -44,6 +44,20 @@
         text-align: center;
     }
 
+    /* === Standardization Utilities === */
+    .standard-wrapper {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-standard-header {
+        padding-top: var(--section-h1-top);
+        /* 90px from variables */
+        text-align: center;
+        margin-bottom: var(--space-2xl);
+    }
+
     /* === Grid System === */
     .grid {
         display: grid;

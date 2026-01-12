@@ -49,10 +49,22 @@ async function initModules() {
     } catch (e) { Logger.error('Social Proof load failed', e); }
 
     // 4. Logo Fader (Always loaded)
-    const { initLogoFader } = await import('./modules/hero/logo_fader.js');
+    const { initLogoFader } = await import('./modules/hero/logo_fader.js?v=CACHE_BUST_FIX');
     initLogoFader();
 
-    // 5. Sidebar Logic (Global event delegation)
+    // 5. Proceso Accordion (New Module)
+    try {
+        const { initProcesoAccordion } = await import('./modules/proceso/proceso_accordion.js');
+        initProcesoAccordion();
+    } catch (e) { Logger.error('Proceso Accordion load failed', e); }
+
+    // 6. Proceso Cards Animation (Tease)
+    try {
+        const { initProcesoCards } = await import('./modules/proceso/proceso_cards.js');
+        initProcesoCards();
+    } catch (e) { Logger.error('Proceso Cards load failed', e); }
+
+    // 6. Sidebar Logic (Global event delegation)
     // Replaces inline onclick="toggleSidebar()"
     document.addEventListener('click', (e) => {
         // Check for specific ID or data-action

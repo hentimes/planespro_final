@@ -4,13 +4,13 @@
 // ===================================
 
 const ALL_LOGOS = [
-    { src: 'assets/logos_isapre/consalud.png', alt: 'Consalud Logo' },
-    { src: 'assets/logos_isapre/nuevamasvida.png', alt: 'Nueva Masvida Logo' },
-    { src: 'assets/logos_isapre/cruzblanca.png', alt: 'CruzBlanca Logo' },
-    { src: 'assets/logos_isapre/colmena.png', alt: 'Colmena Logo' },
-    { src: 'assets/logos_isapre/vidatres.png', alt: 'Vida Tres Logo' },
-    { src: 'assets/logos_isapre/banmedica-logo.png', alt: 'Banmédica Logo' },
-    { src: 'assets/logos_isapre/esencial.png', alt: 'Esencial Logo' }
+    { src: '/assets/ilustraciones/logos_isapre/consalud.png', alt: 'Consalud Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/nuevamasvida.png', alt: 'Nueva Masvida Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/cruzblanca.png', alt: 'CruzBlanca Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/colmena.png', alt: 'Colmena Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/vidatres.png', alt: 'Vida Tres Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/banmedica-logo.png', alt: 'Banmédica Logo' },
+    { src: '/assets/ilustraciones/logos_isapre/esencial.png', alt: 'Esencial Logo' }
 ];
 
 const CYCLE_INTERVAL = 35000; // 35s
