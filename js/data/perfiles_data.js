@@ -51,7 +51,7 @@ export const perfilesData = [
                 { icon: "fa-ambulance", label: "Urgencia", value: "0.90 UF", sub: "Copago Fijo" },
                 { icon: "fa-file-invoice-dollar", label: "Tope General", value: "1.500 UF", sub: "Por Beneficiario" }
             ],
-            ctaText: "Solicitar este Plan",
+            ctaText: "Ver más",
             // NEW: Fonasa Comparison Data (Versus Mode)
             fonasaComparison: [
                 { icon: "fa-bed", label: "Día Cama", fonasa: "Alto Costo ($250k+)", plan: "90% Cubierto" },
@@ -89,7 +89,7 @@ export const perfilesData = [
                 "Sin topes días cama",
                 "Neonatología Cubierta"
             ],
-            ctaText: "Ver Opciones Maternales"
+            ctaText: "Ver más"
         }
     },
     {
@@ -120,7 +120,7 @@ export const perfilesData = [
                 "Alta Cobertura Pediátrica",
                 "Red UC / Alemana"
             ],
-            ctaText: "Proteger a mi Familia"
+            ctaText: "Ver Plan"
         }
     },
     {

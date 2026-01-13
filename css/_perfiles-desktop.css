@@ -1,171 +1,628 @@
 /* ===================================
-   PLANES SECTION - DESKTOP SPECIFIC
-   Grid layout and Card designs (V2)
+   PERFILES SECTION - DESKTOP
+   Dashboard V2 Style: Grid → Tabs + 2-Column Layout
    =================================== */
 
 @media (min-width: 721px) {
 
+    /* ================================================
+       SECTION CONTAINER & HEADER
+       ================================================ */
+
     .perfiles-section-desktop {
+        height: 100vh;
+        max-height: 100vh;
         background-color: var(--color-bg-secondary);
         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Section Header */
-    .perfiles-header-desktop {
-        /* text-align: center; Handled by .section-standard-header */
-        /* padding-top: 90px; Handled by .section-standard-header */
-        /* margin-bottom: var(--space-2xl); Handled by .section-standard-header */
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .perfiles-title-desktop {
-        font-size: var(--font-size-h2);
-        font-weight: var(--font-weight-bold);
-
-        /* REMOVED ABSOLUTE POSITIONING to standardize flow */
-        /* position: absolute; */
-        /* top: 90px; */
-        /* left: 50%; */
-        /* transform: translateX(-50%); */
-        width: 100%;
-        text-align: center;
-
-        background: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-brand-blue) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: var(--space-sm);
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .perfiles-subtitle-desktop {
         font-size: 1.125rem;
         color: var(--color-gray-500);
         line-height: var(--line-height-relaxed);
+        text-align: center;
+        margin-top: 0;
     }
 
-    /* Grid Layout */
-    .perfiles-grid-desktop {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-xl);
-        /* width: 100%; max-width: 1200px; margin: 0 auto; - Controlled by .standard-wrapper in HTML now */
-    }
+    /* ================================================
+       STATE 1: GRID VIEW (Initial)
+       ================================================ */
 
-    /* V2 Card Style */
-    .perfiles-card {
-        background: var(--color-white);
-        border-radius: 20px;
-        padding: var(--space-xl);
-        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-        transition: all var(--transition-medium);
-        border: 1px solid rgba(0, 0, 0, 0.03);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .perfiles-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px -5px rgba(0, 116, 218, 0.15);
-        border-color: rgba(10, 116, 218, 0.2);
-    }
-
-    /* PREMIUM GLOW for Recommended Card */
-    .perfiles-card.featured {
-        border-color: rgba(10, 116, 218, 0.3);
-        box-shadow: 0 0 0 4px rgba(2, 73, 255, 0.05), var(--shadow-lg);
-        position: relative;
-        z-index: 1;
-        /* Elevate slightly */
-    }
-
-    .perfiles-card.featured::before {
-        content: "RECOMENDADO";
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        box-shadow: 0 4px 10px rgba(2, 73, 255, 0.3);
-    }
-
-    /* Card Icon Wrapper */
-    .perfiles-card-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, var(--color-bg-azure-50) 0%, var(--color-bg-azure-100) 100%);
+    .perfiles-grid-container {
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: var(--space-lg);
+        transition: opacity 0.3s ease;
+        padding: var(--space-2xl) 0;
+    }
+
+    .perfiles-grid-container.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .perfiles-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+        max-width: var(--max-width-standard);
+        /* Matches header width */
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+    }
+
+    /* Card Style (Grid) - Premium */
+    .perfiles-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: var(--space-lg);
+        box-shadow:
+            0 2px 8px -2px rgba(0, 0, 0, 0.04),
+            0 8px 24px -8px rgba(37, 99, 235, 0.08);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: pointer;
+        min-height: 280px;
+        animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    .perfiles-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow:
+            0 4px 16px -4px rgba(0, 0, 0, 0.08),
+            0 20px 48px -12px rgba(37, 99, 235, 0.2),
+            0 0 0 1px rgba(37, 99, 235, 0.08) inset;
+        border-color: rgba(37, 99, 235, 0.15);
+    }
+
+    .perfiles-card-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.15) 100%);
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-md);
         color: var(--color-primary);
-        font-size: 1.5rem;
-        transition: all var(--transition-fast);
+        font-size: 1.3rem;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .perfiles-card:hover .perfiles-card-icon-wrapper {
-        background: linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-brand-blue-dark) 100%);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
         color: white;
         transform: scale(1.1) rotate(5deg);
+        box-shadow:
+            0 8px 20px -6px rgba(37, 99, 235, 0.4),
+            0 0 0 4px rgba(37, 99, 235, 0.1);
+        border-color: transparent;
     }
 
-    /* Card Typography */
     .perfiles-card-title {
-        font-size: 1.25rem;
-        font-weight: var(--font-weight-bold);
+        font-size: 1.15rem;
+        font-weight: 700;
         color: var(--color-dark);
         margin-bottom: var(--space-xs);
+        letter-spacing: -0.02em;
     }
 
     .perfiles-card-tagline {
-        font-size: 0.875rem;
-        font-weight: var(--font-weight-medium);
+        font-size: 0.8rem;
+        font-weight: 600;
         color: var(--color-primary);
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: var(--space-md);
+        letter-spacing: 0.08em;
+        margin-bottom: var(--space-sm);
     }
 
     .perfiles-card-desc {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         color: var(--color-gray-500);
-        line-height: 1.6;
-        margin-bottom: var(--space-lg);
+        line-height: 1.5;
+        margin-bottom: var(--space-md);
         flex-grow: 1;
-        /* Pushes button to bottom */
     }
 
-    /* Card Button */
     .perfiles-card-btn {
         width: 100%;
-        padding: 12px;
+        padding: 10px 8px;
         text-align: center;
         border-radius: 12px;
-        background-color: var(--color-bg-secondary);
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.12) 100%);
         color: var(--color-primary);
-        font-weight: var(--font-weight-semibold);
+        font-weight: 600;
         text-decoration: none;
-        transition: all var(--transition-fast);
-        border: 1px solid transparent;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        font-size: 0.9rem;
     }
 
     .perfiles-card:hover .perfiles-card-btn {
-        background-color: var(--color-primary);
+        background: var(--color-primary);
         color: white;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Stagger animation delays */
+    .perfiles-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .perfiles-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .perfiles-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .perfiles-card:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .perfiles-card:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .perfiles-card:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    /* Fade in up animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ================================================
+       STATE 2: DASHBOARD VIEW
+       ================================================ */
+
+    .perfiles-dashboard-container {
+        display: none;
+        /* Hidden by default */
+        flex-direction: column;
+        flex: 1;
+        opacity: 0;
+        transition: opacity 0.5s ease 0.3s;
+    }
+
+    .perfiles-dashboard-container.active {
+        display: flex;
+        opacity: 1;
+    }
+
+    /* ================================================
+       TABS NAVIGATION
+       ================================================ */
+
+    .perfiles-tabs {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+        padding: var(--space-md) var(--space-lg) var(--space-lg);
+        flex-wrap: wrap;
+    }
+
+    .profile-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 16px;
+        border: 2px solid var(--color-gray-200);
+        border-radius: var(--radius-lg);
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        min-width: 85px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-tab:hover {
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    }
+
+    .profile-tab.active {
+        border-color: var(--color-primary);
+        background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
+        box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+    }
+
+    .profile-tab i {
+        font-size: 1.3rem;
+        color: var(--color-gray-400);
+        transition: color 0.3s;
+    }
+
+    .profile-tab:hover i,
+    .profile-tab.active i {
+        color: var(--color-primary);
+    }
+
+    .profile-tab span {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-gray-600);
+    }
+
+    .profile-tab.active span {
+        color: var(--color-primary);
+    }
+
+    /* Back to Grid Button */
+    .back-to-grid-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--color-gray-300);
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex-shrink: 0;
+    }
+
+    .back-to-grid-btn:hover {
+        border-color: var(--color-primary);
+        background: #f8fbff;
+        transform: translateX(-3px);
+    }
+
+    .back-to-grid-btn i {
+        font-size: 1.1rem;
+        color: var(--color-gray-600);
+    }
+
+    .back-to-grid-btn:hover i {
+        color: var(--color-primary);
+    }
+
+    /* ================================================
+       DASHBOARD 2-COLUMN LAYOUT
+       ================================================ */
+
+    .dashboard-content {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: var(--space-xl);
+        padding: var(--space-lg) var(--space-xl);
+        max-width: 1300px;
+        margin: 0 auto;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* ================================================
+       LEFT COLUMN: PLAN CARD
+       ================================================ */
+
+    .plan-card-premium {
+        background: white;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        height: fit-content;
+    }
+
+    .card-header-premium {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        padding: var(--space-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-premium {
+        height: 32px;
+        max-width: 120px;
+        object-fit: contain;
+        background: white;
+        padding: var(--space-sm);
+        border-radius: var(--radius-md);
+    }
+
+    .tag-premium {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+
+    .card-body-premium {
+        padding: var(--space-lg);
+    }
+
+    /* Profile Badge */
+    .profile-badge {
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        font-size: 0.85rem;
+        color: var(--color-primary);
+        margin-bottom: var(--space-lg);
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        border-left: 3px solid var(--color-primary);
+    }
+
+    .profile-badge i {
+        font-size: 1rem;
+    }
+
+    /* Price */
+    .price-premium {
+        text-align: center;
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-md);
+        border-bottom: 1px solid var(--color-gray-100);
+    }
+
+    .price-val {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        line-height: 1;
+        margin-bottom: var(--space-xs);
+    }
+
+    .price-sub {
+        display: block;
+        font-size: 1rem;
+        color: var(--color-gray-500);
+    }
+
+    /* Plan Info */
+    .plan-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--color-dark);
+        margin-bottom: var(--space-sm);
+    }
+
+    .plan-coverage {
+        color: var(--color-gray-600);
+        margin-bottom: var(--space-xl);
+        line-height: 1.5;
+    }
+
+    /* Dense Metrics Grid 2x2 */
+    .card-dense-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+    }
+
+    .dense-metric-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-sm);
+        padding: var(--space-md);
+        background: var(--color-bg-secondary);
+        border-radius: var(--radius-md);
+        transition: all 0.3s;
+    }
+
+    .dense-metric-item:hover {
+        background: #f0f7ff;
+        transform: translateY(-2px);
+    }
+
+    .metric-icon {
+        font-size: 1.4rem;
+        color: var(--color-primary);
+        flex-shrink: 0;
+    }
+
+    .metric-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .metric-label {
+        font-size: 0.75rem;
+        color: var(--color-gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        font-weight: 600;
+    }
+
+    .metric-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-dark);
+        margin: 2px 0;
+    }
+
+    .metric-sub {
+        font-size: 0.85rem;
+        color: var(--color-gray-600);
+    }
+
+    /* Benefits List (Fallback) */
+    .card-benefits-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-xl);
+    }
+
+    .card-benefits-list li {
+        padding: var(--space-sm) 0;
+        color: var(--color-gray-700);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .card-benefits-list i {
+        color: var(--color-primary);
+    }
+
+    /* CTA Button */
+    .btn-select-plan {
+        width: 100%;
+        padding: var(--space-md);
+        background: var(--color-primary);
+        color: white;
+        text-align: center;
+        border-radius: var(--radius-lg);
+        font-weight: 700;
+        font-size: 1.05rem;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: block;
+    }
+
+    .btn-select-plan:hover {
+        background: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* ================================================
+       RIGHT COLUMN: VALIDATION PANEL
+       ================================================ */
+
+    .dashboard-validation-col {
+        padding: var(--space-xl);
+    }
+
+    .validation-title {
+        font-size: var(--font-size-h3);
+        color: var(--color-dark);
+        margin-bottom: var(--space-md);
+        line-height: 1.3;
+    }
+
+    .validation-description {
+        color: var(--color-gray-600);
+        line-height: 1.7;
+        margin-bottom: var(--space-xl);
+        font-size: 1.05rem;
+    }
+
+    .validation-subtitle {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--color-gray-700);
+        margin-bottom: var(--space-md);
+    }
+
+    .validation-bullets {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-xl);
+    }
+
+    .validation-bullets li {
+        padding: var(--space-sm) 0;
+        padding-left: var(--space-xl);
+        position: relative;
+        color: var(--color-gray-700);
+        line-height: 1.6;
+        font-size: 1.05rem;
+    }
+
+    .validation-bullets li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--color-primary);
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+
+    /* ================================================
+       RESPONSIVE DESKTOP
+       ================================================ */
+
+    /* 1400px - 1200px: Reduce card width */
+    @media (max-width: 1400px) {
+        .dashboard-content {
+            grid-template-columns: 380px 1fr;
+            gap: var(--space-xl);
+        }
+    }
+
+    /* 1200px - 900px: Stack layout */
+    @media (max-width: 1200px) {
+        .dashboard-content {
+            grid-template-columns: 1fr;
+            max-width: 700px;
+            gap: var(--space-2xl);
+        }
+
+        .plan-card-premium {
+            position: static;
+        }
+
+        .dashboard-validation-col {
+            order: -1;
+            /* Panel on top */
+        }
+
+        .perfiles-tabs {
+            gap: var(--space-sm);
+        }
+
+        .profile-tab {
+            padding: var(--space-sm) var(--space-md);
+            min-width: 80px;
+        }
+
+        .profile-tab span {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* 900px - 720px: Minimize tabs, reduce metrics */
+    @media (max-width: 900px) {
+        .perfiles-tabs {
+            overflow-x: auto;
+            justify-content: flex-start;
+            gap: var(--space-xs);
+            padding: var(--space-md);
+        }
+
+        .profile-tab {
+            flex: 0 0 auto;
+        }
+
+        .card-dense-grid {
+            grid-template-columns: 1fr;
+            /* Stack metrics */
+        }
+
+        .dashboard-content {
+            padding: var(--space-lg);
+        }
     }
 
 }

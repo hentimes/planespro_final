@@ -5,17 +5,6 @@
 
 @media (min-width: 721px) {
 
-
-
-    .section-title-desktop {
-        font-size: var(--font-size-h2);
-        color: var(--color-dark);
-        font-weight: 700;
-        text-align: center;
-        /* Main title remains centered */
-        margin-bottom: var(--space-2xl);
-    }
-
     /* GRID LAYOUT: Text Left | Image Right (Force V2) */
     .proceso-content-grid-v2 {
         display: grid;

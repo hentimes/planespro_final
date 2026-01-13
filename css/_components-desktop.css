@@ -5,6 +5,19 @@
 
 @media (min-width: 721px) {
 
+    /* ================================================
+       STANDARD SECTION TITLE (H2)
+       Used by ALL sections except Hero
+       Single source of truth for section titles
+       ================================================ */
+    .section-title-standard {
+        font-size: var(--font-size-h2);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        text-align: center;
+        margin-bottom: var(--space-lg);
+    }
+
     /* --- BUTTONS --- */
     .btn-primary-desktop {
         display: inline-block;

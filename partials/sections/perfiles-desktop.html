@@ -1,17 +1,47 @@
 <section id="perfiles" class="snap-section perfiles-section-desktop show-desktop">
     <div class="content-wrapper">
+
+        <!-- Header (always visible) -->
         <div class="perfiles-header-desktop section-standard-header">
-            <h2 class="perfiles-title-desktop">Elige tu Perfil</h2>
+            <h2 class="section-title-standard">Elige tu Perfil</h2>
             <p class="perfiles-subtitle-desktop">
                 Diseñamos estrategias para cada etapa de la vida. Selecciona tu situación actual para ver la
                 recomendación experta.
             </p>
         </div>
 
-        <!-- Dynamic Grid Container -->
-        <div id="perfiles-grid-desktop" class="perfiles-grid-desktop standard-wrapper">
-            <!-- Cards will be injected here by JS -->
-            <div class="loading-state">Cargando perfiles...</div>
+        <!-- STATE 1: Grid View (default visible) -->
+        <div class="perfiles-grid-container" id="perfilesGridContainer">
+            <div id="perfiles-grid-desktop" class="perfiles-grid-desktop">
+                <!-- Cards injected by perfiles_ui.js -->
+                <div class="loading-state">Cargando perfiles...</div>
+            </div>
         </div>
+
+        <!-- STATE 2: Dashboard View (hidden by default) -->
+        <div class="perfiles-dashboard-container" id="perfilesDashboard">
+
+            <!-- Tabs horizontales -->
+            <div class="perfiles-tabs" id="perfilesTabs">
+                <!-- Tabs injected by JS -->
+            </div>
+
+            <!-- Dashboard 2-column layout -->
+            <div class="dashboard-content">
+
+                <!-- Left: Plan Card -->
+                <aside class="dashboard-card-col" id="dashboardCard">
+                    <!-- Card content injected by JS -->
+                </aside>
+
+                <!-- Right: Validation Panel -->
+                <main class="dashboard-validation-col" id="dashboardValidation">
+                    <!-- Validation content injected by JS -->
+                </main>
+
+            </div>
+
+        </div>
+
     </div>
 </section>

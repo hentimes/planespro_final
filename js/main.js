@@ -19,6 +19,10 @@ async function initModules() {
     try {
         const { renderPerfiles } = await import('./modules/perfiles/perfiles_ui.js');
         renderPerfiles();
+
+        // Initialize interaction after rendering
+        const { initPerfilesInteraction } = await import('./modules/perfiles/perfiles_interaction.js');
+        initPerfilesInteraction();
     } catch (e) { Logger.error('Perfiles UI load failed', e); }
 
     // 3. Desktop-specific modules (Loaded unconditionally for responsive resize)
