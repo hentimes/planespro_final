@@ -323,7 +323,7 @@ planespro_final/
 
 - Solo estructura semántica
 - Cero JavaScript inline (`onclick=""`)
-- Cero CSS inline (`style=""`)
+- Cero CSS inline (`style=""`) - **Excepción:** `<style>` dentro de `<noscript>` para fallback cuando JavaScript está deshabilitado
 - Atributos `data-*` para hooks de JavaScript
 - ARIA labels para accesibilidad
 
@@ -497,11 +497,12 @@ border-radius: 8px;       /* Valor mágico */
 | `!important` | Rompe cascada | Aumentar especificidad |
 | Inline styles | Inmantenible | Clases CSS |
 | IDs para estilos | Especificidad alta | Clases |
-| `@media` en archivos de componente | Mezcla plataformas | Archivos separados |
 | Valores hardcodeados | Inconsistencia | Variables CSS |
 | Selectores anidados > 3 niveles | Fragilidad | Refactorizar |
 
-**Excepción permitida:** `!important` solo en `prefers-reduced-motion` para accesibilidad.
+**Excepciones permitidas:**
+- `!important` solo en `prefers-reduced-motion` para accesibilidad
+- `@media` queries dentro de archivos de componente si están encapsuladas (mejora mantenibilidad modular)
 
 ---
 
@@ -582,7 +583,7 @@ Logger.error('Error crítico', errorObject);
 ```
 
 **Prohibido:**
-- `console.log()` directo en código de producción
+- `console.log()` directo en código de producción - **Excepción:** `console.log` solo dentro de `js/utils/logger.js` (wrapper pattern)
 - `console.error()` sin contexto
 
 **Configuración:**

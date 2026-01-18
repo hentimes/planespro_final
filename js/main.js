@@ -8,6 +8,15 @@ import { loadAllComponents } from './loader.js';
 import { Logger } from './utils/logger.js';
 
 /**
+ * Cache Version Strategy (matches loader.js)
+ * Development: Date.now() for automatic freshness
+ * Production: Static version for efficient caching
+ */
+// Cache versioning
+const IS_DEV = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const CACHE_VERSION = IS_DEV ? Date.now().toString() : '1.0.3';
+
+/**
  * Initialize JavaScript modules based on platform
  */
 async function initModules() {
@@ -17,11 +26,11 @@ async function initModules() {
 
     // 2. Perfiles Data Rendering (Always loaded)
     try {
-        const { renderPerfiles } = await import('./modules/perfiles/perfiles_ui.js');
+        const { renderPerfiles } = await import('./modules/perfiles/perfiles_ui.js?v=9.2');
         renderPerfiles();
 
         // Initialize interaction after rendering
-        const { initPerfilesInteraction } = await import('./modules/perfiles/perfiles_interaction.js');
+        const { initPerfilesInteraction } = await import(`./modules/perfiles/perfiles_interaction.js?v=${CACHE_VERSION}`);
         initPerfilesInteraction();
     } catch (e) { Logger.error('Perfiles UI load failed', e); }
 
@@ -47,8 +56,9 @@ async function initModules() {
 
     // Social Proof (Avatars)
     try {
-        // Cache bust to ensure latest logic loaded
-        const { initSocialProof } = await import(`./modules/hero/social_proof.js?v=${Date.now()}`);
+        // Cache bust using hybrid strategy
+        const { initSocialProof } = await import(`./modules/hero/social_proof.js?v=${CACHE_VERSION}`);
+        initSocialProof();
         initSocialProof();
     } catch (e) { Logger.error('Social Proof load failed', e); }
 

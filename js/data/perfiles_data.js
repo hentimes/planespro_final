@@ -4,17 +4,21 @@
 export const perfilesData = [
     {
         id: "joven",
-        label: "Joven",
+        label: "Joven Profesional",
+        shortLabel: "Joven",
         icon: "fa-rocket",
         tagline: "El Despegue",
+        badgeText: "MAX RENTABILIDAD",
+        theme: "blue", /* New theme property */
         validation: {
-            title: "Tu 7% ya no genera excedentes. Úsalo bien.",
-            description: "Eres joven y sano. Como la ley eliminó los excedentes, tu meta es un plan que cueste exactamente tu 7% y te cubra donde realmente vas.",
+            title: "Paga lo justo y evita sobrecostos en tu plan.",
+            description: "<em>Eres sano y tu 7% es oro. No lo desperdicies en coberturas que no usarás.</em><br><br>Tu estrategia: Plan ajustado a tu 7% y foco en consultas y urgencias.",
             bullets: [
-                "Tu plan calza con tu 7% legal.",
-                "Sin pagar de más por coberturas que no usas.",
-                "Foco: Consultas, Exámenes y Accidentes."
+                "Tu 7% cubre el costo mensual del plan.",
+                "No quieres pagar por coberturas que no usas.",
+                "Tu foco es consultas, exámenes y urgencias."
             ],
+            trustBadge: "<strong>+1.200 diagnósticos realizados.</strong> Ejecutivos certificados por la Superintendencia.", /* Quantified Proof */
             extraBenefits: [
                 {
                     id: "dental",
@@ -37,39 +41,43 @@ export const perfilesData = [
             ]
         },
         recommendedPlan: {
-            tag: "TU 7% EXACTO",
+            tag: "Tu 7% Legal", /* Reverted to short punchy version */
             tagClass: "tag-popular",
-            name: "Cruz Blanca - Campus Bupa",
-            isapreLogo: "assets/logos_isapre/cruzblanca.png",
             price: "2.64 UF",
             priceCLP: "$105.600",
-            keyCoverage: "Plan Cerrado Inteligente",
+            keyCoverage: "Plan Recomendado", /* Updated from Plan Cerrado */
+            // Removed cardSubtitle (redundant)
+            // Removed savings (unverifiable claim)
             // NEW: Structured Data for Dense Card Grid
             denseMetrics: [
-                { icon: "fa-hospital", label: "Hospitalario", value: "90%", sub: "Clínica Bupa" },
-                { icon: "fa-user-md", label: "Ambulatorio", value: "80%", sub: "Integramédica" },
+                { icon: "fa-hospital", label: "Hospitalario", value: "50%", sub: "Clínica Privada" },
+                { icon: "fa-user-md", label: "Ambulatorio", value: "70%", sub: "Centro Médico" },
                 { icon: "fa-ambulance", label: "Urgencia", value: "0.90 UF", sub: "Copago Fijo" },
                 { icon: "fa-file-invoice-dollar", label: "Tope General", value: "1.500 UF", sub: "Por Beneficiario" }
             ],
-            ctaText: "Ver más",
+            ctaText: "Ver recomendación", /* Updated from Ver más */
+            ctaSub: "Te contactamos por WhatsApp en menos de 5 min.", /* New Field */
             // NEW: Fonasa Comparison Data (Versus Mode)
             fonasaComparison: [
                 { icon: "fa-bed", label: "Día Cama", fonasa: "Alto Costo ($250k+)", plan: "90% Cubierto" },
                 { icon: "fa-clock", label: "Lista Espera", fonasa: "1 a 3 Años", plan: "Inmediata (0 días)" },
                 { icon: "fa-ambulance", label: "Urgencia", fonasa: "Variable ($50k+)", plan: "0.90 UF Fijo" },
                 { icon: "fa-hospital", label: "Hospitalario", fonasa: "Cobertura Baja", plan: "90% Sin Tope" },
-                { icon: "fa-shield-alt", label: "Tope Deuda", fonasa: "Sin Límite (Riesgo)", plan: "1.500 UF (Blindado)" }
+                { icon: "fa-shield-alt", label: "Tope Deuda", fonasa: "1.500 UF (Blindado)", plan: "1.500 UF (Blindado)" }
             ]
         }
     },
     {
         id: "maternidad",
-        label: "Maternidad",
+        label: "Planificación Maternal",
+        shortLabel: "Maternidad",
         icon: "fa-baby-carriage",
         tagline: "Futura Mamá",
+        badgeText: "BLINDAJE TOTAL",
+        theme: "purple", /* New theme property */
         validation: {
             title: "Cero sorpresas en el parto.",
-            description: "El parto es un evento financiero mayor. Esta recomendación te blinda contra facturas millonarias inesperadas.",
+            description: "<em>Un parto sin cobertura adecuada puede costar millones.</em><br><br>Tu estrategia: Cobertura al 100% y acceso a las mejores clínicas sin sorpresas.",
             bullets: [
                 "Embarazo en 12-24 meses.",
                 "Valor parto conocido hoy.",
@@ -79,11 +87,9 @@ export const perfilesData = [
         recommendedPlan: {
             tag: "MATERNIDAD SEGURA",
             tagClass: "tag-maternity",
-            name: "Mamá Full Cobertura",
-            isapreLogo: "assets/logos_isapre/colmena.png",
             price: "3.50 UF",
             priceCLP: "$134.750",
-            keyCoverage: "Parto Costo Cero o Libre Elección.",
+            keyCoverage: "Parto Costo Cero",
             benefits: [
                 "Parto Integral",
                 "Sin topes días cama",
@@ -95,12 +101,15 @@ export const perfilesData = [
     {
         id: "familia",
         recommended: true, /* Trigger 'featured' class */
-        label: "Familia",
+        label: "Núcleo Familiar",
+        shortLabel: "Familia",
         icon: "fa-users",
         tagline: "Con Hijos",
+        badgeText: "URGENCIA RÁPIDA",
+        theme: "green", /* New theme property */
         validation: {
             title: "Escudo Familiar: Urgencias $0.",
-            description: "Urgencias inevitables con hijos. Necesitas una Isapre que responda rápido y con cobertura pediátrica sólida.",
+            description: "<em>Con hijos, la velocidad es vital.</em><br><br>Tu estrategia: Reducción de burocracia, urgencias preferentes y pediatría de alto nivel.",
             bullets: [
                 "Hijos pequeños o escolares.",
                 "Urgencia preferente ($0).",
@@ -110,27 +119,28 @@ export const perfilesData = [
         recommendedPlan: {
             tag: "PROTECCIÓN TOTAL",
             tagClass: "tag-family",
-            name: "Familia Blindada",
-            isapreLogo: "assets/logos_isapre/consalud.png",
             price: "4.50 UF",
             priceCLP: "$173.250",
-            keyCoverage: "100% Hosp. Preferente + Urgencia $0.",
+            keyCoverage: "Plan Familiar",
             benefits: [
                 "Urgencia Escolar",
                 "Alta Cobertura Pediátrica",
                 "Red UC / Alemana"
             ],
-            ctaText: "Ver Plan"
+            ctaText: "Ver más"
         }
     },
     {
         id: "compensado",
-        label: "Compensado",
+        label: "Compensación de Pareja",
+        shortLabel: "Compensado",
         icon: "fa-heart",
         tagline: "Compensados",
+        badgeText: "ACCESO VIP",
+        theme: "red", /* New theme property */
         validation: {
             title: "Unan fuerzas y beneficios.",
-            description: "¿Uno gana más? Al 'compensar' (unir sus 7%), acceden a un plan Premium impagable por separado.",
+            description: "<em>Al unir cotizaciones, el poder de compra se multiplica.</em><br><br>Tu estrategia: Acceder a un Plan Premium que sería impagable individualmente.",
             bullets: [
                 "Casados o Acuerdo Unión Civil.",
                 "Rentas dispares (uno gana +).",
@@ -140,27 +150,28 @@ export const perfilesData = [
         recommendedPlan: {
             tag: "EFICIENCIA FAMILIAR",
             tagClass: "tag-couple",
-            name: "Duo Pack Compensado",
-            isapreLogo: "assets/logos_isapre/banmedica.png",
             price: "5.80 UF",
             priceCLP: "$223.300",
-            keyCoverage: "Subsidio cruzado para mejor plan.",
+            keyCoverage: "Plan Optimizado",
             benefits: [
                 "Acceso a Clínicas VIP",
                 "Sin pago adicional (solo 7%)",
                 "Protección desempleo"
             ],
-            ctaText: "Simular Compensación"
+            ctaText: "Ver más"
         }
     },
     {
-        id: "independiente",
-        label: "Freelance",
-        icon: "fa-laptop",
+        id: "freelance",
+        label: "Freelance / Independiente",
+        shortLabel: "Freelance",
+        icon: "fa-briefcase",
         tagline: "Con Boleta",
+        badgeText: "INGRESOS SEGUROS",
+        theme: "yellow", /* New theme property */
         validation: {
             title: "Tu salud, tu respaldo.",
-            description: "Si no trabajas, no facturas. Necesitas pago ágil de licencias y flexibilidad ante ingresos variables.",
+            description: "<em>Si te enfermas, no facturas.</em><br><br>Tu estrategia: Asegurar el pago íntegro de licencias médicas y flexibilidad ante ingresos variables.",
             bullets: [
                 "Eres independiente / boleteas.",
                 "Pago ágil licencias médicas.",
@@ -170,27 +181,28 @@ export const perfilesData = [
         recommendedPlan: {
             tag: "TU 7% EXACTO",
             tagClass: "tag-popular",
-            name: "Cruz Blanca", // Simplified
-            isapreLogo: "assets/logos_isapre/cruzblanca.png",
             price: "2.20 UF",
             priceCLP: "$84.700",
-            keyCoverage: "Libre Elección ágil en licencias.",
+            keyCoverage: "Libre Elección",
             benefits: [
                 "Licencia Digital",
                 "Cobertura Dental",
                 "Ajustable por Renta"
             ],
-            ctaText: "Ver Planes Freelance"
+            ctaText: "Ver más"
         }
     },
     {
         id: "voluntario",
-        label: "Voluntario",
+        label: "Voluntario / Estudiante",
+        shortLabel: "Voluntario",
         icon: "fa-hand-holding-heart",
         tagline: "Sin Contrato",
+        badgeText: "CONTROL TOTAL",
+        theme: "brown", /* New theme property */
         validation: {
             title: "Salud privada sin jefe.",
-            description: "Sin contrato laboral. Estudiantes, jubilados o dueños de casa: afíliate pagando directamente.",
+            description: "<em>Ideal para dueños de casa, jubilados o estudiantes.</em><br><br>Tu estrategia: Sin intermediarios, pagando directamente para mantener tu cobertura activa.",
             bullets: [
                 "Sin liquidaciones ni boletas.",
                 "Ingresos pasivos o terceros.",
@@ -200,17 +212,15 @@ export const perfilesData = [
         recommendedPlan: {
             tag: "ACCESO DIRECTO",
             tagClass: "tag-voluntary",
-            name: "Protección Voluntaria",
-            isapreLogo: "assets/logos_isapre/consalud.png",
             price: "1.80 UF",
             priceCLP: "$69.300",
-            keyCoverage: "Planes pago fijo UF (cupón).",
+            keyCoverage: "Pago Directo",
             benefits: [
                 "Sin requisito empleador",
                 "Hospitalario Fuerte",
                 "Acreditación simple"
             ],
-            ctaText: "Ver Pago Directo"
+            ctaText: "Ver más"
         }
     }
 ];

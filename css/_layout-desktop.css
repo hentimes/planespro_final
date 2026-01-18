@@ -18,7 +18,8 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
+        /* STANDARDIZATION: All sections align titles at 100px from top */
         align-items: center;
         position: relative;
     }
@@ -121,8 +122,11 @@
     }
 
     /* === Responsive Display === */
-    .show-mobile {
-        display: none !important;
+    /* Increased specificity to override mobile rules without !important */
+    @media (min-width: 721px) {
+        .show-mobile {
+            display: none;
+        }
     }
 
     /* .show-desktop removed - elements preserve their natural display (flex, grid, block, etc.) */

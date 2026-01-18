@@ -3,6 +3,8 @@
 // Handles dynamic avatar cycle + WhatsApp Testimonials
 // ===================================
 
+import { Logger } from '../../utils/logger.js';
+
 // import { testimonials } from '../../data/testimonials.js'; // REMOVED (Static Cache Issue)
 
 export async function initSocialProof() {
@@ -16,7 +18,7 @@ export async function initSocialProof() {
     try {
         const module = await import(`../../data/testimonials.js?t=${Date.now()}`);
         testimonials = module.testimonialsData;
-        // console.log('[SOCIAL PROOF] Testimonials loaded (Fresh):', testimonials.length);
+        Logger.log('[SOCIAL PROOF] Testimonials loaded (Fresh):', testimonials.length);
     } catch (e) {
         console.error('[SOCIAL PROOF] Could not load testimonials', e);
         return;
@@ -29,7 +31,7 @@ export async function initSocialProof() {
         // Refill deck if empty
         if (testimonialDeck.length === 0) {
             testimonialDeck = [...testimonials];
-            // Optional: console.log('[SOCIAL PROOF] Deck reshuffled');
+            Logger.log('[SOCIAL PROOF] Deck reshuffled');
         }
 
         // Pick random from remaining
@@ -323,7 +325,7 @@ export async function initSocialProof() {
 
         // Listener for Title Animation Trigger V2
         document.addEventListener('hero-start-social-proof-v2', () => {
-            // console.log('[SOCIAL PROOF] Trigger V2 received. Starting animation...');
+            Logger.log('[SOCIAL PROOF] Trigger V2 received. Starting animation...');
             hasStarted = true;
             if (isVisible) startLoopRecursion();
         }, { once: true });

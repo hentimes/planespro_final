@@ -99,8 +99,11 @@
     }
 
     /* === Responsive Display === */
-    .show-desktop {
-        display: none !important;
+    /* Increased specificity to override desktop rules without !important */
+    @media (max-width: 720px) {
+        .show-desktop {
+            display: none;
+        }
     }
 
     /* .show-mobile removed - elements preserve their natural display (flex, grid, block, etc.) */

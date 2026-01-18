@@ -24,7 +24,7 @@
 /* Renamed from _home */
 @import url('_proceso-desktop.css');
 @import url('_proceso-mobile.css');
-@import url('_perfiles-desktop.css');
+@import url('_perfiles-desktop.css?v=4.0');
 /* Selector de perfiles */
 @import url('_perfiles-mobile.css');
 /* Selector de perfiles */

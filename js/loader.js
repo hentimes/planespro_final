@@ -7,14 +7,23 @@
 import { Logger } from './utils/logger.js';
 
 /**
+ * Cache Version Strategy
+ * Development (localhost): Date.now() for automatic freshness
+ * Production: Static version for efficient caching (improves Core Web Vitals)
+ */
+// Cache version (must match main.js)
+const IS_DEV = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const CACHE_VERSION = IS_DEV ? '1737131300000' : '1.2.9-capsules-grid';
+
+/**
  * Load an HTML component from partials directory
  * @param {string} placeholderId - ID of the placeholder element
  * @param {string} componentPath - Path to the HTML file (relative to project root)
  */
 export async function loadComponent(placeholderId, componentPath) {
     try {
-        // Cache Busting: Force fresh fetch
-        const response = await fetch(`${componentPath}?v=${Date.now()}`);
+        // Cache Busting: Hybrid strategy (dev vs prod)
+        const response = await fetch(`${componentPath}?v=${CACHE_VERSION}`);
 
         if (!response.ok) {
             throw new Error(`Failed to load ${componentPath}: ${response.status}`);

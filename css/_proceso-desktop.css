@@ -5,10 +5,10 @@
 
 @media (min-width: 721px) {
 
-    /* GRID LAYOUT: Text Left | Image Right (Force V2) */
+    /* GRID LAYOUT: Text Left | Image Right */
     .proceso-content-grid-v2 {
         display: grid;
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: 1fr 1fr;
         gap: var(--space-2xl);
         align-items: start;
         margin-bottom: var(--space-sm);
@@ -131,7 +131,7 @@
     .proceso-accordion-item.active {
         border-color: var(--color-primary-light);
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
-        background-color: #f8fbff;
+        background-color: var(--color-gradient-lightest);
         /* Very subtle blue tint */
         border-left: 4px solid var(--color-primary);
         /* The Accent */

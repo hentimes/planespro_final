@@ -3,6 +3,8 @@
  * Uses Intersection Observer to lazy load sections when they're about to enter viewport
  */
 
+import { Logger } from '../../utils/logger.js';
+
 export function initLazySectionLoader() {
     // Only lazy load below-the-fold sections
     const lazySections = [
@@ -12,7 +14,7 @@ export function initLazySectionLoader() {
 
     // Check if Intersection Observer is supported
     if (!('IntersectionObserver' in window)) {
-        console.log('Intersection Observer not supported, loading all sections immediately');
+        Logger.warn('Intersection Observer not supported, loading all sections immediately');
         return;
     }
 
@@ -23,7 +25,7 @@ export function initLazySectionLoader() {
                 const sectionData = lazySections.find(s => s.id === target.id);
 
                 if (sectionData) {
-                    console.log(`Lazy loading section: ${sectionData.id}`);
+                    Logger.log(`Lazy loading section: ${sectionData.id}`);
                     loadSection(target, sectionData.partial);
                     observer.unobserve(target); // Stop observing once loaded
                 }
@@ -55,8 +57,8 @@ async function loadSection(container, partialPath) {
             detail: { path: partialPath }
         }));
 
-        console.log(`Section loaded successfully: ${partialPath}`);
+        Logger.log(`Section loaded successfully: ${partialPath}`);
     } catch (error) {
-        console.error(`Failed to load section ${partialPath}:`, error);
+        Logger.error(`Failed to load section ${partialPath}:`, error);
     }
 }

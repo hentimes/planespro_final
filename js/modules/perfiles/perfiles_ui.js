@@ -1,11 +1,12 @@
-import { perfilesData } from '../../data/perfiles_data.js';
+import { perfilesData } from '../../data/perfiles_data.js?v=9.2';
+import { Logger } from '../../utils/logger.js';
 
 /**
  * Render Perfiles Cards into the Grid Container
  * Supports both Desktop (grid) and Mobile (slider/stack) containers
  */
 export function renderPerfiles() {
-    // console.log('[PERFILES Renderer] Starting render...');
+    Logger.log('[PERFILES Renderer] Starting render...');
 
     // Desktop Container
     const desktopContainer = document.getElementById('perfiles-grid-desktop');
@@ -30,28 +31,31 @@ export function renderPerfiles() {
  * Generate HTML for Desktop Grid Card
  */
 function createDesktopCardHTML(profile) {
-    const { id, label, icon, validation, recommendedPlan } = profile;
+    const { id, label, icon, validation, tagline, theme } = profile;
     const namespace = 'perfiles';
 
-    const iconClass = `fas ${icon}`;
-
     return `
-        <article class="${namespace}-card" data-profile="${id}">
-            <div class="${namespace}-card-header">
+        <article class="${namespace}-card theme-${theme}" data-profile-id="${id}">
+            <!-- Icon + Tagline Row -->
+            <div class="${namespace}-card-top-row">
                 <div class="${namespace}-card-icon-wrapper">
-                    <i class="${iconClass}"></i>
+                    <i class="fas ${icon}"></i>
                 </div>
-                <h3 class="${namespace}-card-title">${label}</h3>
-                <span class="${namespace}-card-tagline">${profile.tagline}</span>
+                <span class="${namespace}-card-tagline">${tagline}</span>
             </div>
 
+            <!-- Title -->
+            <h3 class="${namespace}-card-title">${label}</h3>
+
+            <!-- Description -->
             <p class="${namespace}-card-desc">
                 ${validation.description}
             </p>
 
+            <!-- CTA with dynamic profile name -->
             <div class="${namespace}-card-footer">
                 <a href="#contacto" class="${namespace}-card-btn">
-                    ${recommendedPlan.ctaText || 'Ver Detalles'}
+                    Ver estrategia ${label.split(' ')[0]}
                 </a>
             </div>
         </article>

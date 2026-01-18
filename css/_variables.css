@@ -10,6 +10,8 @@
     /* Trust Blue */
     --color-primary-dark: #1e40af;
     --color-primary-light: #3b82f6;
+    --rgb-primary: 37, 99, 235;
+    /* For rgba usage */
 
     /* Secondary Accent */
     --color-secondary: #10b981;
@@ -38,6 +40,21 @@
     --color-bg-azure-50: #F0F9FF;
     --color-bg-azure-100: #E0F2FE;
 
+    /* Gradient colors for subtle blue backgrounds */
+    --color-gradient-lightest: #f8fbff;
+    /* Lightest blue tint for hovers/active states */
+    --color-gradient-lighter: #f0f7ff;
+    /* Medium light blue for gradients */
+    --color-gradient-light-alt: #e6f2ff;
+    --color-gradient-light-alt: #e6f2ff;
+    /* Alternative light blue tone */
+    --color-bg-icon-box: #F0F5FF;
+    /* Light blueish bg for icon boxes */
+
+    /* Primary gradient for CTA buttons */
+    --gradient-primary: linear-gradient(135deg, #0444CC 0%, #0249FF 100%);
+
+
     /* === Brand Colors (Specific) === */
     --color-brand-navy: #1A365D;
     --color-brand-blue: #0A74DA;
@@ -47,6 +64,57 @@
     --color-whatsapp-bg: #D9FDD3;
     --color-whatsapp-text: #111b21;
     --color-whatsapp-tick: #53bdeb;
+
+    /* === Theme Palettes (Strict Component Tokens) === */
+    /* Used for Plan Cards (perfiles-desktop.css) */
+
+    /* Purple Theme */
+    --color-purple-50: #F5F3FF;
+    --color-purple-600: #7C3AED;
+    --rgb-purple-600: 124, 58, 237;
+    /* For rgba usage */
+    --color-purple-400: #A78BFA;
+    /* Gradient Light */
+
+    /* Green Theme */
+    --color-green-50: #ECFDF5;
+    --color-green-600: #059669;
+    --rgb-green-600: 5, 150, 105;
+    --color-green-400: #34D399;
+    --rgb-green-700: 21, 128, 61;
+    /* For rgba usage */
+    --rgb-green-500: 34, 197, 94;
+    /* For rgba usage */
+
+    /* Red Theme */
+    --color-red-50: #FFF1F2;
+    --color-red-600: #E11D48;
+    --rgb-red-600: 225, 29, 72;
+    --color-red-400: #FB7185;
+
+    /* Yellow Theme */
+    --color-yellow-50: #FFFBEB;
+    --color-yellow-600: #D97706;
+    --rgb-yellow-600: 217, 119, 6;
+    --color-yellow-400: #FBBF24;
+
+    /* Brown Theme */
+    --color-brown-50: #FAFAF9;
+    /* Stone 50 */
+    --color-brown-600: #B45309;
+    --rgb-brown-600: 180, 83, 9;
+    --color-brown-400: #D97706;
+    /* Gradient start */
+    --color-brown-text: #57534E;
+    /* Stone 600 */
+
+    /* Blue Theme Specifics */
+    --color-blue-50: #F0F9FF;
+    /* Sky 50 */
+    --color-blue-600: #2563EB;
+    /* Primary match */
+    --color-blue-700: #0369A1;
+    /* Sky 700 */
 
     /* === Typography === */
     /* GROW: Clear hierarchy for messaging */
@@ -84,6 +152,10 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
     --space-4xl: 6rem;
+
+    /* === Layout Constraints === */
+    /* Standard content max-width for sections */
+    --max-width-standard: 1200px;
 
     /* Section H1 Positioning Standards */
     --header-height: 70px;

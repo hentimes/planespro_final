@@ -3,6 +3,8 @@
 // Cinematic 35s cycle with asymmetric fades
 // ===================================
 
+import { Logger } from '../../utils/logger.js';
+
 const ALL_LOGOS = [
     { src: '/assets/ilustraciones/logos_isapre/consalud.png', alt: 'Consalud Logo' },
     { src: '/assets/ilustraciones/logos_isapre/nuevamasvida.png', alt: 'Nueva Masvida Logo' },
@@ -29,7 +31,7 @@ export function initLogoFader() {
         clearInterval(Number(container.dataset.intervalId));
     }
 
-    // console.log('[LogoFader] Initializing (35s cycle)');
+    Logger.log('[LogoFader] Initializing (35s cycle)');
 
     // State to track current mode
     let wasMobile = window.innerWidth <= 720;

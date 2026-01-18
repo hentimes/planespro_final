@@ -7,8 +7,10 @@
 // 4. If ANY pill active -> No pulse.
 // ===================================
 
+import { Logger } from '../../utils/logger.js';
+
 export function initBenefitAccordion() {
-    // console.log('[ACCORDION] Initializing module...');
+    Logger.log('[ACCORDION] Initializing module...');
 
     function togglePulse(forceOff = false) {
         const pills = document.querySelectorAll('.benefit-accordion');

@@ -1,4 +1,4 @@
-import { perfilesData } from '../../data/perfiles_data.js';
+import { perfilesData } from '../../data/perfiles_data.js?v=7.0';
 import { Logger } from '../../utils/logger.js';
 
 /**
@@ -14,28 +14,28 @@ export function initPerfilesInteraction() {
         return;
     }
 
-    // Wait for cards to be rendered
-    setTimeout(() => {
-        attachCardClickHandlers(gridContainer, dashboard);
-    }, 100);
+    // Attach handlers using delegation
+    Logger.log('[PERFILES Interaction] Attaching delegated handlers...');
+    attachCardClickHandlers(gridContainer, dashboard);
 }
 
 /**
- * Attach click handlers to profile cards
+ * Attach click handlers to profile cards using Event Delegation
  */
 function attachCardClickHandlers(gridContainer, dashboard) {
-    const cards = document.querySelectorAll('.perfiles-card');
+    // Simple delegation - attach once to the container
+    gridContainer.addEventListener('click', (e) => {
+        // Find closest card ancestor
+        const card = e.target.closest('.perfiles-card');
 
-    if (cards.length === 0) {
-        Logger.warn('No profile cards found');
-        return;
-    }
+        if (card) {
+            const profileId = card.dataset.profileId;
+            Logger.log(`[PERFILES] Card clicked: ${profileId}`);
 
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            const profileId = card.dataset.profile;
-            transitionToDashboard(profileId, gridContainer, dashboard);
-        });
+            if (profileId) {
+                transitionToDashboard(profileId, gridContainer, dashboard);
+            }
+        }
     });
 }
 
@@ -69,7 +69,7 @@ function renderDashboard(profileId) {
 
     // Render all dashboard components
     renderTabs(profileId);
-    renderPlanCard(profile.recommendedPlan, profile.label);
+    renderPlanCard(profile);
     renderValidationPanel(profile.validation);
 }
 
@@ -81,11 +81,8 @@ function renderTabs(activeId) {
 
     if (!tabsContainer) return;
 
-    // Find active profile for name display
-    const activeProfile = perfilesData.find(p => p.id === activeId);
-
     const tabsHTML = `
-        <button class="back-to-grid-btn" id="backToGrid" title="Volver al inicio">
+        <button class="back-to-grid-btn" id="backToGrid" data-tooltip="Volver a vista general" title="Volver a vista general">
             <i class="fas fa-arrow-left"></i>
         </button>
         ${perfilesData.map(profile => {
@@ -93,7 +90,7 @@ function renderTabs(activeId) {
         return `
                 <button class="profile-tab ${isActive}" data-profile="${profile.id}">
                     <i class="fas ${profile.icon}"></i>
-                    <span>${profile.label}</span>
+                    <span>${profile.shortLabel || profile.label}</span>
                 </button>
             `;
     }).join('')}
@@ -147,7 +144,7 @@ function switchProfile(profileId) {
     // Re-render content
     const profile = perfilesData.find(p => p.id === profileId);
     if (profile) {
-        renderPlanCard(profile.recommendedPlan, profile.label);
+        renderPlanCard(profile);
         renderValidationPanel(profile.validation);
     }
 }
@@ -155,10 +152,12 @@ function switchProfile(profileId) {
 /**
  * Render plan card (left column)
  */
-function renderPlanCard(plan, profileLabel) {
+function renderPlanCard(profile) {
     const cardContainer = document.getElementById('dashboardCard');
 
     if (!cardContainer) return;
+
+    const plan = profile.recommendedPlan;
 
     // Use denseMetrics if available, otherwise benefits
     let bodyContent = '';
@@ -190,36 +189,56 @@ function renderPlanCard(plan, profileLabel) {
 
     cardContainer.innerHTML = `
         <div class="plan-card-premium">
-            <!-- Header azul -->
-            <div class="card-header-premium">
-                <img src="${plan.isapreLogo}" alt="${plan.name}" class="logo-premium" onerror="this.style.display='none'">
+            <!-- Header with dynamic theme color -->
+            <div class="card-header-premium theme-${profile.theme || 'blue'}">
                 <div class="tag-premium ${plan.tagClass}">${plan.tag}</div>
+                <div class="header-text-col" style="text-align: right;">
+                    <div class="plan-coverage-header">${plan.keyCoverage}</div>
+                    ${plan.cardSubtitle ? `<div class="plan-subtitle-header" style="font-size:0.75rem; color:rgba(255,255,255,0.85); margin-top:2px; font-weight:500;">${plan.cardSubtitle}</div>` : ''}
+                </div>
             </div>
 
             <!-- Body -->
             <div class="card-body-premium">
-                <!-- Profile Badge -->
-                <div class="profile-badge">
-                    <i class="fas fa-user"></i> Perfil: <strong>${profileLabel}</strong>
-                </div>
+                <!-- Price Section: Clean Unified Layout -->
+                <div class="price-section">
+                    <div class="price-row-clean">
+                        <!-- Left: Identity (Icon + Label) -->
+                        <div class="price-left-col">
+                            <div class="clean-icon-box">
+                                <i class="fas ${profile.icon}"></i>
+                            </div>
+                            <span class="clean-label">Perfil ${profile.label}</span>
+                        </div>
 
-                <!-- Precio -->
-                <div class="price-premium">
-                    <span class="price-val">${plan.price}</span>
-                    <span class="price-sub">${plan.priceCLP}</span>
-                </div>
+                        <!-- Right: Value (Price + UF) -->
+                        <div class="price-right-col">
+                            <span class="clean-price-main">${plan.priceCLP}</span>
+                            <span class="clean-price-sub">${plan.price} / mes</span>
+                        </div>
+                    </div>
 
-                <!-- Plan name -->
-                <h4 class="plan-name">${plan.name}</h4>
-                <p class="plan-coverage">${plan.keyCoverage}</p>
+                    <!-- Divider -->
+                    <div class="price-divider"></div>
+                </div>
 
                 <!-- Métricas o beneficios -->
                 ${bodyContent}
 
-                <!-- CTA -->
-                <a href="#contacto" class="btn-select-plan">
-                    ${plan.ctaText || 'Solicitar Plan'}
+                <!-- Savings Badge (Premium) -->
+                ${plan.savings ? `
+                <div class="value-badge" style="margin-top:auto;">
+                    <i class="fas fa-coins"></i>
+                    <span>${plan.savings}</span>
+                </div>` : ''}
+            </div>
+
+            <!-- Footer with CTA -->
+            <div class="card-footer-premium">
+                <a href="#contacto" class="btn-primary-desktop cta-card-full">
+                    ${plan.ctaText || 'Cotizar Ahora'}
                 </a>
+                <p class="cta-micro-copy">${plan.ctaSub || '✓ Respuesta en 2 minutos · 100% online'}</p>
             </div>
         </div>
     `;
@@ -235,6 +254,14 @@ function renderValidationPanel(validation) {
 
     const bulletsHTML = validation.bullets.map(b => `<li>${b}</li>`).join('');
 
+    // Trust Badge HTML (Optional)
+    const trustBadgeHTML = validation.trustBadge ? `
+        <div class="validation-trust-badge">
+            <i class="fas fa-shield-check"></i>
+            <span>${validation.trustBadge}</span>
+        </div>
+    ` : '';
+
     panelContainer.innerHTML = `
         <div class="validation-content">
             <h3 class="validation-title">${validation.title}</h3>
@@ -244,6 +271,8 @@ function renderValidationPanel(validation) {
             <ul class="validation-bullets">
                 ${bulletsHTML}
             </ul>
+
+            ${trustBadgeHTML}
         </div>
     `;
 }
